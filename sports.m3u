@@ -1,0 +1,10 @@
+#EXTM3U
+
+#EXTINF:-1 group-title="Sports",Sky Sports Darts UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471382&extension=ts&play_token=RCUbXjP9kV
+
+#EXTINF:-1 group-title="Sports",TNT Sports UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=77kmIyInwi
+
+#EXTINF:-1 group-title="Sports",Sky Sports F1 UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1761500&extension=ts&play_token=Krn0cIravU
