@@ -1,0 +1,14 @@
+{
+  "name": "m3u-stremio-addon",
+  "version": "1.0.0",
+  "description": "IPTV-org addon for Stremio and Nuvio",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "express": "^4.21.2",
+    "stremio-addon-sdk": "^1.6.10"
+  }
+}
