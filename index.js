@@ -18,12 +18,14 @@ let channels = [];
 let genres = [];
 
 let lastLoad = 0;
+let loadingPromise = null;
+
 const CACHE_TIME = 30 * 60 * 1000;
 
 
-// ================================
-// PORTAL BASE URL
-// ================================
+// ========================================
+// PORTAL BASE
+// ========================================
 
 function getPortalBase() {
   let url = PORTAL_URL || "";
@@ -32,57 +34,64 @@ function getPortalBase() {
     url += "/";
   }
 
+  // http://server/c/ -> http://server/
   url = url.replace(/\/c\/?$/i, "/");
 
   return url;
 }
 
 
-// ================================
-// STALKER API URL
-// ================================
+// ========================================
+// API URL
+// ========================================
 
 function apiUrl(params) {
-  const base = getPortalBase();
-
   const query = new URLSearchParams({
     JsHttpRequest: "1-xml",
     ...params
   });
 
-  return `${base}portal.php?${query.toString()}`;
+  return `${getPortalBase()}portal.php?${query.toString()}`;
 }
 
 
-// ================================
-// DEFAULT HEADERS
-// ================================
+// ========================================
+// HEADERS
+// ========================================
 
 function headers(withToken = true) {
-  const h = {
+  const result = {
     "User-Agent":
       "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 Safari/533.3",
+
     "X-User-Agent":
       "Model: MAG254; Link: Ethernet",
+
     "Referer":
       `${getPortalBase()}c/`,
+
     "Cookie":
       `mac=${MAC_ENCODED}; stb_lang=en; timezone=GMT`
   };
 
   if (withToken && token) {
-    h.Authorization = `Bearer ${token}`;
+    result.Authorization = `Bearer ${token}`;
   }
 
-  return h;
+  return result;
 }
 
 
-// ================================
+// ========================================
 // HANDSHAKE
-// ================================
+// ========================================
 
 async function handshake() {
+  // Nếu đã có token thì không handshake lại
+  if (token) {
+    return;
+  }
+
   console.log("Connecting to Stalker portal...");
 
   const url = apiUrl({
@@ -94,8 +103,22 @@ async function handshake() {
 
   const response = await axios.get(url, {
     headers: headers(false),
-    timeout: 30000
+    timeout: 30000,
+    validateStatus: status =>
+      status >= 200 && status < 500
   });
+
+  if (response.status === 429) {
+    throw new Error(
+      "Portal rate limited request (HTTP 429). Wait before retrying."
+    );
+  }
+
+  if (response.status >= 400) {
+    throw new Error(
+      `Handshake HTTP error ${response.status}`
+    );
+  }
 
   const data =
     response.data?.js ||
@@ -106,6 +129,11 @@ async function handshake() {
     data?.js?.token;
 
   if (!newToken) {
+    console.log(
+      "Handshake response:",
+      JSON.stringify(response.data).slice(0, 500)
+    );
+
     throw new Error(
       "Portal handshake failed: no token returned"
     );
@@ -117,50 +145,55 @@ async function handshake() {
 }
 
 
-// ================================
+// ========================================
 // PROFILE
-// ================================
+// ========================================
 
 async function getProfile() {
   const url = apiUrl({
     type: "stb",
     action: "get_profile",
     hd: "1",
+
     ver:
       "ImageDescription: 0.2.18-r23-254; ImageDate: Wed Mar 18 11:54:49 EET 2015; PORTAL version: 5.6.1",
+
     num_banks: "2",
     sn: "",
     stb_type: "MAG254",
     client_type: "STB",
     image_version: "218",
     video_out: "hdmi",
-    device_id: "",
-    device_id2: "",
-    signature: "",
     auth_second_step: "1",
     hw_version: "1.7-BD-00",
     not_valid_token: "0"
   });
 
   try {
-    await axios.get(url, {
+    const response = await axios.get(url, {
       headers: headers(),
-      timeout: 30000
+      timeout: 30000,
+      validateStatus: status =>
+        status >= 200 && status < 500
     });
+
+    if (response.status === 429) {
+      throw new Error("HTTP 429");
+    }
 
     console.log("Profile loaded");
   } catch (error) {
     console.log(
-      "Profile request warning:",
+      "Profile warning:",
       error.message
     );
   }
 }
 
 
-// ================================
-// GET GENRES
-// ================================
+// ========================================
+// GENRES
+// ========================================
 
 async function getGenres() {
   const url = apiUrl({
@@ -180,8 +213,7 @@ async function getGenres() {
   const list =
     Array.isArray(data)
       ? data
-      : data?.data ||
-        [];
+      : data?.data || [];
 
   genres = list.map(item => ({
     id: String(
@@ -203,9 +235,9 @@ async function getGenres() {
 }
 
 
-// ================================
-// GET ALL CHANNELS
-// ================================
+// ========================================
+// ALL CHANNELS
+// ========================================
 
 async function getChannels() {
   const url = apiUrl({
@@ -225,60 +257,60 @@ async function getChannels() {
   const list =
     Array.isArray(data)
       ? data
-      : data?.data ||
-        [];
+      : data?.data || [];
 
-  channels = list.map((item, index) => {
-    const genreId =
-      String(
-        item.tv_genre_id ??
-        item.genre_id ??
-        item.category_id ??
-        ""
-      );
+  channels = list.map(
+    (item, index) => {
 
-    const genre =
-      genres.find(
-        g => g.id === genreId
-      );
-
-    return {
-      id:
+      const genreId =
         String(
-          item.id ??
-          item.ch_id ??
-          index
-        ),
+          item.tv_genre_id ??
+          item.genre_id ??
+          item.category_id ??
+          ""
+        );
 
-      name:
-        item.name ||
-        item.title ||
-        "Unknown",
+      const genre =
+        genres.find(
+          g =>
+            g.id === genreId
+        );
 
-      cmd:
-        item.cmd ||
-        item.url ||
-        "",
+      return {
+        id:
+          String(
+            item.id ??
+            item.ch_id ??
+            index
+          ),
 
-      logo:
-        item.logo ||
-        item.screenshot_uri ||
-        "",
+        name:
+          item.name ||
+          item.title ||
+          "Unknown",
 
-      genreId,
+        cmd:
+          item.cmd ||
+          item.url ||
+          "",
 
-      genreName:
-        genre?.title ||
-        "",
+        logo:
+          item.logo ||
+          item.screenshot_uri ||
+          "",
 
-      number:
-        item.number ||
-        "",
+        genreId,
 
-      raw:
-        item
-    };
-  });
+        genreName:
+          genre?.title ||
+          "",
+
+        number:
+          item.number ||
+          ""
+      };
+    }
+  );
 
   console.log(
     "Channels loaded:",
@@ -287,37 +319,58 @@ async function getChannels() {
 }
 
 
-// ================================
-// REFRESH PORTAL DATA
-// ================================
+// ========================================
+// LOAD PORTAL
+// ========================================
 
 async function loadPortal() {
   const now = Date.now();
 
   if (
-    channels.length &&
+    channels.length > 0 &&
     now - lastLoad < CACHE_TIME
   ) {
     return;
   }
 
-  await handshake();
-  await getProfile();
-  await getGenres();
-  await getChannels();
+  // Ngăn nhiều request Stremio
+  // chạy handshake cùng lúc
+  if (loadingPromise) {
+    return loadingPromise;
+  }
 
-  lastLoad = Date.now();
+  loadingPromise = (async () => {
+    try {
+      await handshake();
+
+      await getProfile();
+
+      await getGenres();
+
+      await getChannels();
+
+      lastLoad = Date.now();
+    } catch (error) {
+
+      // token có thể hết hạn
+      token = "";
+
+      throw error;
+    } finally {
+      loadingPromise = null;
+    }
+  })();
+
+  return loadingPromise;
 }
 
 
-// ================================
-// NORMALIZE TEXT
-// ================================
+// ========================================
+// SEARCH
+// ========================================
 
-function normalizedText(channel) {
-  return (
-    `${channel.name} ${channel.genreName}`
-  )
+function normalizeText(text) {
+  return String(text || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(
@@ -327,177 +380,45 @@ function normalizedText(channel) {
 }
 
 
-// ================================
-// SPORTS FILTER
-// ================================
+function searchChannels(search) {
+  if (!search) {
+    return channels;
+  }
 
-const SPORTS_WORDS = [
-  "sport",
-  "sports",
-  "football",
-  "soccer",
-  "futbol",
-  "bein",
-  "espn",
-  "eurosport",
-  "sky sports",
-  "tnt sports",
-  "dazn",
-  "nba",
-  "nfl",
-  "nhl",
-  "mlb",
-  "ufc",
-  "mma",
-  "boxing",
-  "boxeo",
-  "wrestling",
-  "tennis",
-  "golf",
-  "cricket",
-  "rugby",
-  "racing",
-  "motorsport",
-  "formula",
-  "f1",
-  "motogp",
-  "basketball",
-  "basket",
-  "baseball",
-  "hockey",
-  "volleyball",
-  "handball",
-  "premier league",
-  "champions league"
-];
+  const q =
+    normalizeText(search);
 
-function isSports(channel) {
-  const text =
-    normalizedText(channel);
+  return channels.filter(
+    channel => {
 
-  return SPORTS_WORDS.some(
-    word =>
-      text.includes(word)
+      const text =
+        normalizeText(
+          `${channel.name} ${channel.genreName}`
+        );
+
+      return text.includes(q);
+    }
   );
 }
 
 
-// ================================
-// MOVIE FILTER
-// ================================
-
-const MOVIE_WORDS = [
-  "movie",
-  "movies",
-  "film",
-  "films",
-  "cinema",
-  "cine",
-  "ciné",
-  "kino",
-  "hbo",
-  "cinemax",
-  "showtime",
-  "star movies",
-  "movies hd",
-  "movie channel",
-  "film channel",
-  "cinema hd"
-];
-
-function isMovies(channel) {
-  const text =
-    normalizedText(channel);
-
-  return MOVIE_WORDS.some(
-    word =>
-      text.includes(word)
-  );
-}
-
-
-// ================================
-// 4K UHD FILTER
-// ================================
-
-const UHD_WORDS = [
-  "4k",
-  "uhd",
-  "ultra hd",
-  "ultrahd",
-  "2160",
-  "2160p"
-];
-
-function is4K(channel) {
-  const text =
-    normalizedText(channel);
-
-  return UHD_WORDS.some(
-    word =>
-      text.includes(word)
-  );
-}
-
-
-// ================================
-// CATALOG FILTER
-// ================================
-
-function filterChannels(
-  catalogId,
-  search
-) {
-  let list = [];
-
-  if (catalogId === "sports") {
-    list =
-      channels.filter(isSports);
-  }
-
-  if (catalogId === "movies") {
-    list =
-      channels.filter(isMovies);
-  }
-
-  if (catalogId === "uhd") {
-    list =
-      channels.filter(is4K);
-  }
-
-  if (search) {
-    const q =
-      search
-        .toLowerCase()
-        .trim();
-
-    list =
-      list.filter(channel =>
-        normalizedText(channel)
-          .includes(q)
-      );
-  }
-
-  return list;
-}
-
-
-// ================================
+// ========================================
 // STREMIO MANIFEST
-// ================================
+// ========================================
 
 const manifest = {
+
   id:
-    "com.m3usport.stalker",
+    "com.myportal.allchannels",
 
   version:
-    "2.0.0",
+    "4.0.0",
 
   name:
-    "Sports Movies 4K",
+    "Portal IPTV",
 
   description:
-    "Sports, Movies and 4K/UHD channels",
+    "All live channels from my IPTV portal",
 
   resources: [
     "catalog",
@@ -511,49 +432,30 @@ const manifest = {
 
   catalogs: [
     {
-      type: "tv",
-      id: "sports",
-      name: "🏆 Sports",
-      extra: [
-        {
-          name: "search",
-          isRequired: false
-        },
-        {
-          name: "skip",
-          isRequired: false
-        }
-      ]
-    },
+      type:
+        "tv",
 
-    {
-      type: "tv",
-      id: "movies",
-      name: "🎬 Movies",
-      extra: [
-        {
-          name: "search",
-          isRequired: false
-        },
-        {
-          name: "skip",
-          isRequired: false
-        }
-      ]
-    },
+      id:
+        "all-channels",
 
-    {
-      type: "tv",
-      id: "uhd",
-      name: "📺 4K / UHD",
+      name:
+        "📺 All Channels",
+
       extra: [
         {
-          name: "search",
-          isRequired: false
+          name:
+            "search",
+
+          isRequired:
+            false
         },
+
         {
-          name: "skip",
-          isRequired: false
+          name:
+            "skip",
+
+          isRequired:
+            false
         }
       ]
     }
@@ -565,19 +467,19 @@ const builder =
   new addonBuilder(manifest);
 
 
-// ================================
-// CATALOG HANDLER
-// ================================
+// ========================================
+// CATALOG
+// ========================================
 
 builder.defineCatalogHandler(
   async args => {
 
     try {
+
       await loadPortal();
 
-      const list =
-        filterChannels(
-          args.id,
+      let list =
+        searchChannels(
           args.extra?.search
         );
 
@@ -594,31 +496,43 @@ builder.defineCatalogHandler(
         );
 
       return {
+
         metas:
-          page.map(channel => ({
-            id:
-              `stalker_${channel.id}`,
+          page.map(
+            channel => ({
 
-            type:
-              "tv",
+              id:
+                `portal_${channel.id}`,
 
-            name:
-              channel.name,
+              type:
+                "tv",
 
-            poster:
-              channel.logo ||
-              "https://dummyimage.com/500x500/222222/ffffff.png&text=LIVE",
+              name:
+                channel.name,
 
-            posterShape:
-              "square",
+              poster:
+                channel.logo ||
+                "https://dummyimage.com/500x500/222222/ffffff.png&text=LIVE",
 
-            description:
-              channel.genreName ||
-              "Live TV"
-          }))
+              posterShape:
+                "square",
+
+              description:
+                channel.genreName ||
+                "Live TV",
+
+              genres:
+                channel.genreName
+                  ? [
+                      channel.genreName
+                    ]
+                  : []
+            })
+          )
       };
 
     } catch (error) {
+
       console.error(
         "Catalog error:",
         error.message
@@ -632,25 +546,27 @@ builder.defineCatalogHandler(
 );
 
 
-// ================================
-// META HANDLER
-// ================================
+// ========================================
+// META
+// ========================================
 
 builder.defineMetaHandler(
   async args => {
 
     try {
+
       await loadPortal();
 
       const id =
         args.id.replace(
-          "stalker_",
+          "portal_",
           ""
         );
 
       const channel =
         channels.find(
-          c => c.id === id
+          item =>
+            item.id === id
         );
 
       if (!channel) {
@@ -660,7 +576,9 @@ builder.defineMetaHandler(
       }
 
       return {
+
         meta: {
+
           id:
             args.id,
 
@@ -679,11 +597,24 @@ builder.defineMetaHandler(
 
           description:
             channel.genreName ||
-            "Live TV"
+            "Live TV",
+
+          genres:
+            channel.genreName
+              ? [
+                  channel.genreName
+                ]
+              : []
         }
       };
 
     } catch (error) {
+
+      console.error(
+        "Meta error:",
+        error.message
+      );
+
       return {
         meta: null
       };
@@ -692,13 +623,14 @@ builder.defineMetaHandler(
 );
 
 
-// ================================
-// CREATE STREAM LINK
-// ================================
+// ========================================
+// CREATE PLAY LINK
+// ========================================
 
 async function createStreamLink(
   channel
 ) {
+
   if (!channel.cmd) {
     throw new Error(
       "Channel has no cmd"
@@ -706,22 +638,72 @@ async function createStreamLink(
   }
 
   const url = apiUrl({
-    type: "itv",
-    action: "create_link",
-    cmd: channel.cmd,
-    series: "0",
-    forced_storage: "undefined",
-    disable_ad: "0",
-    download: "0"
+    type:
+      "itv",
+
+    action:
+      "create_link",
+
+    cmd:
+      channel.cmd,
+
+    series:
+      "0",
+
+    forced_storage:
+      "undefined",
+
+    disable_ad:
+      "0",
+
+    download:
+      "0"
   });
 
-  const response = await axios.get(
-    url,
-    {
-      headers: headers(),
-      timeout: 30000
+  let response;
+
+  try {
+
+    response =
+      await axios.get(
+        url,
+        {
+          headers:
+            headers(),
+
+          timeout:
+            30000
+        }
+      );
+
+  } catch (error) {
+
+    // thử tạo session mới một lần
+    if (
+      error.response?.status === 401 ||
+      error.response?.status === 403
+    ) {
+
+      token = "";
+
+      await handshake();
+
+      response =
+        await axios.get(
+          url,
+          {
+            headers:
+              headers(),
+
+            timeout:
+              30000
+          }
+        );
+
+    } else {
+      throw error;
     }
-  );
+  }
 
   const data =
     response.data?.js ||
@@ -740,33 +722,41 @@ async function createStreamLink(
 
   cmd =
     cmd
-      .replace(/^ffmpeg\s+/i, "")
-      .replace(/^ffrt\s+/i, "")
+      .replace(
+        /^ffmpeg\s+/i,
+        ""
+      )
+      .replace(
+        /^ffrt\s+/i,
+        ""
+      )
       .trim();
 
   return cmd;
 }
 
 
-// ================================
-// STREAM HANDLER
-// ================================
+// ========================================
+// STREAM
+// ========================================
 
 builder.defineStreamHandler(
   async args => {
 
     try {
+
       await loadPortal();
 
       const id =
         args.id.replace(
-          "stalker_",
+          "portal_",
           ""
         );
 
       const channel =
         channels.find(
-          c => c.id === id
+          item =>
+            item.id === id
         );
 
       if (!channel) {
@@ -781,6 +771,7 @@ builder.defineStreamHandler(
         );
 
       return {
+
         streams: [
           {
             name:
@@ -796,6 +787,7 @@ builder.defineStreamHandler(
       };
 
     } catch (error) {
+
       console.error(
         "Stream error:",
         error.message
@@ -809,11 +801,12 @@ builder.defineStreamHandler(
 );
 
 
-// ================================
+// ========================================
 // EXPRESS
-// ================================
+// ========================================
 
-const app = express();
+const app =
+  express();
 
 app.use(
   getRouter(
@@ -822,31 +815,17 @@ app.use(
 );
 
 
-// ================================
+// ========================================
 // STATUS PAGE
-// ================================
+// ========================================
 
 app.get(
   "/",
   async (req, res) => {
 
     try {
+
       await loadPortal();
-
-      const sports =
-        channels.filter(
-          isSports
-        );
-
-      const movies =
-        channels.filter(
-          isMovies
-        );
-
-      const uhd =
-        channels.filter(
-          is4K
-        );
 
       const manifestUrl =
         `${req.protocol}://${req.get("host")}/manifest.json`;
@@ -857,27 +836,29 @@ app.get(
         <html>
 
         <head>
+
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1"
           >
 
           <title>
-            Sports Movies 4K
+            Portal IPTV
           </title>
+
         </head>
 
         <body
           style="
             background:#111;
-            color:white;
-            font-family:Arial;
+            color:#fff;
+            font-family:Arial,sans-serif;
             padding:30px;
           "
         >
 
           <h1>
-            📺 Sports Movies 4K
+            📺 Portal IPTV
           </h1>
 
           <p>
@@ -886,31 +867,28 @@ app.get(
 
           <p>
             Total channels:
-            <b>${channels.length}</b>
+            <strong>
+              ${channels.length}
+            </strong>
           </p>
 
           <p>
-            🏆 Sports:
-            <b>${sports.length}</b>
+            Categories:
+            <strong>
+              ${genres.length}
+            </strong>
           </p>
 
           <p>
-            🎬 Movies:
-            <b>${movies.length}</b>
-          </p>
-
-          <p>
-            📺 4K / UHD:
-            <b>${uhd.length}</b>
-          </p>
-
-          <p>
-            Manifest:
+            Manifest URL:
           </p>
 
           <p
             style="
               word-break:break-all;
+              background:#222;
+              padding:12px;
+              border-radius:8px;
             "
           >
             ${manifestUrl}
@@ -926,17 +904,16 @@ app.get(
       res
         .status(500)
         .send(
-          "Portal error: " +
-          error.message
+          `Portal error: ${error.message}`
         );
     }
   }
 );
 
 
-// ================================
-// START SERVER
-// ================================
+// ========================================
+// START
+// ========================================
 
 app.listen(
   PORT,
@@ -944,7 +921,7 @@ app.listen(
   () => {
 
     console.log(
-      `Stalker addon running on port ${PORT}`
+      `Portal IPTV addon running on port ${PORT}`
     );
   }
 );
