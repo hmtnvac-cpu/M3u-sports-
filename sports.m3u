@@ -1,10 +1,37 @@
 #EXTM3U
 
+#EXTINF:-1 group-title="Sports",beIN Sports UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1948627&extension=ts&play_token=YÝtO3ymSXM
+
+#EXTINF:-1 group-title="Sports",Digi Sport UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632122&extension=ts&play_token=Bc1RBTdvcu
+
+#EXTINF:-1 group-title="Sports",Eleven Sports 1 UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1470618&extension=ts&play_token=m0Llrs5Iev
+
+#EXTINF:-1 group-title="Sports",Sky Sports 1 UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608068&extension=ts&play_token=vdđJ3JIwT7
+
+#EXTINF:-1 group-title="Sports",Sky Sports 2 UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608069&extension=ts&play_token=eẻvbqSf7nG
+
 #EXTINF:-1 group-title="Sports",Sky Sports Darts UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471382&extension=ts&play_token=RCUbXjP9kV
 
-#EXTINF:-1 group-title="Sports",TNT Sports UHD
-http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=77kmIyInwi
-
 #EXTINF:-1 group-title="Sports",Sky Sports F1 UHD
-http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1761500&extension=ts&play_token=Krn0cIravU
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1761500&extension=ts&play_token=R0RwoZl4We
+
+#EXTINF:-1 group-title="Sports",Sky Sports Main Event
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608071&extension=ts&play_token=ffh6vBOXXG
+
+#EXTINF:-1 group-title="Sports",Sky Sports UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471387&extension=ts&play_token=acG0ANBzsw
+
+#EXTINF:-1 group-title="Sports",TF1 HDR UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1640379&extension=ts&play_token=nh5uKOD1OI
+
+#EXTINF:-1 group-title="Sports",TNT Sports UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=G26iịCdrYZ
+
+#EXTINF:-1 group-title="Sports",V Sport+ UHD
+http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632123&extension=ts&play_token=kmWkMZUxoN
