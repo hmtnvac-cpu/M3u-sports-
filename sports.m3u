@@ -3,17 +3,38 @@
 #EXTINF:-1 group-title="Sports",beIN Sports UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1948627&extension=ts&play_token=YÝtO3ymSXM
 
+#EXTINF:-1 group-title="Sports",Canal+ LDC UHD
+http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/105102?play_token=kpxOTsDTky
+
+#EXTINF:-1 group-title="Sports",Canal+ UHD
+http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/105100?play_token=bTvRbHUDJ5
+
 #EXTINF:-1 group-title="Sports",Digi Sport UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632122&extension=ts&play_token=Bc1RBTdvcu
 
 #EXTINF:-1 group-title="Sports",Eleven Sports 1 UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1470618&extension=ts&play_token=m0Llrs5Iev
 
+#EXTINF:-1 group-title="Sports",NOW Sports 4K 1
+http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/112208?play_token=UgtrFqkDV9
+
+#EXTINF:-1 group-title="Sports",NOW Sports 4K 2
+http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/116706?play_token=DfQqJWbopO
+
+#EXTINF:-1 group-title="Sports",NOW Sports 4K 3
+http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/116707?play_token=rAJRw3Axyw
+
+#EXTINF:-1 group-title="Sports",RTL UHD
+http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/130363?play_token=4ZC5Z1Ct9s
+
 #EXTINF:-1 group-title="Sports",Sky Sports 1 UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608068&extension=ts&play_token=vdđJ3JIwT7
 
 #EXTINF:-1 group-title="Sports",Sky Sports 2 UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608069&extension=ts&play_token=eẻvbqSf7nG
+
+#EXTINF:-1 group-title="Sports",Sky Sports Bundesliga UHD
+http://mag.tivi-one-iptv.net:80/play/live.php?mac=00:1A:79:0E:0F:8E&stream=893917&extension=ts&play_token=5QPOI5t6D3
 
 #EXTINF:-1 group-title="Sports",Sky Sports Darts UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471382&extension=ts&play_token=RCUbXjP9kV
@@ -32,6 +53,9 @@ http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1640379&
 
 #EXTINF:-1 group-title="Sports",TNT Sports UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=G26iịCdrYZ
+
+#EXTINF:-1 group-title="Sports",TNT Sports UHD Unlimited
+http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/131353?play_token=YnInsrDaU1
 
 #EXTINF:-1 group-title="Sports",V Sport+ UHD
 http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632123&extension=ts&play_token=kmWkMZUxoN
