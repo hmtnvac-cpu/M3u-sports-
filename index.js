@@ -19,8 +19,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV1",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -28,8 +29,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV2",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv2/live247-hls-avc/vtv2-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv2/live247-hls-avc/vtv2-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -37,8 +39,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV3",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv3/live247-hls-avc/vtv3-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv3/live247-hls-avc/vtv3-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -46,8 +49,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV4",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv4/live247-hls-avc/vtv4-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv4/live247-hls-avc/vtv4-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -55,8 +59,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV5",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv5/live247-hls-avc/vtv5-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv5/live247-hls-avc/vtv5-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -64,8 +69,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV6",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv6/live247-hls-avc/vtv6-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv6/live247-hls-avc/vtv6-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -73,8 +79,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV7",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv7/live247-hls-avc/vtv7-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv7/live247-hls-avc/vtv7-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -82,8 +89,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV8",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv8/live-hls-avc/vtv8-avc1_4000000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv8/live-hls-avc/vtv8-avc1_4000000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -91,8 +99,9 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV9",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv9/live247-hls-avc/vtv9-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv9/live247-hls-avc/vtv9-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
   },
 
   {
@@ -100,8 +109,54 @@ const channels = [
     type: "tv",
     group: "vtv",
     name: "VTV10",
-    description: "VTV • Truyền hình Việt Nam",
-    url: "https://vips-livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/vtv10-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    streams: [
+      "https://vips-livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/vtv10-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+    ]
+  },
+
+  // ==================================================
+  // 📺 SPORTS 1080P / 60FPS
+  // ==================================================
+
+  {
+    id: "now-sports-1080",
+    type: "tv",
+    group: "sports1080",
+    name: "NOW Sports 1080 60FPS",
+    streams: [
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948655&extension=ts&play_token=tbb2RAOWTW",
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948655&extension=ts&play_token=wKjCMLCsCQ"
+    ]
+  },
+
+  {
+    id: "sportsnet-one-ca-1080",
+    type: "tv",
+    group: "sports1080",
+    name: "Sportsnet One CA 1080 60FPS",
+    streams: [
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948644&extension=ts&play_token=67dYXdFMD5"
+    ]
+  },
+
+  {
+    id: "nbc-sports-1080",
+    type: "tv",
+    group: "sports1080",
+    name: "NBC Sports 1080 60FPS",
+    streams: [
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1124350&extension=ts&play_token=Nye7KFsDtT"
+    ]
+  },
+
+  {
+    id: "cbs-sports-1080",
+    type: "tv",
+    group: "sports1080",
+    name: "CBS Sports 1080 60FPS",
+    streams: [
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=45601&extension=ts&play_token=FzL6BKqvEe"
+    ]
   },
 
   // ==================================================
@@ -113,8 +168,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "beIN Sports UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1948627&extension=ts&play_token=YÝtO3ymSXM"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1948627&extension=ts&play_token=YÝtO3ymSXM",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948627&extension=ts&play_token=Vlmr36mT65",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948627&extension=ts&play_token=ZylqK6Jlon"
+    ]
   },
 
   {
@@ -122,8 +182,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Digi Sport UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632122&extension=ts&play_token=Bc1RBTdvcu"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632122&extension=ts&play_token=Bc1RBTdvcu",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632122&extension=ts&play_token=SFUMHAeisS",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632122&extension=ts&play_token=SpK901Rc9Y"
+    ]
   },
 
   {
@@ -131,8 +196,15 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Eleven Sports 1 UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1470618&extension=ts&play_token=m0Llrs5Iev"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1470618&extension=ts&play_token=m0Llrs5Iev",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1470618&extension=ts&play_token=e0V5DEpkoI",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948660&extension=ts&play_token=PkLWuD6skY",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1470618&extension=ts&play_token=z0mDj0DrdW"
+    ]
   },
 
   {
@@ -140,8 +212,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Sky Sports 1 UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608068&extension=ts&play_token=vdđJ3JIwT7"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608068&extension=ts&play_token=vdđJ3JIwT7",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608068&extension=ts&play_token=ChIhpB8guR",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608068&extension=ts&play_token=bNqN7HTIKX"
+    ]
   },
 
   {
@@ -149,8 +226,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Sky Sports 2 UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608069&extension=ts&play_token=eẻvbqSf7nG"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608069&extension=ts&play_token=eẻvbqSf7nG",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608069&extension=ts&play_token=Jn8XYQ8soh"
+    ]
   },
 
   {
@@ -158,8 +240,9 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Sky Sports Bundesliga UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://mag.tivi-one-iptv.net:80/play/live.php?mac=00:1A:79:0E:0F:8E&stream=893917&extension=ts&play_token=5QPOI5t6D3"
+    streams: [
+      "http://mag.tivi-one-iptv.net:80/play/live.php?mac=00:1A:79:0E:0F:8E&stream=893917&extension=ts&play_token=5QPOI5t6D3"
+    ]
   },
 
   {
@@ -167,8 +250,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Sky Sports Darts UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471382&extension=ts&play_token=RCUbXjP9kV"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471382&extension=ts&play_token=RCUbXjP9kV",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471382&extension=ts&play_token=Xjz7IglxZB",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1471382&extension=ts&play_token=FqtO3KWqUT"
+    ]
   },
 
   {
@@ -176,8 +264,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Sky Sports F1 UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1761500&extension=ts&play_token=R0RwoZl4We"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1761500&extension=ts&play_token=R0RwoZl4We",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1761500&extension=ts&play_token=3TLQcXqTKG"
+    ]
   },
 
   {
@@ -185,8 +278,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Sky Sports Main Event",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608071&extension=ts&play_token=ffh6vBOXXG"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608071&extension=ts&play_token=ffh6vBOXXG",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608071&extension=ts&play_token=BZa17svpdY",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608071&extension=ts&play_token=YPIwjxNGfQ"
+    ]
   },
 
   {
@@ -194,8 +292,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "Sky Sports UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471387&extension=ts&play_token=acG0ANBzsw"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471387&extension=ts&play_token=acG0ANBzsw",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471387&extension=ts&play_token=54v3D6UwQT",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1753227&extension=ts&play_token=3Ea6Hxt5oq"
+    ]
   },
 
   {
@@ -203,8 +306,13 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "TNT Sports UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=G26iịCdrYZ"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=G26iịCdrYZ",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1479591&extension=ts&play_token=vzYU4fDUAQ",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1479591&extension=ts&play_token=9JzXAViV1F"
+    ]
   },
 
   {
@@ -212,8 +320,21 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "TNT Sports UHD Unlimited",
-    description: "Sports • UHD / 4K",
-    url: "http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/131353?play_token=YnInsrDaU1"
+    streams: [
+      "http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/131353?play_token=YnInsrDaU1"
+    ]
+  },
+
+  {
+    id: "tnt-sports-ultimate-uhd",
+    type: "tv",
+    group: "sports4k",
+    name: "TNT Sports Ultimate UHD",
+    streams: [
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1595637&extension=ts&play_token=YdoiZErSQZ",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1595637&extension=ts&play_token=pmWvIQQHhL"
+    ]
   },
 
   {
@@ -221,18 +342,48 @@ const channels = [
     type: "tv",
     group: "sports4k",
     name: "V Sport+ UHD",
-    description: "Sports • UHD / 4K",
-    url: "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632123&extension=ts&play_token=kmWkMZUxoN"
+    streams: [
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632123&extension=ts&play_token=kmWkMZUxoN",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632123&extension=ts&play_token=Aeer3FFu7o",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1749221&extension=ts&play_token=jg5ZtLtCQN",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632123&extension=ts&play_token=E6ziX5leBT"
+    ]
+  },
+
+  {
+    id: "tf1-hdr-uhd",
+    type: "tv",
+    group: "sports4k",
+    name: "TF1 HDR UHD",
+    streams: [
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1640379&extension=ts&play_token=YWsJoaBWoi",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1640379&extension=ts&play_token=6gj5Htj59g"
+    ]
   }
 ];
 
 // ==================================================
-// SẮP XẾP TỪNG NHÓM
+// SẮP XẾP TÊN KÊNH A → Z TRONG TỪNG NHÓM
 // ==================================================
 
+const groupOrder = {
+  vtv: 1,
+  sports1080: 2,
+  sports4k: 3
+};
+
 channels.sort((a, b) => {
+
   if (a.group !== b.group) {
-    return a.group === "vtv" ? -1 : 1;
+
+    return (
+      groupOrder[a.group] -
+      groupOrder[b.group]
+    );
   }
 
   return a.name.localeCompare(
@@ -250,13 +401,15 @@ channels.sort((a, b) => {
 // ==================================================
 
 const manifest = {
+
   id: "com.hmtnvac.livetv",
-  version: "3.0.0",
+
+  version: "4.0.0",
 
   name: "Live TV",
 
   description:
-    "VTV và Sports UHD / 4K",
+    "VTV, Sports 1080P 60FPS và Sports UHD / 4K",
 
   resources: [
     "catalog",
@@ -267,10 +420,23 @@ const manifest = {
   types: ["tv"],
 
   catalogs: [
+
     {
       type: "tv",
       id: "vtv",
       name: "🇻🇳 VTV",
+      extra: [
+        {
+          name: "search",
+          isRequired: false
+        }
+      ]
+    },
+
+    {
+      type: "tv",
+      id: "sports1080",
+      name: "📺 Sports 1080P • 60FPS",
       extra: [
         {
           name: "search",
@@ -301,13 +467,39 @@ const builder =
 // ==================================================
 
 function posterFor(channel) {
+
   const text =
-    encodeURIComponent(channel.name);
+    encodeURIComponent(
+      channel.name
+    );
 
   return (
     "https://dummyimage.com/" +
     "500x500/111111/ffffff.png" +
     `&text=${text}`
+  );
+}
+
+// ==================================================
+// DESCRIPTION
+// ==================================================
+
+function descriptionFor(channel) {
+
+  if (channel.group === "vtv") {
+    return "VTV • Truyền hình Việt Nam";
+  }
+
+  if (channel.group === "sports1080") {
+    return (
+      "Sports • 1080P • 60FPS • " +
+      `${channel.streams.length} luồng`
+    );
+  }
+
+  return (
+    "Sports • UHD / 4K • " +
+    `${channel.streams.length} luồng`
   );
 }
 
@@ -333,35 +525,41 @@ builder.defineCatalogHandler(
         : "";
 
     if (search) {
+
       list =
-        list.filter(channel =>
-          channel.name
-            .toLowerCase()
-            .includes(search)
+        list.filter(
+          channel =>
+            channel.name
+              .toLowerCase()
+              .includes(search)
         );
     }
 
     return {
+
       metas:
-        list.map(channel => ({
-          id:
-            channel.id,
+        list.map(
+          channel => ({
 
-          type:
-            "tv",
+            id:
+              channel.id,
 
-          name:
-            channel.name,
+            type:
+              "tv",
 
-          poster:
-            posterFor(channel),
+            name:
+              channel.name,
 
-          posterShape:
-            "square",
+            poster:
+              posterFor(channel),
 
-          description:
-            channel.description
-        }))
+            posterShape:
+              "square",
+
+            description:
+              descriptionFor(channel)
+          })
+        )
     };
   }
 );
@@ -380,13 +578,16 @@ builder.defineMetaHandler(
       );
 
     if (!channel) {
+
       return {
         meta: null
       };
     }
 
     return {
+
       meta: {
+
         id:
           channel.id,
 
@@ -403,7 +604,7 @@ builder.defineMetaHandler(
           "square",
 
         description:
-          channel.description
+          descriptionFor(channel)
       }
     };
   }
@@ -423,26 +624,27 @@ builder.defineStreamHandler(
       );
 
     if (!channel) {
+
       return {
         streams: []
       };
     }
 
     return {
-      streams: [
-        {
-          name:
-            channel.group === "vtv"
-              ? "🇻🇳 VTV"
-              : "🏆 Sports UHD / 4K",
 
-          title:
-            channel.name,
+      streams:
+        channel.streams.map(
+          (url, index) => ({
 
-          url:
-            channel.url
-        }
-      ]
+            name:
+              channel.name,
+
+            title:
+              `${channel.name} • ${index + 1}`,
+
+            url
+          })
+        )
     };
   }
 );
@@ -474,10 +676,24 @@ app.get(
         c => c.group === "vtv"
       ).length;
 
-    const sportsCount =
+    const p1080Count =
+      channels.filter(
+        c =>
+          c.group === "sports1080"
+      ).length;
+
+    const p4kCount =
       channels.filter(
         c => c.group === "sports4k"
       ).length;
+
+    const sourceCount =
+      channels.reduce(
+        (total, channel) =>
+          total +
+          channel.streams.length,
+        0
+      );
 
     res.send(`
       <!doctype html>
@@ -485,6 +701,7 @@ app.get(
       <html>
 
         <head>
+
           <meta charset="UTF-8">
 
           <meta
@@ -493,6 +710,7 @@ app.get(
           >
 
           <title>Live TV</title>
+
         </head>
 
         <body
@@ -518,16 +736,30 @@ app.get(
           </p>
 
           <p>
-            🏆 Sports UHD / 4K:
+            📺 Sports 1080P:
             <strong>
-              ${sportsCount}
+              ${p1080Count}
             </strong>
           </p>
 
           <p>
-            Tổng:
+            🏆 Sports UHD / 4K:
+            <strong>
+              ${p4kCount}
+            </strong>
+          </p>
+
+          <p>
+            Tổng số kênh:
             <strong>
               ${channels.length}
+            </strong>
+          </p>
+
+          <p>
+            Tổng số luồng:
+            <strong>
+              ${sourceCount}
             </strong>
           </p>
 
@@ -537,7 +769,11 @@ app.get(
             Manifest:
           </p>
 
-          <p style="word-break:break-all">
+          <p
+            style="
+              word-break:break-all
+            "
+          >
             ${manifestUrl}
           </p>
 
@@ -562,7 +798,7 @@ app.listen(
     );
 
     console.log(
-      `Total channels: ${channels.length}`
+      `Channels: ${channels.length}`
     );
   }
 );
