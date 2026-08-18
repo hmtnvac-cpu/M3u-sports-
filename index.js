@@ -170,9 +170,7 @@ const channels = [
     name: "beIN Sports UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1948627&extension=ts&play_token=YÝtO3ymSXM",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948627&extension=ts&play_token=Vlmr36mT65",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948627&extension=ts&play_token=ZylqK6Jlon"
     ]
   },
@@ -184,9 +182,7 @@ const channels = [
     name: "Digi Sport UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632122&extension=ts&play_token=Bc1RBTdvcu",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632122&extension=ts&play_token=SFUMHAeisS",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632122&extension=ts&play_token=SpK901Rc9Y"
     ]
   },
@@ -198,11 +194,8 @@ const channels = [
     name: "Eleven Sports 1 UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1470618&extension=ts&play_token=m0Llrs5Iev",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1470618&extension=ts&play_token=e0V5DEpkoI",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948660&extension=ts&play_token=PkLWuD6skY",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1470618&extension=ts&play_token=z0mDj0DrdW"
     ]
   },
@@ -214,9 +207,7 @@ const channels = [
     name: "Sky Sports 1 UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608068&extension=ts&play_token=vdđJ3JIwT7",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608068&extension=ts&play_token=ChIhpB8guR",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608068&extension=ts&play_token=bNqN7HTIKX"
     ]
   },
@@ -228,9 +219,7 @@ const channels = [
     name: "Sky Sports 2 UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608069&extension=ts&play_token=eẻvbqSf7nG",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608069&extension=ts&play_token=Jn8XYQ8soh"
     ]
   },
@@ -252,9 +241,7 @@ const channels = [
     name: "Sky Sports Darts UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471382&extension=ts&play_token=RCUbXjP9kV",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471382&extension=ts&play_token=Xjz7IglxZB",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1471382&extension=ts&play_token=FqtO3KWqUT"
     ]
   },
@@ -266,9 +253,7 @@ const channels = [
     name: "Sky Sports F1 UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1761500&extension=ts&play_token=R0RwoZl4We",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1761500&extension=ts&play_token=3TLQcXqTKG"
     ]
   },
@@ -280,9 +265,7 @@ const channels = [
     name: "Sky Sports Main Event",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608071&extension=ts&play_token=ffh6vBOXXG",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608071&extension=ts&play_token=BZa17svpdY",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608071&extension=ts&play_token=YPIwjxNGfQ"
     ]
   },
@@ -294,9 +277,7 @@ const channels = [
     name: "Sky Sports UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471387&extension=ts&play_token=acG0ANBzsw",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471387&extension=ts&play_token=54v3D6UwQT",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1753227&extension=ts&play_token=3Ea6Hxt5oq"
     ]
   },
@@ -308,25 +289,21 @@ const channels = [
     name: "TNT Sports UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=G26iịCdrYZ",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1479591&extension=ts&play_token=vzYU4fDUAQ",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1479591&extension=ts&play_token=9JzXAViV1F"
     ]
   },
 
   {
-    id: "tnt-sports-uhd-ultimate",
+    id: "tnt-sports-ultimate-uhd",
     type: "tv",
     group: "sports4k",
-    name: "TNT Sports UHD Unlimited",
+    name: "TNT Sports Ultimate UHD",
     streams: [
-      "http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/131353?play_token=YnInsrDaU1"
+      "http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/131353?play_token=YnInsrDaU1",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1595637&extension=ts&play_token=YdoiZErSQZ",
-"http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1595637&extension=ts&play_token=pmWvIQQHhL"
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1595637&extension=ts&play_token=pmWvIQQHhL"
     ]
-  },
-
   },
 
   {
@@ -336,11 +313,8 @@ const channels = [
     name: "V Sport+ UHD",
     streams: [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632123&extension=ts&play_token=kmWkMZUxoN",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632123&extension=ts&play_token=Aeer3FFu7o",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1749221&extension=ts&play_token=jg5ZtLtCQN",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632123&extension=ts&play_token=E6ziX5leBT"
     ]
   },
@@ -352,14 +326,13 @@ const channels = [
     name: "TF1 HDR UHD",
     streams: [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1640379&extension=ts&play_token=YWsJoaBWoi",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1640379&extension=ts&play_token=6gj5Htj59g"
     ]
   }
 ];
 
 // ==================================================
-// SẮP XẾP TÊN KÊNH A → Z TRONG TỪNG NHÓM
+// THỨ TỰ NHÓM + A → Z
 // ==================================================
 
 const groupOrder = {
@@ -371,7 +344,6 @@ const groupOrder = {
 channels.sort((a, b) => {
 
   if (a.group !== b.group) {
-
     return (
       groupOrder[a.group] -
       groupOrder[b.group]
@@ -396,7 +368,7 @@ const manifest = {
 
   id: "com.hmtnvac.livetv",
 
-  version: "4.0.0",
+  version: "4.2.0",
 
   name: "Live TV",
 
@@ -460,15 +432,10 @@ const builder =
 
 function posterFor(channel) {
 
-  const text =
-    encodeURIComponent(
-      channel.name
-    );
-
   return (
     "https://dummyimage.com/" +
     "500x500/111111/ffffff.png" +
-    `&text=${text}`
+    `&text=${encodeURIComponent(channel.name)}`
   );
 }
 
@@ -570,7 +537,6 @@ builder.defineMetaHandler(
       );
 
     if (!channel) {
-
       return {
         meta: null
       };
@@ -616,7 +582,6 @@ builder.defineStreamHandler(
       );
 
     if (!channel) {
-
       return {
         streams: []
       };
