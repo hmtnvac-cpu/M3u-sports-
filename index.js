@@ -316,25 +316,17 @@ const channels = [
   },
 
   {
-    id: "tnt-sports-uhd-unlimited",
+    id: "tnt-sports-uhd-ultimate",
     type: "tv",
     group: "sports4k",
     name: "TNT Sports UHD Unlimited",
     streams: [
       "http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/131353?play_token=YnInsrDaU1"
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1595637&extension=ts&play_token=YdoiZErSQZ",
+"http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1595637&extension=ts&play_token=pmWvIQQHhL"
     ]
   },
 
-  {
-    id: "tnt-sports-ultimate-uhd",
-    type: "tv",
-    group: "sports4k",
-    name: "TNT Sports Ultimate UHD",
-    streams: [
-      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1595637&extension=ts&play_token=YdoiZErSQZ",
-
-      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1595637&extension=ts&play_token=pmWvIQQHhL"
-    ]
   },
 
   {
