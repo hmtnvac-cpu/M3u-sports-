@@ -8,7 +8,7 @@ const PUBLIC_BASE =
   process.env.PUBLIC_BASE_URL ||
   "https://m3u-sports-tv.onrender.com";
 
-const VERSION = "1.0.3";
+const VERSION = "1.0.4";
 
 // ==================================================
 // HELPERS
@@ -34,7 +34,7 @@ function normalizedPng(url) {
     "&bg=11151c" +
     "&output=png" +
     "&q=92" +
-    "&v=103"
+    "&v=104"
   );
 }
 
@@ -59,20 +59,22 @@ function escapeXml(value) {
 }
 
 // ==================================================
-// VTV LOGO - SELF HOSTED SVG
-// KHÔNG SHARP
-// KHÔNG FONT
-// KHÔNG LINK ẢNH NGOÀI
+// VTV TROLL LOGO
+//
+// - SELF HOSTED TRÊN RENDER
+// - KHÔNG FONT
+// - KHÔNG SHARP
+// - KHÔNG ẢNH NGOÀI
+// - VTV1 → VTV10 ĐỀU CÓ SỐ VECTOR
 // ==================================================
 
 function vtvLogoUrl(number) {
-  return `${PUBLIC_BASE}/logo/vtv${number}.svg?v=103`;
+  return `${PUBLIC_BASE}/logo/vtv${number}.svg?v=104`;
 }
 
-/*
-  Các số được vẽ bằng segment vector.
-  Không sử dụng <text>.
-*/
+// ==================================================
+// VECTOR DIGITS
+// ==================================================
 
 const DIGITS = {
   0: ["a", "b", "c", "d", "e", "f"],
@@ -87,74 +89,157 @@ const DIGITS = {
   9: ["a", "b", "c", "d", "f", "g"]
 };
 
+function horizontalSegment(x, y, w, h) {
+  return `
+    <polygon
+      points="
+        ${x + 8},${y}
+        ${x + w - 8},${y}
+        ${x + w},${y + h / 2}
+        ${x + w - 8},${y + h}
+        ${x + 8},${y + h}
+        ${x},${y + h / 2}
+      "
+    />
+  `;
+}
+
+function verticalSegment(x, y, w, h) {
+  return `
+    <polygon
+      points="
+        ${x},${y + 8}
+        ${x + w / 2},${y}
+        ${x + w},${y + 8}
+        ${x + w},${y + h - 8}
+        ${x + w / 2},${y + h}
+        ${x},${y + h - 8}
+      "
+    />
+  `;
+}
+
 function digitSvg(digit, x, y, scale = 1) {
 
-  const active = DIGITS[digit] || [];
-
-  const horizontal = (sx, sy) => `
-    <polygon
-      points="
-        ${sx + 8},${sy}
-        ${sx + 62},${sy}
-        ${sx + 70},${sy + 8}
-        ${sx + 62},${sy + 16}
-        ${sx + 8},${sy + 16}
-        ${sx},${sy + 8}
-      "
-    />
-  `;
-
-  const vertical = (sx, sy) => `
-    <polygon
-      points="
-        ${sx},${sy + 8}
-        ${sx + 8},${sy}
-        ${sx + 16},${sy + 8}
-        ${sx + 16},${sy + 62}
-        ${sx + 8},${sy + 70}
-        ${sx},${sy + 62}
-      "
-    />
-  `;
+  const active =
+    DIGITS[String(digit)] || [];
 
   const segments = {
-    a: horizontal(0, 0),
-    g: horizontal(0, 70),
-    d: horizontal(0, 140),
+    a: horizontalSegment(0, 0, 78, 18),
+    g: horizontalSegment(0, 82, 78, 18),
+    d: horizontalSegment(0, 164, 78, 18),
 
-    f: vertical(-8, 8),
-    b: vertical(62, 8),
+    f: verticalSegment(-5, 12, 18, 72),
+    b: verticalSegment(65, 12, 18, 72),
 
-    e: vertical(-8, 78),
-    c: vertical(62, 78)
+    e: verticalSegment(-5, 96, 18, 72),
+    c: verticalSegment(65, 96, 18, 72)
   };
 
   return `
     <g
-      transform="translate(${x} ${y}) scale(${scale})"
-      fill="#176db3"
+      transform="
+        translate(${x} ${y})
+        rotate(-3 40 90)
+        scale(${scale})
+      "
+      fill="#e51c2a"
+      stroke="#111111"
+      stroke-width="3"
+      stroke-linejoin="round"
     >
-      ${active.map(segment => segments[segment]).join("")}
+
+      ${active
+        .map(s => segments[s])
+        .join("")}
+
+      <!-- troll eyes -->
+      <ellipse
+        cx="26"
+        cy="68"
+        rx="8"
+        ry="5"
+        fill="#ffffff"
+        stroke="#111111"
+      />
+
+      <ellipse
+        cx="51"
+        cy="66"
+        rx="8"
+        ry="5"
+        fill="#ffffff"
+        stroke="#111111"
+      />
+
+      <circle
+        cx="29"
+        cy="69"
+        r="2.5"
+        fill="#111111"
+      />
+
+      <circle
+        cx="48"
+        cy="67"
+        r="2.5"
+        fill="#111111"
+      />
+
+      <!-- troll grin -->
+      <path
+        d="
+          M18 122
+          Q39 143 61 120
+          Q42 155 18 122
+        "
+        fill="#ffffff"
+        stroke="#111111"
+        stroke-width="4"
+      />
+
+      <path
+        d="
+          M25 128
+          L25 138
+          M34 132
+          L34 143
+          M43 132
+          L43 143
+          M52 128
+          L52 138
+        "
+        stroke="#111111"
+        stroke-width="2"
+      />
+
     </g>
   `;
 }
 
 function numberSvg(number) {
 
-  const value = String(number);
+  const value =
+    String(number);
 
   if (value === "10") {
-    return (
-      digitSvg("1", 410, 230, 0.72) +
-      digitSvg("0", 475, 230, 0.72)
-    );
+
+    return `
+      ${digitSvg("1", 430, 225, 0.73)}
+      ${digitSvg("0", 492, 225, 0.73)}
+    `;
   }
 
-  return digitSvg(value, 455, 215, 0.9);
+  return digitSvg(
+    value,
+    474,
+    220,
+    0.85
+  );
 }
 
 // ==================================================
-// ENDPOINT LOGO VTV
+// VTV LOGO ENDPOINT
 // ==================================================
 
 app.get(
@@ -174,83 +259,306 @@ app.get(
         .send("Not found");
     }
 
-    /*
-      Logo được cố tình đặt giữa khung 600x600,
-      có khoảng trắng xung quanh giống ảnh mẫu.
-    */
-
     const svg = `
 <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="600"
-  height="600"
-  viewBox="0 0 600 600"
+xmlns="http://www.w3.org/2000/svg"
+width="600"
+height="600"
+viewBox="0 0 600 600"
 >
 
-  <!-- nền -->
-  <rect
-    width="600"
-    height="600"
-    fill="#ffffff"
-  />
+<!-- ============================================= -->
+<!-- BACKGROUND -->
+<!-- ============================================= -->
 
-  <!-- =================================================
-       V ĐỎ
-       ================================================= -->
+<rect
+  width="600"
+  height="600"
+  rx="36"
+  fill="#ffffff"
+/>
 
-  <polygon
-    points="
-      70,205
-      155,205
-      205,350
-      255,205
-      340,205
-      245,405
-      165,405
-    "
-    fill="#e51f2b"
-  />
+<!-- ============================================= -->
+<!-- RED V -->
+<!-- ============================================= -->
 
-  <!-- =================================================
-       T XANH LÁ
-       ================================================= -->
+<path
+  d="
+    M70 190
+    L158 190
+    L210 333
+    L257 190
+    L340 190
+    L247 405
+    Q234 430 210 430
+    Q185 430 172 405
+    Z
+  "
+  fill="#e71928"
+  stroke="#111111"
+  stroke-width="6"
+  stroke-linejoin="round"
+/>
 
-  <polygon
-    points="
-      205,205
-      390,205
-      365,270
-      320,270
-      265,405
-      185,405
-      240,270
-      180,270
-    "
-    fill="#16864a"
-  />
+<!-- RED V FACE -->
 
-  <!-- =================================================
-       V XANH DƯƠNG
-       ================================================= -->
+<ellipse
+  cx="171"
+  cy="270"
+  rx="19"
+  ry="12"
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="5"
+/>
 
-  <polygon
-    points="
-      330,205
-      410,205
-      445,345
-      495,205
-      565,205
-      480,405
-      405,405
-    "
-    fill="#176db3"
-  />
+<ellipse
+  cx="219"
+  cy="267"
+  rx="19"
+  ry="12"
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="5"
+/>
 
-  <!-- =================================================
-       SỐ KÊNH - VECTOR
-       ================================================= -->
+<circle
+  cx="177"
+  cy="272"
+  r="5"
+  fill="#111111"
+/>
 
-  ${numberSvg(number)}
+<circle
+  cx="213"
+  cy="269"
+  r="5"
+  fill="#111111"
+/>
+
+<path
+  d="
+    M145 319
+    Q194 373 241 316
+    Q205 389 145 319
+  "
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="6"
+/>
+
+<path
+  d="
+    M160 331
+    L164 350
+
+    M178 340
+    L179 360
+
+    M198 341
+    L198 362
+
+    M217 335
+    L214 354
+  "
+  stroke="#111111"
+  stroke-width="3"
+/>
+
+<!-- troll wrinkles red -->
+
+<path
+  d="
+    M136 246
+    Q165 228 185 239
+
+    M205 238
+    Q228 224 245 240
+  "
+  fill="none"
+  stroke="#111111"
+  stroke-width="4"
+/>
+
+<!-- ============================================= -->
+<!-- GREEN T -->
+<!-- ============================================= -->
+
+<path
+  d="
+    M233 190
+    L414 190
+    L395 255
+    L349 255
+    L300 430
+    L230 430
+    L280 255
+    L219 255
+    Z
+  "
+  fill="#11984a"
+  stroke="#111111"
+  stroke-width="6"
+  stroke-linejoin="round"
+/>
+
+<!-- GREEN T FACE -->
+
+<ellipse
+  cx="285"
+  cy="240"
+  rx="18"
+  ry="11"
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="5"
+/>
+
+<ellipse
+  cx="343"
+  cy="239"
+  rx="18"
+  ry="11"
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="5"
+/>
+
+<circle
+  cx="290"
+  cy="241"
+  r="4"
+  fill="#111111"
+/>
+
+<circle
+  cx="337"
+  cy="240"
+  r="4"
+  fill="#111111"
+/>
+
+<path
+  d="
+    M277 288
+    Q316 321 356 285
+    Q319 340 277 288
+  "
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="5"
+/>
+
+<path
+  d="
+    M288 296
+    L292 309
+
+    M304 302
+    L307 316
+
+    M322 302
+    L324 316
+
+    M339 295
+    L338 309
+  "
+  stroke="#111111"
+  stroke-width="2.5"
+/>
+
+<!-- ============================================= -->
+<!-- BLUE V -->
+<!-- ============================================= -->
+
+<path
+  d="
+    M354 190
+    L427 190
+    L458 330
+    L510 190
+    L568 190
+    L490 410
+    Q478 433 453 433
+    Q428 433 415 410
+    Z
+  "
+  fill="#1253b7"
+  stroke="#111111"
+  stroke-width="6"
+  stroke-linejoin="round"
+/>
+
+<!-- BLUE V FACE -->
+
+<ellipse
+  cx="432"
+  cy="270"
+  rx="18"
+  ry="11"
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="5"
+/>
+
+<ellipse
+  cx="480"
+  cy="266"
+  rx="18"
+  ry="11"
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="5"
+/>
+
+<circle
+  cx="438"
+  cy="272"
+  r="4"
+  fill="#111111"
+/>
+
+<circle
+  cx="474"
+  cy="268"
+  r="4"
+  fill="#111111"
+/>
+
+<path
+  d="
+    M409 318
+    Q455 371 500 315
+    Q463 387 409 318
+  "
+  fill="#ffffff"
+  stroke="#111111"
+  stroke-width="6"
+/>
+
+<path
+  d="
+    M424 329
+    L428 348
+
+    M442 338
+    L443 358
+
+    M460 338
+    L460 359
+
+    M480 330
+    L477 350
+  "
+  stroke="#111111"
+  stroke-width="3"
+/>
+
+<!-- ============================================= -->
+<!-- CHANNEL NUMBER -->
+<!-- ============================================= -->
+
+${numberSvg(number)}
 
 </svg>
 `;
@@ -275,7 +583,7 @@ app.get(
 
 const LOGOS = {
 
-  // VTV - HOST NGAY TRÊN RENDER
+  // VTV SELF HOSTED
 
   vtv1: vtvLogoUrl(1),
   vtv2: vtvLogoUrl(2),
@@ -288,7 +596,7 @@ const LOGOS = {
   vtv9: vtvLogoUrl(9),
   vtv10: vtvLogoUrl(10),
 
-  // SPORTS 1080 - GIỮ NGUYÊN
+  // SPORTS 1080
 
   cbs:
     "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cbs-sports-network-us.png",
@@ -314,7 +622,7 @@ const LOGOS = {
   universo:
     "https://img.nbc.com/files/images/2019/4/26/Universo-logos-templateUniverso-Logo-Coloralt2-450x250.v2.png",
 
-  // SPORTS UHD / 4K - GIỮ NGUYÊN
+  // SPORTS UHD
 
   bein:
     "https://www.tvlogo.org/france/bein-sports-fr.png",
@@ -492,8 +800,11 @@ const channels = [
     LOGOS.cbs,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=45601&extension=ts&play_token=FzL6BKqvEe",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1931140&extension=ts&play_token=78QsJViQ2M",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1931140&extension=ts&play_token=drj6UiUd3H",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1931140&extension=ts&play_token=dMBw5KtrCr"
     ]
   ),
@@ -505,9 +816,13 @@ const channels = [
     LOGOS.nbc,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1124350&extension=ts&play_token=Nye7KFsDtT",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1124350&extension=ts&play_token=eNXy4IgwMX",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1124350&extension=ts&play_token=7VZFU5RGrb",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=234677&extension=ts&play_token=tvycd3S4G4",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1124350&extension=ts&play_token=rQKi6Aw8Jy"
     ]
   ),
@@ -519,9 +834,13 @@ const channels = [
     LOGOS.now,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948655&extension=ts&play_token=tbb2RAOWTW",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948655&extension=ts&play_token=wKjCMLCsCQ",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948655&extension=ts&play_token=4dOHhrrZQ5",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1948655&extension=ts&play_token=kDi24LfUfG",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948655&extension=ts&play_token=0MqG6oZhXz"
     ]
   ),
@@ -533,8 +852,11 @@ const channels = [
     LOGOS.skyMain,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905853&extension=ts&play_token=VcLSkUIKoV",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1905853&extension=ts&play_token=HJKEBcMdYW",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1905853&extension=ts&play_token=tFtdcozl0Z",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1905853&extension=ts&play_token=0PellAUHuM"
     ]
   ),
@@ -546,8 +868,11 @@ const channels = [
     LOGOS.skyPL,
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1905844&extension=ts&play_token=HE8bJPpkM0",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905844&extension=ts&play_token=AIylOstlvH",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1905844&extension=ts&play_token=VauO51P7Uz",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1905844&extension=ts&play_token=Rp6htQTP1z"
     ]
   ),
@@ -559,7 +884,9 @@ const channels = [
     LOGOS.sportsnet,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948644&extension=ts&play_token=67dYXdFMD5",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1948650&extension=ts&play_token=IeulQneT0e",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948650&extension=ts&play_token=kOpzJPZpl8"
     ]
   ),
@@ -571,9 +898,13 @@ const channels = [
     LOGOS.usa,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1930887&extension=ts&play_token=17642b7BAL",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=45466&extension=ts&play_token=BhBlcThs4o",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1930887&extension=ts&play_token=wXIyU8E7YD",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1930887&extension=ts&play_token=J2KdNN5TYM",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1930887&extension=ts&play_token=tdDzhWuRot"
     ]
   ),
@@ -585,7 +916,9 @@ const channels = [
     LOGOS.universo,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1930892&extension=ts&play_token=Qu3YNaQE54",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1930892&extension=ts&play_token=EaKf87ZAR8",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1930892&extension=ts&play_token=Dshjs6wiNd"
     ]
   ),
@@ -601,7 +934,9 @@ const channels = [
     LOGOS.bein,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948627&extension=ts&play_token=Vlmr36mT65",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948627&extension=ts&play_token=ZylqK6Jlon",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948627&extension=ts&play_token=5fIeli4ylw"
     ]
   ),
@@ -613,7 +948,9 @@ const channels = [
     LOGOS.digi,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632122&extension=ts&play_token=SFUMHAeisS",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632122&extension=ts&play_token=SpK901Rc9Y",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1632122&extension=ts&play_token=1Fi4sgyPhW"
     ]
   ),
@@ -625,8 +962,11 @@ const channels = [
     LOGOS.eleven,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1470618&extension=ts&play_token=e0V5DEpkoI",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948660&extension=ts&play_token=PkLWuD6skY",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1470618&extension=ts&play_token=z0mDj0DrdW",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948660&extension=ts&play_token=EIr5yxfGPr"
     ]
   ),
@@ -638,7 +978,9 @@ const channels = [
     LOGOS.sky,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608068&extension=ts&play_token=ChIhpB8guR",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608068&extension=ts&play_token=bNqN7HTIKX",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1608068&extension=ts&play_token=djxHx6Uy9j"
     ]
   ),
@@ -650,7 +992,9 @@ const channels = [
     LOGOS.sky,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608069&extension=ts&play_token=Jn8XYQ8soh",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1608069&extension=ts&play_token=T7pDKwjV1Z"
     ]
   ),
@@ -672,7 +1016,9 @@ const channels = [
     LOGOS.skyDarts,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471382&extension=ts&play_token=Xjz7IglxZB",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1471382&extension=ts&play_token=FqtO3KWqUT",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1471382&extension=ts&play_token=4wKKTKtM8L"
     ]
   ),
@@ -684,6 +1030,7 @@ const channels = [
     LOGOS.skyF1,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1761500&extension=ts&play_token=3TLQcXqTKG",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1761500&extension=ts&play_token=OWv81jhV3e"
     ]
   ),
@@ -695,7 +1042,9 @@ const channels = [
     LOGOS.skyMain,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608071&extension=ts&play_token=BZa17svpdY",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608071&extension=ts&play_token=YPIwjxNGfQ",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1641636&extension=ts&play_token=Oxc5PyW4yK"
     ]
   ),
@@ -707,7 +1056,9 @@ const channels = [
     LOGOS.sky,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471387&extension=ts&play_token=54v3D6UwQT",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1753227&extension=ts&play_token=3Ea6Hxt5oq",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1471387&extension=ts&play_token=Bx3mlhSM6x"
     ]
   ),
@@ -719,7 +1070,9 @@ const channels = [
     LOGOS.tf1,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1640379&extension=ts&play_token=YWsJoaBWoi",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1640379&extension=ts&play_token=6gj5Htj59g",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1640379&extension=ts&play_token=qXUKertYkr"
     ]
   ),
@@ -731,7 +1084,9 @@ const channels = [
     LOGOS.tnt,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1479591&extension=ts&play_token=vzYU4fDUAQ",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1479591&extension=ts&play_token=9JzXAViV1F",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1479591&extension=ts&play_token=mSsCW5SfPM"
     ]
   ),
@@ -753,16 +1108,15 @@ const channels = [
     LOGOS.vsport,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632123&extension=ts&play_token=Aeer3FFu7o",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1749221&extension=ts&play_token=jg5ZtLtCQN",
+
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632123&extension=ts&play_token=E6ziX5leBT",
+
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1632123&extension=ts&play_token=6GO8Kiqjfm"
     ]
   )
 ];
-
-// ==================================================
-// CHANNEL MAP
-// ==================================================
 
 const channelMap =
   Object.fromEntries(
@@ -882,10 +1236,11 @@ const matches = [
 ];
 
 // ==================================================
-// CACHE TEAM LOGOS
+// TEAM IMAGE CACHE
 // ==================================================
 
-const imageCache = new Map();
+const imageCache =
+  new Map();
 
 async function toDataUri(url) {
 
@@ -901,7 +1256,7 @@ async function toDataUri(url) {
 
         headers: {
           "User-Agent":
-            "Mozilla/5.0 LiveTV/1.0.3"
+            "Mozilla/5.0 LiveTV/1.0.4"
         }
       }
     );
@@ -925,7 +1280,10 @@ async function toDataUri(url) {
   const data =
     `data:${type};base64,${buffer.toString("base64")}`;
 
-  imageCache.set(url, data);
+  imageCache.set(
+    url,
+    data
+  );
 
   return data;
 }
@@ -959,86 +1317,86 @@ app.get(
 
       const svg = `
 <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="600"
-  height="600"
-  viewBox="0 0 600 600"
+xmlns="http://www.w3.org/2000/svg"
+width="600"
+height="600"
+viewBox="0 0 600 600"
 >
 
 <rect
-  width="600"
-  height="600"
-  rx="38"
-  fill="#11151c"
+width="600"
+height="600"
+rx="38"
+fill="#11151c"
 />
 
 <rect
-  x="25"
-  y="25"
-  width="550"
-  height="550"
-  rx="32"
-  fill="#171c24"
+x="25"
+y="25"
+width="550"
+height="550"
+rx="32"
+fill="#171c24"
 />
 
 <image
-  href="${home}"
-  x="70"
-  y="155"
-  width="185"
-  height="185"
-  preserveAspectRatio="xMidYMid meet"
+href="${home}"
+x="70"
+y="155"
+width="185"
+height="185"
+preserveAspectRatio="xMidYMid meet"
 />
 
 <image
-  href="${away}"
-  x="345"
-  y="155"
-  width="185"
-  height="185"
-  preserveAspectRatio="xMidYMid meet"
+href="${away}"
+x="345"
+y="155"
+width="185"
+height="185"
+preserveAspectRatio="xMidYMid meet"
 />
 
 <circle
-  cx="300"
-  cy="248"
-  r="44"
-  fill="#0c1017"
-  stroke="#636c79"
-  stroke-width="3"
+cx="300"
+cy="248"
+r="44"
+fill="#0c1017"
+stroke="#636c79"
+stroke-width="3"
 />
 
 <text
-  x="300"
-  y="260"
-  text-anchor="middle"
-  fill="#ffffff"
-  font-family="Arial,Helvetica,sans-serif"
-  font-size="32"
-  font-weight="800"
+x="300"
+y="260"
+text-anchor="middle"
+fill="#ffffff"
+font-family="Arial,Helvetica,sans-serif"
+font-size="32"
+font-weight="800"
 >
 VS
 </text>
 
 <text
-  x="300"
-  y="430"
-  text-anchor="middle"
-  fill="#ffffff"
-  font-family="Arial,Helvetica,sans-serif"
-  font-size="46"
-  font-weight="800"
+x="300"
+y="430"
+text-anchor="middle"
+fill="#ffffff"
+font-family="Arial,Helvetica,sans-serif"
+font-size="46"
+font-weight="800"
 >
 ${escapeXml(match.time)}
 </text>
 
 <text
-  x="300"
-  y="490"
-  text-anchor="middle"
-  fill="#aab2bf"
-  font-family="Arial,Helvetica,sans-serif"
-  font-size="24"
+x="300"
+y="490"
+text-anchor="middle"
+fill="#aab2bf"
+font-family="Arial,Helvetica,sans-serif"
+font-size="24"
 >
 ${escapeXml(match.date)}
 </text>
@@ -1208,7 +1566,7 @@ const builder =
   new addonBuilder(manifest);
 
 // ==================================================
-// HELPERS LIVE
+// POSTERS
 // ==================================================
 
 function liveName(match) {
@@ -1220,12 +1578,8 @@ function liveName(match) {
 
 function channelPoster(channel) {
 
-  /*
-    QUAN TRỌNG:
-    VTV dùng trực tiếp endpoint của Render.
-    KHÔNG đưa VTV qua weserv.
-  */
-
+  // VTV lấy trực tiếp từ Render.
+  // KHÔNG qua weserv.
   if (channel.group === "vtv") {
     return channel.logo;
   }
@@ -1238,7 +1592,7 @@ function channelPoster(channel) {
 function livePoster(match) {
 
   return normalizedPng(
-    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=103`
+    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=104`
   );
 }
 
@@ -1260,6 +1614,10 @@ function descriptionFor(channel) {
     `${channel.streams.length} luồng`
   );
 }
+
+// ==================================================
+// LIVE STREAMS
+// ==================================================
 
 function liveStreams(match, quality) {
 
@@ -1283,9 +1641,12 @@ function liveStreams(match, quality) {
       (url, index) => {
 
         streams.push({
-          name: channel.name,
+          name:
+            channel.name,
+
           title:
             `${channel.name} • ${index + 1}`,
+
           url
         });
       }
@@ -1316,7 +1677,8 @@ builder.defineCatalogHandler(
 
       let list =
         matches.filter(
-          m => m.channels1080.length > 0
+          m =>
+            m.channels1080.length > 0
         );
 
       if (search) {
@@ -1330,6 +1692,7 @@ builder.defineCatalogHandler(
       }
 
       return {
+
         metas:
           list.map(m => ({
             id:
@@ -1359,7 +1722,8 @@ builder.defineCatalogHandler(
 
       let list =
         matches.filter(
-          m => m.channels4k.length > 0
+          m =>
+            m.channels4k.length > 0
         );
 
       if (search) {
@@ -1373,6 +1737,7 @@ builder.defineCatalogHandler(
       }
 
       return {
+
         metas:
           list.map(m => ({
             id:
@@ -1400,7 +1765,8 @@ builder.defineCatalogHandler(
 
     let list =
       channels.filter(
-        c => c.group === args.id
+        c =>
+          c.group === args.id
       );
 
     if (search) {
@@ -1414,6 +1780,7 @@ builder.defineCatalogHandler(
     }
 
     return {
+
       metas:
         list.map(channel => ({
           id:
@@ -1465,7 +1832,8 @@ builder.defineMetaHandler(
 
       const match =
         matches.find(
-          m => m.id === base
+          m =>
+            m.id === base
         );
 
       if (!match) {
@@ -1475,6 +1843,7 @@ builder.defineMetaHandler(
       }
 
       return {
+
         meta: {
           id:
             args.id,
@@ -1511,6 +1880,7 @@ builder.defineMetaHandler(
     }
 
     return {
+
       meta: {
         id:
           channel.id,
@@ -1561,7 +1931,8 @@ builder.defineStreamHandler(
 
       const match =
         matches.find(
-          m => m.id === base
+          m =>
+            m.id === base
         );
 
       if (!match) {
@@ -1571,6 +1942,7 @@ builder.defineStreamHandler(
       }
 
       return {
+
         streams:
           liveStreams(
             match,
@@ -1591,6 +1963,7 @@ builder.defineStreamHandler(
     }
 
     return {
+
       streams:
         channel.streams.map(
           (url, index) => ({
@@ -1657,14 +2030,18 @@ app.get(
 <html>
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
+name="viewport"
+content="width=device-width,initial-scale=1"
 >
 
-<title>Live TV</title>
+<title>
+Live TV
+</title>
+
 </head>
 
 <body
@@ -1677,11 +2054,18 @@ line-height:1.7;
 "
 >
 
-<h1>📺 Live TV</h1>
+<h1>
+📺 Live TV
+</h1>
 
 <p>
 Version:
 <b>${VERSION}</b>
+</p>
+
+<p>
+VTV logo:
+<b>Troll Vector Self-Hosted</b>
 </p>
 
 <p>
@@ -1728,13 +2112,14 @@ ${manifestUrl}
 </p>
 
 </body>
+
 </html>
 `);
   }
 );
 
 // ==================================================
-// STREMIO ROUTER
+// ROUTER
 // ==================================================
 
 app.use(
@@ -1763,6 +2148,10 @@ app.listen(
 
     console.log(
       `Live matches: ${matches.length}`
+    );
+
+    console.log(
+      "VTV logo mode: Troll Vector Self-Hosted"
     );
   }
 );
