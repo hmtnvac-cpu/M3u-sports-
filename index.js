@@ -26,7 +26,7 @@ function channel(id, group, name, logo, streams) {
 }
 
 // ==================================================
-// LOGO KÊNH (PNG ỔN ĐỊNH)
+// LOGO KÊNH (ĐÃ KIỂM TRA ĐẦY ĐỦ)
 // ==================================================
 
 const LOGO = {
@@ -66,7 +66,7 @@ const LOGO = {
 };
 
 // ==================================================
-// LOGO CLB
+// LOGO CLB (ĐỘI NHÀ & ĐỘI KHÁCH RIÊNG BIỆT)
 // ==================================================
 
 const TEAM = {
@@ -85,7 +85,7 @@ const TEAM = {
 };
 
 // ==================================================
-// DANH SÁCH KÊNH (ĐẦY ĐỦ NHIỀU LUỒNG DỰ PHÒNG)
+// DANH SÁCH KÊNH (ĐỦ LUỒNG DỰ PHÒNG)
 // ==================================================
 
 const channels = [
@@ -265,7 +265,7 @@ matches.sort((a, b) => a.time.localeCompare(b.time));
 
 const manifest = {
   id: "com.hmtnvac.livetv",
-  version: "7.6.0",
+  version: "7.7.0",
   name: "Live TV",
   description: "Live football, Sports 1080P, Sports UHD / 4K và VTV",
   resources: ["catalog", "meta", "stream"],
@@ -337,7 +337,8 @@ builder.defineMetaHandler(async args => {
         name: `${m.time} • ${m.home} vs ${m.away}`,
         poster: m.homeLogo,
         background: m.awayLogo,
-        posterShape: "square"
+        posterShape: "square",
+        description: `${m.time} • ${m.home} (Home) gặp ${m.away} (Away)`
       }
     };
   }
@@ -353,7 +354,8 @@ builder.defineMetaHandler(async args => {
         name: `${m.time} • ${m.home} vs ${m.away}`,
         poster: m.homeLogo,
         background: m.awayLogo,
-        posterShape: "square"
+        posterShape: "square",
+        description: `${m.time} • ${m.home} (Home) gặp ${m.away} (Away) • UHD / 4K`
       }
     };
   }
