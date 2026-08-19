@@ -85,7 +85,7 @@ const TEAM = {
 };
 
 // ==================================================
-// DANH SÁCH KÊNH (ĐÃ BỔ SUNG ĐẦY ĐỦ CÁC LUỒNG DỰ PHÒNG)
+// DANH SÁCH KÊNH (ĐẦY ĐỦ NHIỀU LUỒNG DỰ PHÒNG)
 // ==================================================
 
 const channels = [
@@ -265,7 +265,7 @@ matches.sort((a, b) => a.time.localeCompare(b.time));
 
 const manifest = {
   id: "com.hmtnvac.livetv",
-  version: "7.5.0",
+  version: "7.6.0",
   name: "Live TV",
   description: "Live football, Sports 1080P, Sports UHD / 4K và VTV",
   resources: ["catalog", "meta", "stream"],
