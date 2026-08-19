@@ -1,16 +1,13 @@
 {
   "name": "live-tv-stremio",
-  "version": "3.0.0",
-  "description": "VTV and Sports UHD Stremio addon",
+  "version": "9.0.0",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.21.2",
+    "sharp": "^0.34.3",
     "stremio-addon-sdk": "^1.6.10"
-  },
-  "engines": {
-    "node": ">=18"
   }
 }
