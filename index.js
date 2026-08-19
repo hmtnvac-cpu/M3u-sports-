@@ -1,5 +1,6 @@
 const { addonBuilder, getRouter } = require("stremio-addon-sdk");
 const express = require("express");
+const sharp = require("sharp");
 
 const app = express();
 const PORT = process.env.PORT || 7000;
@@ -13,27 +14,16 @@ const PUBLIC_BASE =
 // ==================================================
 
 const uniq = arr =>
-  [...new Set(
-    arr
-      .map(x => String(x).trim())
-      .filter(Boolean)
-  )];
+  [...new Set(arr.map(x => String(x).trim()).filter(Boolean))];
 
 const commons = file =>
   "https://commons.wikimedia.org/wiki/Special:Redirect/file/" +
-  encodeURIComponent(file) +
-  "?width=800";
+  encodeURIComponent(file);
 
 const espn = id =>
   `https://a.espncdn.com/i/teamlogos/soccer/500/${id}.png`;
 
-function makeChannel(
-  id,
-  group,
-  name,
-  logo,
-  streams
-) {
+function makeChannel(id, group, name, logo, streams) {
   return {
     id,
     type: "tv",
@@ -44,71 +34,37 @@ function makeChannel(
   };
 }
 
-function escapeXml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
 // ==================================================
-// LOGO SOURCES
+// LOGO SOURCE
+// Chỉ Render truy cập các URL này.
+// Stremio/Nuvio chỉ nhận PNG từ chính Render.
 // ==================================================
 
 const LOGO = {
-
   // VTV
-  vtv1:
-    commons("VTV1 logo 2013 final.svg"),
+  vtv1: commons("VTV1 logo 2013 final.svg"),
+  vtv2: commons("VTV2 logo 2013 final.svg"),
+  vtv3: commons("VTV3 logo 2013 final.svg"),
+  vtv4: commons("VTV4 logo 2013 final.svg"),
+  vtv5: commons("VTV5 logo 2013 final.svg"),
+  vtv6: commons("VTV6 logo 2026 final.svg"),
+  vtv7: commons("VTV7 logo 2016 final.svg"),
+  vtv8: commons("VTV8 logo 2016 final.svg"),
+  vtv9: commons("VTV9 logo 2013 final.svg"),
+  vtv10: commons("VTV10 logo 2026.png"),
 
-  vtv2:
-    commons("VTV2 logo 2013 final.svg"),
-
-  vtv3:
-    commons("VTV3 logo 2013 final.svg"),
-
-  vtv4:
-    commons("VTV4 logo 2013 final.svg"),
-
-  vtv5:
-    commons("VTV5 logo 2013 final.svg"),
-
-  vtv6:
-    commons("VTV6 logo 2026 final.svg"),
-
-  vtv7:
-    commons("VTV7 logo 2016 final.svg"),
-
-  vtv8:
-    commons("VTV8 logo 2016 final.svg"),
-
-  vtv9:
-    commons("VTV9 logo 2013 final.svg"),
-
-  vtv10:
-    commons("VTV10 logo 2026.png"),
-
-  // 1080
-  cbs:
-    commons("CBS Sports logo.svg"),
-
-  nbc:
-    commons("NBC Sports 2023 (with NBC wordmark).svg"),
+  // 1080P
+  cbs: commons("CBS Sports logo.svg"),
+  nbc: commons("NBC Sports 2023 (with NBC wordmark).svg"),
 
   now:
     "https://www.tvchannellists.com/wiki/images/2/2f/NowsportsprimeHK.png",
 
   skyMain:
-    commons(
-      "Sky Sports Main Event - Logo 2025.svg"
-    ),
+    commons("Sky Sports Main Event - Logo 2025.svg"),
 
   sky:
-    commons(
-      "Sky Sports Football - Logo 2025.svg"
-    ),
+    commons("Sky Sports Football - Logo 2025.svg"),
 
   sportsnet:
     "https://www.logo.wine/a/logo/Sportsnet_One/Sportsnet_One-Logo.wine.svg",
@@ -119,11 +75,9 @@ const LOGO = {
   universo:
     commons("Universo 2015.svg"),
 
-  // UHD
+  // UHD / 4K
   bein:
-    commons(
-      "BeIN Sports logo (vertical version).svg"
-    ),
+    commons("BeIN Sports logo (vertical version).svg"),
 
   digi:
     commons("DIGI Sport 1.svg"),
@@ -132,14 +86,10 @@ const LOGO = {
     commons("ELEVEN SPORTS Logo.svg"),
 
   skyDarts:
-    commons(
-      "Sky Sports Darts - Logo 2025.svg"
-    ),
+    commons("Sky Sports Darts - Logo 2025.svg"),
 
   skyF1:
-    commons(
-      "Sky Sports F1 - Logo 2025.svg"
-    ),
+    commons("Sky Sports F1 - Logo 2025.svg"),
 
   tnt:
     commons("TNT Sports (2023).svg"),
@@ -148,11 +98,12 @@ const LOGO = {
     commons("Logo TF1+.svg"),
 
   vsport:
-    "https://res.cloudinary.com/dnaoyj/image/upload/dpr_2,f_auto,q_auto,w_400/v1/Assets/KLT/DNA%20TV/Kanavapaketit/ohjelmakirjastot/V%20kanavat/v_sport_suomi__240X240"
+    "https://res.cloudinary.com/dnaoyj/image/upload/dpr_2,f_auto,q_auto,w_600/v1/Assets/KLT/DNA%20TV/Kanavapaketit/ohjelmakirjastot/V%20kanavat/v_sport_suomi__240X240"
 };
 
 // ==================================================
-// TEAM LOGOS
+// LOGO CLB
+// ESPN đã là PNG trực tiếp
 // ==================================================
 
 const TEAM = {
@@ -182,7 +133,7 @@ const TEAM = {
 const channels = [
 
   // ==================================================
-  // VTV
+  // 🇻🇳 VTV
   // ==================================================
 
   makeChannel(
@@ -286,7 +237,7 @@ const channels = [
   ),
 
   // ==================================================
-  // SPORTS 1080P / FHD
+  // 📺 SPORTS 1080P
   // ==================================================
 
   makeChannel(
@@ -395,7 +346,7 @@ const channels = [
   ),
 
   // ==================================================
-  // SPORTS UHD / 4K
+  // 🏆 SPORTS UHD / 4K
   // ==================================================
 
   makeChannel(
@@ -565,37 +516,20 @@ const channels = [
 ];
 
 const channelMap =
-  Object.fromEntries(
-    channels.map(c => [
-      c.id,
-      c
-    ])
-  );
+  Object.fromEntries(channels.map(c => [c.id, c]));
 
 // ==================================================
-// MATCHES
+// LIVE MATCHES
 // ==================================================
 
 const matches = [
-
   {
-    id:
-      "arsenal-coventry",
-
-    time:
-      "02:00",
-
-    home:
-      "Arsenal",
-
-    away:
-      "Coventry City",
-
-    homeLogo:
-      TEAM.arsenal,
-
-    awayLogo:
-      TEAM.coventry,
+    id: "arsenal-coventry",
+    time: "02:00",
+    home: "Arsenal",
+    away: "Coventry City",
+    homeLogo: TEAM.arsenal,
+    awayLogo: TEAM.coventry,
 
     channels1080: [
       "sky-main-event-fhd",
@@ -610,23 +544,12 @@ const matches = [
   },
 
   {
-    id:
-      "hull-manchester-united",
-
-    time:
-      "18:30",
-
-    home:
-      "Hull City",
-
-    away:
-      "Manchester United",
-
-    homeLogo:
-      TEAM.hull,
-
-    awayLogo:
-      TEAM.manchesterUnited,
+    id: "hull-manchester-united",
+    time: "18:30",
+    home: "Hull City",
+    away: "Manchester United",
+    homeLogo: TEAM.hull,
+    awayLogo: TEAM.manchesterUnited,
 
     channels1080: [
       "usa-network"
@@ -639,23 +562,12 @@ const matches = [
   },
 
   {
-    id:
-      "everton-crystal-palace",
-
-    time:
-      "21:00",
-
-    home:
-      "Everton",
-
-    away:
-      "Crystal Palace",
-
-    homeLogo:
-      TEAM.everton,
-
-    awayLogo:
-      TEAM.crystalPalace,
+    id: "everton-crystal-palace",
+    time: "21:00",
+    home: "Everton",
+    away: "Crystal Palace",
+    homeLogo: TEAM.everton,
+    awayLogo: TEAM.crystalPalace,
 
     channels1080: [
       "usa-network"
@@ -665,23 +577,12 @@ const matches = [
   },
 
   {
-    id:
-      "ipswich-sunderland",
-
-    time:
-      "21:00",
-
-    home:
-      "Ipswich Town",
-
-    away:
-      "Sunderland",
-
-    homeLogo:
-      TEAM.ipswich,
-
-    awayLogo:
-      TEAM.sunderland,
+    id: "ipswich-sunderland",
+    time: "21:00",
+    home: "Ipswich Town",
+    away: "Sunderland",
+    homeLogo: TEAM.ipswich,
+    awayLogo: TEAM.sunderland,
 
     channels1080: [
       "sky-premier-league-fhd"
@@ -691,47 +592,24 @@ const matches = [
   },
 
   {
-    id:
-      "forest-leeds",
-
-    time:
-      "21:00",
-
-    home:
-      "Nottingham Forest",
-
-    away:
-      "Leeds United",
-
-    homeLogo:
-      TEAM.forest,
-
-    awayLogo:
-      TEAM.leeds,
+    id: "forest-leeds",
+    time: "21:00",
+    home: "Nottingham Forest",
+    away: "Leeds United",
+    homeLogo: TEAM.forest,
+    awayLogo: TEAM.leeds,
 
     channels1080: [],
-
     channels4k: []
   },
 
   {
-    id:
-      "brentford-tottenham",
-
-    time:
-      "23:30",
-
-    home:
-      "Brentford",
-
-    away:
-      "Tottenham Hotspur",
-
-    homeLogo:
-      TEAM.brentford,
-
-    awayLogo:
-      TEAM.tottenham,
+    id: "brentford-tottenham",
+    time: "23:30",
+    home: "Brentford",
+    away: "Tottenham Hotspur",
+    homeLogo: TEAM.brentford,
+    awayLogo: TEAM.tottenham,
 
     channels1080: [
       "sky-main-event-fhd",
@@ -746,1165 +624,32 @@ const matches = [
 ];
 
 // ==================================================
-// IMAGE CACHE
+// IMAGE FETCH + CACHE
 // ==================================================
 
-const imageCache =
-  new Map();
+const sourceImageCache = new Map();
+const posterCache = new Map();
 
-async function imageDataUri(
-  url
-) {
-
-  if (
-    imageCache.has(url)
-  ) {
-
-    return imageCache.get(
-      url
-    );
+async function fetchBuffer(url) {
+  if (sourceImageCache.has(url)) {
+    return sourceImageCache.get(url);
   }
 
-  const response =
-    await fetch(
-      url,
-      {
-        redirect:
-          "follow",
-
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 LiveTV/8.0"
-        }
-      }
-    );
+  const response = await fetch(url, {
+    redirect: "follow",
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (compatible; LiveTVAddon/9.0)"
+    }
+  });
 
   if (!response.ok) {
-
     throw new Error(
-      `Image ${response.status}`
+      `HTTP ${response.status}: ${url}`
     );
   }
 
   const buffer =
-    Buffer.from(
-      await response.arrayBuffer()
-    );
+    Buffer.from(await response.arrayBuffer());
 
-  const mime =
-    response.headers.get(
-      "content-type"
-    ) ||
-    "image/png";
-
-  const result =
-    `data:${mime};base64,${buffer.toString("base64")}`;
-
-  imageCache.set(
-    url,
-    result
-  );
-
-  return result;
-}
-
-// ==================================================
-// FALLBACK SVG
-// ==================================================
-
-function fallbackSvg(
-  text
-) {
-
-  return `
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="600"
-      height="600"
-      viewBox="0 0 600 600"
-    >
-
-      <rect
-        width="600"
-        height="600"
-        rx="42"
-        fill="#11151c"
-      />
-
-      <text
-        x="300"
-        y="300"
-        dominant-baseline="middle"
-        text-anchor="middle"
-        fill="#ffffff"
-        font-family="Arial, Helvetica, sans-serif"
-        font-size="42"
-        font-weight="700"
-      >
-        ${escapeXml(text)}
-      </text>
-
-    </svg>
-  `;
-}
-
-// ==================================================
-// NORMALIZED CHANNEL POSTER
-// ==================================================
-
-app.get(
-  "/poster/channel/:id.svg",
-  async (
-    req,
-    res
-  ) => {
-
-    const c =
-      channelMap[
-        req.params.id
-      ];
-
-    if (!c) {
-
-      return res
-        .status(404)
-        .send(
-          "Not found"
-        );
-    }
-
-    try {
-
-      const logo =
-        await imageDataUri(
-          c.logo
-        );
-
-      const svg = `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="600"
-          height="600"
-          viewBox="0 0 600 600"
-        >
-
-          <rect
-            width="600"
-            height="600"
-            rx="42"
-            fill="#11151c"
-          />
-
-          <rect
-            x="30"
-            y="30"
-            width="540"
-            height="540"
-            rx="34"
-            fill="#171c24"
-          />
-
-          <image
-            href="${logo}"
-            x="90"
-            y="140"
-            width="420"
-            height="320"
-            preserveAspectRatio="xMidYMid meet"
-          />
-
-        </svg>
-      `;
-
-      res.set(
-        "Content-Type",
-        "image/svg+xml"
-      );
-
-      res.set(
-        "Cache-Control",
-        "public, max-age=21600"
-      );
-
-      res.send(
-        svg
-      );
-    }
-
-    catch (error) {
-
-      console.error(
-        "Channel poster error:",
-        c.name,
-        error.message
-      );
-
-      res.set(
-        "Content-Type",
-        "image/svg+xml"
-      );
-
-      res.send(
-        fallbackSvg(
-          c.name
-        )
-      );
-    }
-  }
-);
-
-// ==================================================
-// NORMALIZED LIVE POSTER
-// ==================================================
-
-app.get(
-  "/poster/live/:id.svg",
-  async (
-    req,
-    res
-  ) => {
-
-    const match =
-      matches.find(
-        m =>
-          m.id ===
-          req.params.id
-      );
-
-    if (!match) {
-
-      return res
-        .status(404)
-        .send(
-          "Not found"
-        );
-    }
-
-    try {
-
-      const [
-        homeLogo,
-        awayLogo
-      ] =
-        await Promise.all(
-          [
-            imageDataUri(
-              match.homeLogo
-            ),
-
-            imageDataUri(
-              match.awayLogo
-            )
-          ]
-        );
-
-      const svg = `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="600"
-          height="600"
-          viewBox="0 0 600 600"
-        >
-
-          <rect
-            width="600"
-            height="600"
-            rx="42"
-            fill="#11151c"
-          />
-
-          <rect
-            x="28"
-            y="28"
-            width="544"
-            height="544"
-            rx="34"
-            fill="#171c24"
-          />
-
-          <image
-            href="${homeLogo}"
-            x="75"
-            y="165"
-            width="180"
-            height="180"
-            preserveAspectRatio="xMidYMid meet"
-          />
-
-          <image
-            href="${awayLogo}"
-            x="345"
-            y="165"
-            width="180"
-            height="180"
-            preserveAspectRatio="xMidYMid meet"
-          />
-
-          <circle
-            cx="300"
-            cy="255"
-            r="48"
-            fill="#0b0e13"
-            stroke="#4b5563"
-            stroke-width="3"
-          />
-
-          <text
-            x="300"
-            y="258"
-            text-anchor="middle"
-            dominant-baseline="middle"
-            fill="#ffffff"
-            font-family="Arial, Helvetica, sans-serif"
-            font-size="34"
-            font-weight="800"
-          >
-            VS
-          </text>
-
-          <text
-            x="300"
-            y="440"
-            text-anchor="middle"
-            fill="#ffffff"
-            font-family="Arial, Helvetica, sans-serif"
-            font-size="42"
-            font-weight="800"
-          >
-            ${escapeXml(match.time)}
-          </text>
-
-        </svg>
-      `;
-
-      res.set(
-        "Content-Type",
-        "image/svg+xml"
-      );
-
-      res.set(
-        "Cache-Control",
-        "public, max-age=21600"
-      );
-
-      res.send(
-        svg
-      );
-    }
-
-    catch (error) {
-
-      console.error(
-        "Live poster error:",
-        match.id,
-        error.message
-      );
-
-      res.set(
-        "Content-Type",
-        "image/svg+xml"
-      );
-
-      res.send(
-        fallbackSvg(
-          `${match.home} VS ${match.away}`
-        )
-      );
-    }
-  }
-);
-
-// ==================================================
-// SORT
-// ==================================================
-
-const groupOrder = {
-  vtv: 1,
-  sports1080: 2,
-  sports4k: 3
-};
-
-channels.sort(
-  (
-    a,
-    b
-  ) => {
-
-    if (
-      a.group !==
-      b.group
-    ) {
-
-      return (
-        groupOrder[a.group] -
-        groupOrder[b.group]
-      );
-    }
-
-    return a.name.localeCompare(
-      b.name,
-      "en",
-      {
-        sensitivity:
-          "base",
-
-        numeric:
-          true
-      }
-    );
-  }
-);
-
-matches.sort(
-  (
-    a,
-    b
-  ) =>
-    a.time.localeCompare(
-      b.time
-    )
-);
-
-// ==================================================
-// MANIFEST
-// ==================================================
-
-const manifest = {
-
-  id:
-    "com.hmtnvac.livetv",
-
-  version:
-    "8.0.0",
-
-  name:
-    "Live TV",
-
-  description:
-    "Live Football • Sports 1080P • Sports UHD / 4K • VTV",
-
-  resources: [
-    "catalog",
-    "meta",
-    "stream"
-  ],
-
-  types: [
-    "tv"
-  ],
-
-  catalogs: [
-
-    {
-      type:
-        "tv",
-
-      id:
-        "live1080",
-
-      name:
-        "🔴 LIVE • 1080P / FHD"
-    },
-
-    {
-      type:
-        "tv",
-
-      id:
-        "live4k",
-
-      name:
-        "🏆 LIVE • UHD / 4K"
-    },
-
-    {
-      type:
-        "tv",
-
-      id:
-        "sports1080",
-
-      name:
-        "📺 Sports 1080P • 60 FPS"
-    },
-
-    {
-      type:
-        "tv",
-
-      id:
-        "sports4k",
-
-      name:
-        "🏆 Sports UHD / 4K"
-    },
-
-    {
-      type:
-        "tv",
-
-      id:
-        "vtv",
-
-      name:
-        "🇻🇳 VTV"
-    }
-  ]
-};
-
-const builder =
-  new addonBuilder(
-    manifest
-  );
-
-// ==================================================
-// POSTER URL
-// ==================================================
-
-function channelPoster(
-  c
-) {
-
-  return (
-    `${PUBLIC_BASE}` +
-    `/poster/channel/${c.id}.svg`
-  );
-}
-
-function livePoster(
-  match
-) {
-
-  return (
-    `${PUBLIC_BASE}` +
-    `/poster/live/${match.id}.svg`
-  );
-}
-
-// ==================================================
-// LIVE STREAMS
-// ==================================================
-
-function buildLiveStreams(
-  match,
-  quality
-) {
-
-  const ids =
-    quality ===
-    "4k"
-
-      ? match.channels4k
-
-      : match.channels1080;
-
-  const streams = [];
-
-  ids.forEach(
-    id => {
-
-      const c =
-        channelMap[id];
-
-      if (!c) {
-        return;
-      }
-
-      c.streams.forEach(
-        (
-          url,
-          index
-        ) => {
-
-          streams.push(
-            {
-              name:
-                c.name,
-
-              title:
-                `${c.name} • ${index + 1}`,
-
-              url
-            }
-          );
-        }
-      );
-    }
-  );
-
-  return streams;
-}
-
-// ==================================================
-// CATALOG
-// ==================================================
-
-builder.defineCatalogHandler(
-  async args => {
-
-    // LIVE 1080
-
-    if (
-      args.id ===
-      "live1080"
-    ) {
-
-      const list =
-        matches.filter(
-          m =>
-            m.channels1080.length >
-            0
-        );
-
-      return {
-
-        metas:
-          list.map(
-            m => ({
-              id:
-                `live1080-${m.id}`,
-
-              type:
-                "tv",
-
-              name:
-                `${m.time} • ${m.home} vs ${m.away}`,
-
-              poster:
-                livePoster(m),
-
-              posterShape:
-                "square",
-
-              description:
-                `${m.time} • ${m.home} vs ${m.away}`
-            })
-          )
-      };
-    }
-
-    // LIVE 4K
-
-    if (
-      args.id ===
-      "live4k"
-    ) {
-
-      const list =
-        matches.filter(
-          m =>
-            m.channels4k.length >
-            0
-        );
-
-      return {
-
-        metas:
-          list.map(
-            m => ({
-              id:
-                `live4k-${m.id}`,
-
-              type:
-                "tv",
-
-              name:
-                `${m.time} • ${m.home} vs ${m.away}`,
-
-              poster:
-                livePoster(m),
-
-              posterShape:
-                "square",
-
-              description:
-                `${m.time} • ${m.home} vs ${m.away} • UHD / 4K`
-            })
-          )
-      };
-    }
-
-    // CHANNELS
-
-    const list =
-      channels.filter(
-        c =>
-          c.group ===
-          args.id
-      );
-
-    return {
-
-      metas:
-        list.map(
-          c => ({
-            id:
-              c.id,
-
-            type:
-              "tv",
-
-            name:
-              c.name,
-
-            poster:
-              channelPoster(
-                c
-              ),
-
-            posterShape:
-              "square",
-
-            description:
-              `${c.name} • ${c.streams.length} luồng`
-          })
-        )
-    };
-  }
-);
-
-// ==================================================
-// META
-// ==================================================
-
-builder.defineMetaHandler(
-  async args => {
-
-    // LIVE 1080
-
-    if (
-      args.id.startsWith(
-        "live1080-"
-      )
-    ) {
-
-      const id =
-        args.id.replace(
-          "live1080-",
-          ""
-        );
-
-      const m =
-        matches.find(
-          x =>
-            x.id ===
-            id
-        );
-
-      if (!m) {
-
-        return {
-          meta: null
-        };
-      }
-
-      return {
-
-        meta: {
-          id:
-            args.id,
-
-          type:
-            "tv",
-
-          name:
-            `${m.time} • ${m.home} vs ${m.away}`,
-
-          poster:
-            livePoster(
-              m
-            ),
-
-          posterShape:
-            "square"
-        }
-      };
-    }
-
-    // LIVE 4K
-
-    if (
-      args.id.startsWith(
-        "live4k-"
-      )
-    ) {
-
-      const id =
-        args.id.replace(
-          "live4k-",
-          ""
-        );
-
-      const m =
-        matches.find(
-          x =>
-            x.id ===
-            id
-        );
-
-      if (!m) {
-
-        return {
-          meta: null
-        };
-      }
-
-      return {
-
-        meta: {
-          id:
-            args.id,
-
-          type:
-            "tv",
-
-          name:
-            `${m.time} • ${m.home} vs ${m.away}`,
-
-          poster:
-            livePoster(
-              m
-            ),
-
-          posterShape:
-            "square"
-        }
-      };
-    }
-
-    // CHANNEL
-
-    const c =
-      channelMap[
-        args.id
-      ];
-
-    if (!c) {
-
-      return {
-        meta: null
-      };
-    }
-
-    return {
-
-      meta: {
-        id:
-          c.id,
-
-        type:
-          "tv",
-
-        name:
-          c.name,
-
-        poster:
-          channelPoster(
-            c
-          ),
-
-        posterShape:
-          "square",
-
-        description:
-          `${c.name} • ${c.streams.length} luồng`
-      }
-    };
-  }
-);
-
-// ==================================================
-// STREAM
-// ==================================================
-
-builder.defineStreamHandler(
-  async args => {
-
-    // LIVE 1080
-
-    if (
-      args.id.startsWith(
-        "live1080-"
-      )
-    ) {
-
-      const id =
-        args.id.replace(
-          "live1080-",
-          ""
-        );
-
-      const m =
-        matches.find(
-          x =>
-            x.id ===
-            id
-        );
-
-      if (!m) {
-
-        return {
-          streams: []
-        };
-      }
-
-      return {
-
-        streams:
-          buildLiveStreams(
-            m,
-            "1080"
-          )
-      };
-    }
-
-    // LIVE 4K
-
-    if (
-      args.id.startsWith(
-        "live4k-"
-      )
-    ) {
-
-      const id =
-        args.id.replace(
-          "live4k-",
-          ""
-        );
-
-      const m =
-        matches.find(
-          x =>
-            x.id ===
-            id
-        );
-
-      if (!m) {
-
-        return {
-          streams: []
-        };
-      }
-
-      return {
-
-        streams:
-          buildLiveStreams(
-            m,
-            "4k"
-          )
-      };
-    }
-
-    // CHANNEL
-
-    const c =
-      channelMap[
-        args.id
-      ];
-
-    if (!c) {
-
-      return {
-        streams: []
-      };
-    }
-
-    return {
-
-      streams:
-        c.streams.map(
-          (
-            url,
-            index
-          ) => ({
-            name:
-              c.name,
-
-            title:
-              `${c.name} • ${index + 1}`,
-
-            url
-          })
-        )
-    };
-  }
-);
-
-// ==================================================
-// STREMIO ROUTER
-// ==================================================
-
-app.use(
-  "/",
-  getRouter(
-    builder.getInterface()
-  )
-);
-
-// ==================================================
-// HOME
-// ==================================================
-
-app.get(
-  "/",
-  (
-    req,
-    res
-  ) => {
-
-    const manifestUrl =
-      `${req.protocol}://${req.get("host")}/manifest.json`;
-
-    const vtv =
-      channels.filter(
-        c =>
-          c.group ===
-          "vtv"
-      ).length;
-
-    const sports1080 =
-      channels.filter(
-        c =>
-          c.group ===
-          "sports1080"
-      ).length;
-
-    const sports4k =
-      channels.filter(
-        c =>
-          c.group ===
-          "sports4k"
-      ).length;
-
-    const live1080 =
-      matches.filter(
-        m =>
-          m.channels1080.length >
-          0
-      ).length;
-
-    const live4k =
-      matches.filter(
-        m =>
-          m.channels4k.length >
-          0
-      ).length;
-
-    const streams =
-      channels.reduce(
-        (
-          total,
-          c
-        ) =>
-          total +
-          c.streams.length,
-        0
-      );
-
-    res.send(`
-      <!doctype html>
-
-      <html>
-
-        <head>
-
-          <meta
-            charset="UTF-8"
-          >
-
-          <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1"
-          >
-
-          <title>
-            Live TV
-          </title>
-
-        </head>
-
-        <body
-          style="
-            background:#111;
-            color:#fff;
-            font-family:Arial;
-            padding:30px;
-            line-height:1.7;
-          "
-        >
-
-          <h1>
-            📺 Live TV
-          </h1>
-
-          <p>
-            🔴 LIVE 1080P:
-            <b>${live1080}</b>
-          </p>
-
-          <p>
-            🏆 LIVE 4K:
-            <b>${live4k}</b>
-          </p>
-
-          <p>
-            📺 Sports 1080P:
-            <b>${sports1080}</b>
-          </p>
-
-          <p>
-            🏆 Sports UHD / 4K:
-            <b>${sports4k}</b>
-          </p>
-
-          <p>
-            🇻🇳 VTV:
-            <b>${vtv}</b>
-          </p>
-
-          <p>
-            Tổng kênh:
-            <b>${channels.length}</b>
-          </p>
-
-          <p>
-            Tổng luồng:
-            <b>${streams}</b>
-          </p>
-
-          <hr>
-
-          <p>
-            ${manifestUrl}
-          </p>
-
-        </body>
-
-      </html>
-    `);
-  }
-);
-
-// ==================================================
-// START
-// ==================================================
-
-app.listen(
-  PORT,
-  "0.0.0.0",
-  () => {
-
-    console.log(
-      `Live TV running on port ${PORT}`
-    );
-
-    console.log(
-      `Channels: ${channels.length}`
-    );
-
-    console.log(
-      `Live matches: ${matches.length}`
-    );
-  }
-);
+  sourceImageCache.set(url
