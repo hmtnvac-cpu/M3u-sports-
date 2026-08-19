@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 7000;
 // HELPER
 // ==================================================
 
-function channel(id, group, name, logo, streams) {
+function channel(id, group, name, streams) {
   const uniqueStreams = [
     ...new Set(
       streams
@@ -22,15 +22,174 @@ function channel(id, group, name, logo, streams) {
     type: "tv",
     group,
     name,
-    logo,
     streams: uniqueStreams
   };
 }
 
-const wikiLogo = file =>
-  "https://commons.wikimedia.org/wiki/Special:Redirect/file/" +
-  encodeURIComponent(file) +
-  "?width=500";
+function wikiFile(file) {
+  return (
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/" +
+    encodeURIComponent(file)
+  );
+}
+
+function squareLogo(url) {
+  return (
+    "https://wsrv.nl/?" +
+    "url=" + encodeURIComponent(url) +
+    "&w=500" +
+    "&h=500" +
+    "&fit=contain" +
+    "&cbg=111111"
+  );
+}
+
+// ==================================================
+// LOGO KÊNH
+// ==================================================
+
+const LOGOS = {
+
+  // ==================================================
+  // 🇻🇳 VTV
+  // ==================================================
+
+  "vtv1": squareLogo(
+    wikiFile("VTV1 logo 2013 final.svg")
+  ),
+
+  "vtv2": squareLogo(
+    wikiFile("VTV2 logo 2013 final.svg")
+  ),
+
+  "vtv3": squareLogo(
+    wikiFile("VTV3 logo 2013 final.svg")
+  ),
+
+  "vtv4": squareLogo(
+    wikiFile("VTV4 logo 2013 final.svg")
+  ),
+
+  "vtv5": squareLogo(
+    wikiFile("VTV5 logo 2013 final.svg")
+  ),
+
+  "vtv6": squareLogo(
+    wikiFile("VTV6 logo 2026 final.svg")
+  ),
+
+  "vtv7": squareLogo(
+    wikiFile("VTV7 logo 2016 final.svg")
+  ),
+
+  "vtv8": squareLogo(
+    wikiFile("VTV8 logo 2016 final.svg")
+  ),
+
+  "vtv9": squareLogo(
+    wikiFile("VTV9 logo 2013 final.svg")
+  ),
+
+  "vtv10": squareLogo(
+    wikiFile("VTV10 logo 2026.png")
+  ),
+
+  // ==================================================
+  // 📺 SPORTS 1080P / 60 FPS
+  // ==================================================
+
+  "cbs-sports-1080": squareLogo(
+    wikiFile("CBS Sports (2021).svg")
+  ),
+
+  "nbc-sports-1080": squareLogo(
+    wikiFile("NBC Sports 2023 (with NBC wordmark).svg")
+  ),
+
+  "now-sports-1080": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/8/89/Now_Sports_logo.svg"
+  ),
+
+  "sky-sports-main-event-fhd": squareLogo(
+    wikiFile("Sky Sports Main Event - Logo 2025.svg")
+  ),
+
+  "sky-sports-premier-league-fhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/6/69/Sky_Sports_Premier_League_Logo_2025.svg"
+  ),
+
+  "sportsnet-one-ca-1080": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/3/38/Sportsnet_One_logo.svg"
+  ),
+
+  "usa-network-1080": squareLogo(
+    wikiFile("USA-Network-Logo.svg")
+  ),
+
+  "universo-1080": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/5/56/Universo_2017_logo.svg"
+  ),
+
+  // ==================================================
+  // 🏆 SPORTS UHD / 4K
+  // ==================================================
+
+  "bein-sports-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_beIN_SPORTS_2017.png"
+  ),
+
+  "digi-sport-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/f/f2/Digi_Sport_logo.svg"
+  ),
+
+  "eleven-sports-1-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/1/1d/Eleven_Sports_logo.svg"
+  ),
+
+  "sky-sports-1-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/c/c5/Sky_Sports_logo.svg"
+  ),
+
+  "sky-sports-2-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/c/c5/Sky_Sports_logo.svg"
+  ),
+
+  "sky-sports-bundesliga-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/7/7a/Sky_Sport_Bundesliga_Logo.svg"
+  ),
+
+  "sky-sports-darts-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/c/c5/Sky_Sports_logo.svg"
+  ),
+
+  "sky-sports-f1-uhd": squareLogo(
+    wikiFile("Sky Sports F1 - Logo 2025.svg")
+  ),
+
+  "sky-sports-main-event": squareLogo(
+    wikiFile("Sky Sports Main Event - Logo 2025.svg")
+  ),
+
+  "sky-sports-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/c/c5/Sky_Sports_logo.svg"
+  ),
+
+  "tf1-hdr-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/d/d4/TF1_logo_2013.svg"
+  ),
+
+  "tnt-sports-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/0/0c/TNT_Sports_2024_vector_logo.svg"
+  ),
+
+  "tnt-sports-ultimate-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/0/0c/TNT_Sports_2024_vector_logo.svg"
+  ),
+
+  "v-sport-plus-uhd": squareLogo(
+    "https://upload.wikimedia.org/wikipedia/commons/3/36/V_Sport_logo.svg"
+  )
+};
 
 // ==================================================
 // DANH SÁCH KÊNH
@@ -46,7 +205,6 @@ const channels = [
     "vtv1",
     "vtv",
     "VTV1",
-    wikiLogo("VTV1 logo 2013 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -56,7 +214,6 @@ const channels = [
     "vtv2",
     "vtv",
     "VTV2",
-    wikiLogo("VTV2 logo 2013 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv2/live247-hls-avc/vtv2-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -66,7 +223,6 @@ const channels = [
     "vtv3",
     "vtv",
     "VTV3",
-    wikiLogo("VTV3 logo 2013 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv3/live247-hls-avc/vtv3-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -76,7 +232,6 @@ const channels = [
     "vtv4",
     "vtv",
     "VTV4",
-    wikiLogo("VTV4 logo 2013 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv4/live247-hls-avc/vtv4-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -86,7 +241,6 @@ const channels = [
     "vtv5",
     "vtv",
     "VTV5",
-    wikiLogo("VTV5 logo 2013 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv5/live247-hls-avc/vtv5-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -96,7 +250,6 @@ const channels = [
     "vtv6",
     "vtv",
     "VTV6",
-    wikiLogo("VTV6 logo 2013 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv6/live247-hls-avc/vtv6-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -106,7 +259,6 @@ const channels = [
     "vtv7",
     "vtv",
     "VTV7",
-    wikiLogo("VTV7 logo 2016 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv7/live247-hls-avc/vtv7-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -116,7 +268,6 @@ const channels = [
     "vtv8",
     "vtv",
     "VTV8",
-    wikiLogo("VTV8 logo 2016 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv8/live-hls-avc/vtv8-avc1_4000000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -126,7 +277,6 @@ const channels = [
     "vtv9",
     "vtv",
     "VTV9",
-    wikiLogo("VTV9 logo 2013 final.svg"),
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv9/live247-hls-avc/vtv9-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -136,7 +286,6 @@ const channels = [
     "vtv10",
     "vtv",
     "VTV10",
-    "https://dummyimage.com/500x500/ffffff/111111.png&text=VTV10",
     [
       "https://vips-livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/vtv10-avc1_5600000=10000-mp4a_131600=20000.m3u8"
     ]
@@ -150,7 +299,6 @@ const channels = [
     "cbs-sports-1080",
     "sports1080",
     "CBS Sports 1080p 60 FPS",
-    wikiLogo("CBS Sports logo.svg"),
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=45601&extension=ts&play_token=FzL6BKqvEe",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1931140&extension=ts&play_token=78QsJViQ2M",
@@ -163,7 +311,6 @@ const channels = [
     "nbc-sports-1080",
     "sports1080",
     "NBC Sports 1080p 60 FPS",
-    wikiLogo("NBC Sports 2023.svg"),
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1124350&extension=ts&play_token=Nye7KFsDtT",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1124350&extension=ts&play_token=eNXy4IgwMX",
@@ -177,7 +324,6 @@ const channels = [
     "now-sports-1080",
     "sports1080",
     "NOW Sports 1080p 60 FPS",
-    "https://dummyimage.com/500x500/ffffff/111111.png&text=NOW+Sports",
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948655&extension=ts&play_token=tbb2RAOWTW",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948655&extension=ts&play_token=wKjCMLCsCQ",
@@ -191,7 +337,6 @@ const channels = [
     "sky-sports-main-event-fhd",
     "sports1080",
     "Sky Sports Main Event FHD",
-    wikiLogo("Sky Sports logo 2020.svg"),
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905853&extension=ts&play_token=VcLSkUIKoV",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1905853&extension=ts&play_token=HJKEBcMdYW",
@@ -204,7 +349,6 @@ const channels = [
     "sky-sports-premier-league-fhd",
     "sports1080",
     "Sky Sports Premier League FHD",
-    wikiLogo("Sky Sports logo 2020.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1905844&extension=ts&play_token=HE8bJPpkM0",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905844&extension=ts&play_token=AIylOstlvH",
@@ -217,7 +361,6 @@ const channels = [
     "sportsnet-one-ca-1080",
     "sports1080",
     "Sportsnet One CA 1080p 60 FPS",
-    wikiLogo("Sportsnet 2011 logo.svg"),
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948644&extension=ts&play_token=67dYXdFMD5",
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1948650&extension=ts&play_token=IeulQneT0e",
@@ -229,7 +372,6 @@ const channels = [
     "usa-network-1080",
     "sports1080",
     "USA Network 1080p 60 FPS",
-    wikiLogo("USA Network logo.svg"),
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1930887&extension=ts&play_token=17642b7BAL",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=45466&extension=ts&play_token=BhBlcThs4o",
@@ -243,7 +385,6 @@ const channels = [
     "universo-1080",
     "sports1080",
     "Universo 1080p 60 FPS",
-    wikiLogo("Universo 2017 logo.svg"),
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1930892&extension=ts&play_token=Qu3YNaQE54",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1930892&extension=ts&play_token=EaKf87ZAR8",
@@ -260,7 +401,6 @@ const channels = [
     "bein-sports-uhd",
     "sports4k",
     "beIN Sports UHD",
-    wikiLogo("BeIN Sports logo (2017).png"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1948627&extension=ts&play_token=YÝtO3ymSXM",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948627&extension=ts&play_token=Vlmr36mT65",
@@ -273,7 +413,6 @@ const channels = [
     "digi-sport-uhd",
     "sports4k",
     "Digi Sport UHD",
-    wikiLogo("Digi Sport logo.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632122&extension=ts&play_token=Bc1RBTdvcu",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632122&extension=ts&play_token=SFUMHAeisS",
@@ -286,7 +425,6 @@ const channels = [
     "eleven-sports-1-uhd",
     "sports4k",
     "Eleven Sports 1 UHD",
-    wikiLogo("Eleven Sports logo.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1470618&extension=ts&play_token=m0Llrs5Iev",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1470618&extension=ts&play_token=e0V5DEpkoI",
@@ -300,7 +438,6 @@ const channels = [
     "sky-sports-1-uhd",
     "sports4k",
     "Sky Sports 1 UHD",
-    wikiLogo("Sky Sports logo 2020.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608068&extension=ts&play_token=vdđJ3JIwT7",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608068&extension=ts&play_token=ChIhpB8guR",
@@ -313,7 +450,6 @@ const channels = [
     "sky-sports-2-uhd",
     "sports4k",
     "Sky Sports 2 UHD",
-    wikiLogo("Sky Sports logo 2020.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608069&extension=ts&play_token=eẻvbqSf7nG",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
@@ -326,7 +462,6 @@ const channels = [
     "sky-sports-bundesliga-uhd",
     "sports4k",
     "Sky Sports Bundesliga UHD",
-    wikiLogo("Sky Sport Bundesliga Logo 2020.svg"),
     [
       "http://mag.tivi-one-iptv.net:80/play/live.php?mac=00:1A:79:0E:0F:8E&stream=893917&extension=ts&play_token=5QPOI5t6D3"
     ]
@@ -336,7 +471,6 @@ const channels = [
     "sky-sports-darts-uhd",
     "sports4k",
     "Sky Sports Darts UHD",
-    wikiLogo("Sky Sports logo 2020.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471382&extension=ts&play_token=RCUbXjP9kV",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471382&extension=ts&play_token=Xjz7IglxZB",
@@ -349,7 +483,6 @@ const channels = [
     "sky-sports-f1-uhd",
     "sports4k",
     "Sky Sports F1 UHD",
-    wikiLogo("Sky Sports F1 logo.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1761500&extension=ts&play_token=R0RwoZl4We",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
@@ -362,7 +495,6 @@ const channels = [
     "sky-sports-main-event",
     "sports4k",
     "Sky Sports Main Event",
-    wikiLogo("Sky Sports logo 2020.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1608071&extension=ts&play_token=ffh6vBOXXG",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608071&extension=ts&play_token=BZa17svpdY",
@@ -375,7 +507,6 @@ const channels = [
     "sky-sports-uhd",
     "sports4k",
     "Sky Sports UHD",
-    wikiLogo("Sky Sports logo 2020.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1471387&extension=ts&play_token=acG0ANBzsw",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471387&extension=ts&play_token=54v3D6UwQT",
@@ -388,7 +519,6 @@ const channels = [
     "tf1-hdr-uhd",
     "sports4k",
     "TF1 HDR UHD",
-    wikiLogo("TF1 logo 2013.svg"),
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1640379&extension=ts&play_token=YWsJoaBWoi",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1640379&extension=ts&play_token=6gj5Htj59g",
@@ -400,7 +530,6 @@ const channels = [
     "tnt-sports-uhd",
     "sports4k",
     "TNT Sports UHD",
-    wikiLogo("TNT Sports logo.svg"),
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1479591&extension=ts&play_token=G26iịCdrYZ",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1479591&extension=ts&play_token=vzYU4fDUAQ",
@@ -413,7 +542,6 @@ const channels = [
     "tnt-sports-ultimate-uhd",
     "sports4k",
     "TNT Sports Ultimate UHD",
-    wikiLogo("TNT Sports logo.svg"),
     [
       "http://iiiiiiiillllaaaaaiiiiiiiillllaaaaa.cdnip.online:8080/HouseMax/V3f8Ydk6Iu/131353?play_token=YnInsrDaU1",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1595637&extension=ts&play_token=YdoiZErSQZ",
@@ -425,7 +553,6 @@ const channels = [
     "v-sport-plus-uhd",
     "sports4k",
     "V Sport+ UHD",
-    "https://dummyimage.com/500x500/ffffff/111111.png&text=V+Sport%2B",
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:B6:46:AC&stream=1632123&extension=ts&play_token=kmWkMZUxoN",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632123&extension=ts&play_token=Aeer3FFu7o",
@@ -470,7 +597,7 @@ const manifest = {
 
   id: "com.hmtnvac.livetv",
 
-  version: "5.1.0",
+  version: "5.2.0",
 
   name: "Live TV",
 
@@ -534,8 +661,8 @@ const builder =
 
 function posterFor(channel) {
 
-  if (channel.logo) {
-    return channel.logo;
+  if (LOGOS[channel.id]) {
+    return LOGOS[channel.id];
   }
 
   return (
@@ -758,14 +885,20 @@ app.get(
 
     res.send(`
       <!doctype html>
+
       <html>
+
         <head>
+
           <meta charset="UTF-8">
+
           <meta
             name="viewport"
             content="width=device-width,initial-scale=1"
           >
+
           <title>Live TV</title>
+
         </head>
 
         <body
@@ -779,42 +912,61 @@ app.get(
 
           <h1>📺 Live TV</h1>
 
-          <p>Addon đang hoạt động.</p>
+          <p>
+            Addon đang hoạt động.
+          </p>
 
           <p>
             🇻🇳 VTV:
-            <strong>${vtvCount}</strong>
+            <strong>
+              ${vtvCount}
+            </strong>
           </p>
 
           <p>
             📺 Sports 1080p:
-            <strong>${p1080Count}</strong>
+            <strong>
+              ${p1080Count}
+            </strong>
           </p>
 
           <p>
             🏆 Sports UHD / 4K:
-            <strong>${p4kCount}</strong>
+            <strong>
+              ${p4kCount}
+            </strong>
           </p>
 
           <p>
             Tổng số kênh:
-            <strong>${channels.length}</strong>
+            <strong>
+              ${channels.length}
+            </strong>
           </p>
 
           <p>
             Tổng số luồng:
-            <strong>${sourceCount}</strong>
+            <strong>
+              ${sourceCount}
+            </strong>
           </p>
 
           <hr>
 
-          <p>Manifest:</p>
+          <p>
+            Manifest:
+          </p>
 
-          <p style="word-break:break-all">
+          <p
+            style="
+              word-break:break-all
+            "
+          >
             ${manifestUrl}
           </p>
 
         </body>
+
       </html>
     `);
   }
