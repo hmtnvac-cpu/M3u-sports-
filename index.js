@@ -8,7 +8,7 @@ const PUBLIC_BASE =
   process.env.PUBLIC_BASE_URL ||
   "https://m3u-sports-tv.onrender.com";
 
-const VERSION = "1.0.1";
+const VERSION = "1.0.3";
 
 // ==================================================
 // HELPERS
@@ -34,17 +34,11 @@ function normalizedPng(url) {
     "&bg=11151c" +
     "&output=png" +
     "&q=92" +
-    "&v=101"
+    "&v=103"
   );
 }
 
-function makeChannel(
-  id,
-  group,
-  name,
-  logo,
-  streams
-) {
+function makeChannel(id, group, name, logo, streams) {
   return {
     id,
     type: "tv",
@@ -65,56 +59,125 @@ function escapeXml(value) {
 }
 
 // ==================================================
-// LOGO VTV TỰ HOST TRÊN RENDER
-//
-// Không dùng link ảnh bên ngoài.
-// Tất cả cùng một mẫu.
-// Chỉ thay số 1 → 10.
+// VTV LOGO - SELF HOSTED SVG
+// KHÔNG SHARP
+// KHÔNG FONT
+// KHÔNG LINK ẢNH NGOÀI
 // ==================================================
 
 function vtvLogoUrl(number) {
-  return (
-    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=101`
-  );
+  return `${PUBLIC_BASE}/logo/vtv${number}.svg?v=103`;
 }
+
+/*
+  Các số được vẽ bằng segment vector.
+  Không sử dụng <text>.
+*/
+
+const DIGITS = {
+  0: ["a", "b", "c", "d", "e", "f"],
+  1: ["b", "c"],
+  2: ["a", "b", "g", "e", "d"],
+  3: ["a", "b", "c", "d", "g"],
+  4: ["f", "g", "b", "c"],
+  5: ["a", "f", "g", "c", "d"],
+  6: ["a", "f", "g", "e", "c", "d"],
+  7: ["a", "b", "c"],
+  8: ["a", "b", "c", "d", "e", "f", "g"],
+  9: ["a", "b", "c", "d", "f", "g"]
+};
+
+function digitSvg(digit, x, y, scale = 1) {
+
+  const active = DIGITS[digit] || [];
+
+  const horizontal = (sx, sy) => `
+    <polygon
+      points="
+        ${sx + 8},${sy}
+        ${sx + 62},${sy}
+        ${sx + 70},${sy + 8}
+        ${sx + 62},${sy + 16}
+        ${sx + 8},${sy + 16}
+        ${sx},${sy + 8}
+      "
+    />
+  `;
+
+  const vertical = (sx, sy) => `
+    <polygon
+      points="
+        ${sx},${sy + 8}
+        ${sx + 8},${sy}
+        ${sx + 16},${sy + 8}
+        ${sx + 16},${sy + 62}
+        ${sx + 8},${sy + 70}
+        ${sx},${sy + 62}
+      "
+    />
+  `;
+
+  const segments = {
+    a: horizontal(0, 0),
+    g: horizontal(0, 70),
+    d: horizontal(0, 140),
+
+    f: vertical(-8, 8),
+    b: vertical(62, 8),
+
+    e: vertical(-8, 78),
+    c: vertical(62, 78)
+  };
+
+  return `
+    <g
+      transform="translate(${x} ${y}) scale(${scale})"
+      fill="#176db3"
+    >
+      ${active.map(segment => segments[segment]).join("")}
+    </g>
+  `;
+}
+
+function numberSvg(number) {
+
+  const value = String(number);
+
+  if (value === "10") {
+    return (
+      digitSvg("1", 410, 230, 0.72) +
+      digitSvg("0", 475, 230, 0.72)
+    );
+  }
+
+  return digitSvg(value, 455, 215, 0.9);
+}
+
+// ==================================================
+// ENDPOINT LOGO VTV
+// ==================================================
 
 app.get(
   "/logo/vtv:num.svg",
   (req, res) => {
 
-    const num =
-      String(req.params.num);
+    const number =
+      Number(req.params.num);
 
-    const allowed =
-      [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10"
-      ];
-
-    if (!allowed.includes(num)) {
+    if (
+      !Number.isInteger(number) ||
+      number < 1 ||
+      number > 10
+    ) {
       return res
         .status(404)
         .send("Not found");
     }
 
-    // Số 10 dài hơn nên font nhỏ hơn một chút.
-    const numberSize =
-      num === "10"
-        ? 145
-        : 180;
-
-    const numberX =
-      num === "10"
-        ? 430
-        : 455;
+    /*
+      Logo được cố tình đặt giữa khung 600x600,
+      có khoảng trắng xung quanh giống ảnh mẫu.
+    */
 
     const svg = `
 <svg
@@ -124,79 +187,82 @@ app.get(
   viewBox="0 0 600 600"
 >
 
-  <!-- NỀN TRẮNG GIỐNG MẪU -->
+  <!-- nền -->
   <rect
     width="600"
     height="600"
     fill="#ffffff"
   />
 
-  <!-- V ĐỎ -->
-  <text
-    x="95"
-    y="365"
-    font-family="Arial Black,Arial,sans-serif"
-    font-size="220"
-    font-weight="900"
-    font-style="italic"
-    fill="#e6202a"
-    transform="skewX(-8)"
-  >
-    V
-  </text>
+  <!-- =================================================
+       V ĐỎ
+       ================================================= -->
 
-  <!-- T XANH LÁ -->
-  <text
-    x="230"
-    y="365"
-    font-family="Arial Black,Arial,sans-serif"
-    font-size="220"
-    font-weight="900"
-    font-style="italic"
-    fill="#168647"
-    transform="skewX(-8)"
-  >
-    T
-  </text>
+  <polygon
+    points="
+      70,205
+      155,205
+      205,350
+      255,205
+      340,205
+      245,405
+      165,405
+    "
+    fill="#e51f2b"
+  />
 
-  <!-- V XANH DƯƠNG -->
-  <text
-    x="325"
-    y="365"
-    font-family="Arial Black,Arial,sans-serif"
-    font-size="220"
-    font-weight="900"
-    font-style="italic"
-    fill="#1670b8"
-    transform="skewX(-8)"
-  >
-    V
-  </text>
+  <!-- =================================================
+       T XANH LÁ
+       ================================================= -->
 
-  <!-- SỐ KÊNH -->
-  <text
-    x="${numberX}"
-    y="350"
-    font-family="Arial Black,Arial,sans-serif"
-    font-size="${numberSize}"
-    font-weight="900"
-    font-style="italic"
-    fill="#186ead"
-  >
-    ${num}
-  </text>
+  <polygon
+    points="
+      205,205
+      390,205
+      365,270
+      320,270
+      265,405
+      185,405
+      240,270
+      180,270
+    "
+    fill="#16864a"
+  />
+
+  <!-- =================================================
+       V XANH DƯƠNG
+       ================================================= -->
+
+  <polygon
+    points="
+      330,205
+      410,205
+      445,345
+      495,205
+      565,205
+      480,405
+      405,405
+    "
+    fill="#176db3"
+  />
+
+  <!-- =================================================
+       SỐ KÊNH - VECTOR
+       ================================================= -->
+
+  ${numberSvg(number)}
 
 </svg>
 `;
 
     res.set(
       "Content-Type",
-      "image/svg+xml"
+      "image/svg+xml; charset=utf-8"
     );
 
     res.set(
       "Cache-Control",
-      "public,max-age=604800"
+      "public,max-age=86400"
     );
 
     res.send(svg);
@@ -205,50 +271,24 @@ app.get(
 
 // ==================================================
 // LOGOS
-//
-// VTV tự host.
-// Tất cả logo khác giữ nguyên bản đang hoạt động.
 // ==================================================
 
 const LOGOS = {
 
-  // ==================================================
-  // VTV
-  // ==================================================
+  // VTV - HOST NGAY TRÊN RENDER
 
-  vtv1:
-    vtvLogoUrl(1),
+  vtv1: vtvLogoUrl(1),
+  vtv2: vtvLogoUrl(2),
+  vtv3: vtvLogoUrl(3),
+  vtv4: vtvLogoUrl(4),
+  vtv5: vtvLogoUrl(5),
+  vtv6: vtvLogoUrl(6),
+  vtv7: vtvLogoUrl(7),
+  vtv8: vtvLogoUrl(8),
+  vtv9: vtvLogoUrl(9),
+  vtv10: vtvLogoUrl(10),
 
-  vtv2:
-    vtvLogoUrl(2),
-
-  vtv3:
-    vtvLogoUrl(3),
-
-  vtv4:
-    vtvLogoUrl(4),
-
-  vtv5:
-    vtvLogoUrl(5),
-
-  vtv6:
-    vtvLogoUrl(6),
-
-  vtv7:
-    vtvLogoUrl(7),
-
-  vtv8:
-    vtvLogoUrl(8),
-
-  vtv9:
-    vtvLogoUrl(9),
-
-  vtv10:
-    vtvLogoUrl(10),
-
-  // ==================================================
-  // SPORTS 1080
-  // ==================================================
+  // SPORTS 1080 - GIỮ NGUYÊN
 
   cbs:
     "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cbs-sports-network-us.png",
@@ -274,9 +314,7 @@ const LOGOS = {
   universo:
     "https://img.nbc.com/files/images/2019/4/26/Universo-logos-templateUniverso-Logo-Coloralt2-450x250.v2.png",
 
-  // ==================================================
-  // SPORTS UHD / 4K
-  // ==================================================
+  // SPORTS UHD / 4K - GIỮ NGUYÊN
 
   bein:
     "https://www.tvlogo.org/france/bein-sports-fr.png",
@@ -310,7 +348,7 @@ const LOGOS = {
 };
 
 // ==================================================
-// LOGO CLB
+// TEAM LOGOS
 // ==================================================
 
 const TEAM = {
@@ -334,7 +372,7 @@ const TEAM = {
 };
 
 // ==================================================
-// DANH SÁCH KÊNH
+// CHANNELS
 // ==================================================
 
 const channels = [
@@ -444,7 +482,7 @@ const channels = [
   ),
 
   // ==================================================
-  // SPORTS 1080P / 60 FPS
+  // SPORTS 1080
   // ==================================================
 
   makeChannel(
@@ -454,11 +492,8 @@ const channels = [
     LOGOS.cbs,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=45601&extension=ts&play_token=FzL6BKqvEe",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1931140&extension=ts&play_token=78QsJViQ2M",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1931140&extension=ts&play_token=drj6UiUd3H",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1931140&extension=ts&play_token=dMBw5KtrCr"
     ]
   ),
@@ -470,13 +505,9 @@ const channels = [
     LOGOS.nbc,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1124350&extension=ts&play_token=Nye7KFsDtT",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1124350&extension=ts&play_token=eNXy4IgwMX",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1124350&extension=ts&play_token=7VZFU5RGrb",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=234677&extension=ts&play_token=tvycd3S4G4",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1124350&extension=ts&play_token=rQKi6Aw8Jy"
     ]
   ),
@@ -488,13 +519,9 @@ const channels = [
     LOGOS.now,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948655&extension=ts&play_token=tbb2RAOWTW",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948655&extension=ts&play_token=wKjCMLCsCQ",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948655&extension=ts&play_token=4dOHhrrZQ5",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1948655&extension=ts&play_token=kDi24LfUfG",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948655&extension=ts&play_token=0MqG6oZhXz"
     ]
   ),
@@ -506,11 +533,8 @@ const channels = [
     LOGOS.skyMain,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905853&extension=ts&play_token=VcLSkUIKoV",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1905853&extension=ts&play_token=HJKEBcMdYW",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1905853&extension=ts&play_token=tFtdcozl0Z",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1905853&extension=ts&play_token=0PellAUHuM"
     ]
   ),
@@ -522,11 +546,8 @@ const channels = [
     LOGOS.skyPL,
     [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1905844&extension=ts&play_token=HE8bJPpkM0",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905844&extension=ts&play_token=AIylOstlvH",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1905844&extension=ts&play_token=VauO51P7Uz",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1905844&extension=ts&play_token=Rp6htQTP1z"
     ]
   ),
@@ -538,9 +559,7 @@ const channels = [
     LOGOS.sportsnet,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948644&extension=ts&play_token=67dYXdFMD5",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1948650&extension=ts&play_token=IeulQneT0e",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948650&extension=ts&play_token=kOpzJPZpl8"
     ]
   ),
@@ -552,13 +571,9 @@ const channels = [
     LOGOS.usa,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1930887&extension=ts&play_token=17642b7BAL",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=45466&extension=ts&play_token=BhBlcThs4o",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1930887&extension=ts&play_token=wXIyU8E7YD",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1930887&extension=ts&play_token=J2KdNN5TYM",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1930887&extension=ts&play_token=tdDzhWuRot"
     ]
   ),
@@ -570,9 +585,7 @@ const channels = [
     LOGOS.universo,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1930892&extension=ts&play_token=Qu3YNaQE54",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7d:69:87&stream=1930892&extension=ts&play_token=EaKf87ZAR8",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7E:19:50&stream=1930892&extension=ts&play_token=Dshjs6wiNd"
     ]
   ),
@@ -588,9 +601,7 @@ const channels = [
     LOGOS.bein,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948627&extension=ts&play_token=Vlmr36mT65",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1948627&extension=ts&play_token=ZylqK6Jlon",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948627&extension=ts&play_token=5fIeli4ylw"
     ]
   ),
@@ -602,9 +613,7 @@ const channels = [
     LOGOS.digi,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632122&extension=ts&play_token=SFUMHAeisS",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632122&extension=ts&play_token=SpK901Rc9Y",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1632122&extension=ts&play_token=1Fi4sgyPhW"
     ]
   ),
@@ -616,11 +625,8 @@ const channels = [
     LOGOS.eleven,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1470618&extension=ts&play_token=e0V5DEpkoI",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948660&extension=ts&play_token=PkLWuD6skY",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1470618&extension=ts&play_token=z0mDj0DrdW",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1948660&extension=ts&play_token=EIr5yxfGPr"
     ]
   ),
@@ -632,9 +638,7 @@ const channels = [
     LOGOS.sky,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608068&extension=ts&play_token=ChIhpB8guR",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608068&extension=ts&play_token=bNqN7HTIKX",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1608068&extension=ts&play_token=djxHx6Uy9j"
     ]
   ),
@@ -646,9 +650,7 @@ const channels = [
     LOGOS.sky,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608069&extension=ts&play_token=boMozScv7z",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608069&extension=ts&play_token=Jn8XYQ8soh",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1608069&extension=ts&play_token=T7pDKwjV1Z"
     ]
   ),
@@ -670,9 +672,7 @@ const channels = [
     LOGOS.skyDarts,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471382&extension=ts&play_token=Xjz7IglxZB",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1471382&extension=ts&play_token=FqtO3KWqUT",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1471382&extension=ts&play_token=4wKKTKtM8L"
     ]
   ),
@@ -684,7 +684,6 @@ const channels = [
     LOGOS.skyF1,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1761500&extension=ts&play_token=3TLQcXqTKG",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1761500&extension=ts&play_token=OWv81jhV3e"
     ]
   ),
@@ -696,9 +695,7 @@ const channels = [
     LOGOS.skyMain,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608071&extension=ts&play_token=BZa17svpdY",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608071&extension=ts&play_token=YPIwjxNGfQ",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1641636&extension=ts&play_token=Oxc5PyW4yK"
     ]
   ),
@@ -710,9 +707,7 @@ const channels = [
     LOGOS.sky,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471387&extension=ts&play_token=54v3D6UwQT",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1753227&extension=ts&play_token=3Ea6Hxt5oq",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1471387&extension=ts&play_token=Bx3mlhSM6x"
     ]
   ),
@@ -724,9 +719,7 @@ const channels = [
     LOGOS.tf1,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1640379&extension=ts&play_token=YWsJoaBWoi",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1640379&extension=ts&play_token=6gj5Htj59g",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1640379&extension=ts&play_token=qXUKertYkr"
     ]
   ),
@@ -738,9 +731,7 @@ const channels = [
     LOGOS.tnt,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1479591&extension=ts&play_token=vzYU4fDUAQ",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1479591&extension=ts&play_token=9JzXAViV1F",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1479591&extension=ts&play_token=mSsCW5SfPM"
     ]
   ),
@@ -762,11 +753,8 @@ const channels = [
     LOGOS.vsport,
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1632123&extension=ts&play_token=Aeer3FFu7o",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1749221&extension=ts&play_token=jg5ZtLtCQN",
-
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632123&extension=ts&play_token=E6ziX5leBT",
-
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1632123&extension=ts&play_token=6GO8Kiqjfm"
     ]
   )
@@ -778,12 +766,7 @@ const channels = [
 
 const channelMap =
   Object.fromEntries(
-    channels.map(
-      c => [
-        c.id,
-        c
-      ]
-    )
+    channels.map(c => [c.id, c])
   );
 
 // ==================================================
@@ -793,26 +776,13 @@ const channelMap =
 const matches = [
 
   {
-    id:
-      "arsenal-coventry-20260822",
-
-    time:
-      "02:00",
-
-    date:
-      "22/08/2026",
-
-    home:
-      "Arsenal",
-
-    away:
-      "Coventry City",
-
-    homeLogo:
-      TEAM.arsenal,
-
-    awayLogo:
-      TEAM.coventry,
+    id: "arsenal-coventry-20260822",
+    time: "02:00",
+    date: "22/08/2026",
+    home: "Arsenal",
+    away: "Coventry City",
+    homeLogo: TEAM.arsenal,
+    awayLogo: TEAM.coventry,
 
     channels1080: [
       "sky-sports-main-event-fhd",
@@ -827,26 +797,13 @@ const matches = [
   },
 
   {
-    id:
-      "hull-man-united-20260822",
-
-    time:
-      "18:30",
-
-    date:
-      "22/08/2026",
-
-    home:
-      "Hull City",
-
-    away:
-      "Manchester United",
-
-    homeLogo:
-      TEAM.hull,
-
-    awayLogo:
-      TEAM.manUnited,
+    id: "hull-man-united-20260822",
+    time: "18:30",
+    date: "22/08/2026",
+    home: "Hull City",
+    away: "Manchester United",
+    homeLogo: TEAM.hull,
+    awayLogo: TEAM.manUnited,
 
     channels1080: [
       "usa-network-1080"
@@ -859,26 +816,13 @@ const matches = [
   },
 
   {
-    id:
-      "everton-palace-20260822",
-
-    time:
-      "21:00",
-
-    date:
-      "22/08/2026",
-
-    home:
-      "Everton",
-
-    away:
-      "Crystal Palace",
-
-    homeLogo:
-      TEAM.everton,
-
-    awayLogo:
-      TEAM.crystalPalace,
+    id: "everton-palace-20260822",
+    time: "21:00",
+    date: "22/08/2026",
+    home: "Everton",
+    away: "Crystal Palace",
+    homeLogo: TEAM.everton,
+    awayLogo: TEAM.crystalPalace,
 
     channels1080: [
       "usa-network-1080"
@@ -888,26 +832,13 @@ const matches = [
   },
 
   {
-    id:
-      "ipswich-sunderland-20260822",
-
-    time:
-      "21:00",
-
-    date:
-      "22/08/2026",
-
-    home:
-      "Ipswich Town",
-
-    away:
-      "Sunderland",
-
-    homeLogo:
-      TEAM.ipswich,
-
-    awayLogo:
-      TEAM.sunderland,
+    id: "ipswich-sunderland-20260822",
+    time: "21:00",
+    date: "22/08/2026",
+    home: "Ipswich Town",
+    away: "Sunderland",
+    homeLogo: TEAM.ipswich,
+    awayLogo: TEAM.sunderland,
 
     channels1080: [
       "sky-sports-premier-league-fhd"
@@ -917,53 +848,26 @@ const matches = [
   },
 
   {
-    id:
-      "forest-leeds-20260822",
-
-    time:
-      "21:00",
-
-    date:
-      "22/08/2026",
-
-    home:
-      "Nottingham Forest",
-
-    away:
-      "Leeds United",
-
-    homeLogo:
-      TEAM.forest,
-
-    awayLogo:
-      TEAM.leeds,
+    id: "forest-leeds-20260822",
+    time: "21:00",
+    date: "22/08/2026",
+    home: "Nottingham Forest",
+    away: "Leeds United",
+    homeLogo: TEAM.forest,
+    awayLogo: TEAM.leeds,
 
     channels1080: [],
-
     channels4k: []
   },
 
   {
-    id:
-      "brentford-spurs-20260822",
-
-    time:
-      "23:30",
-
-    date:
-      "22/08/2026",
-
-    home:
-      "Brentford",
-
-    away:
-      "Tottenham Hotspur",
-
-    homeLogo:
-      TEAM.brentford,
-
-    awayLogo:
-      TEAM.tottenham,
+    id: "brentford-spurs-20260822",
+    time: "23:30",
+    date: "22/08/2026",
+    home: "Brentford",
+    away: "Tottenham Hotspur",
+    homeLogo: TEAM.brentford,
+    awayLogo: TEAM.tottenham,
 
     channels1080: [
       "sky-sports-main-event-fhd",
@@ -978,39 +882,31 @@ const matches = [
 ];
 
 // ==================================================
-// CACHE LOGO CLB
+// CACHE TEAM LOGOS
 // ==================================================
 
-const imageCache =
-  new Map();
+const imageCache = new Map();
 
 async function toDataUri(url) {
 
-  if (
-    imageCache.has(url)
-  ) {
-    return imageCache.get(
-      url
-    );
+  if (imageCache.has(url)) {
+    return imageCache.get(url);
   }
 
   const response =
     await fetch(
       url,
       {
-        redirect:
-          "follow",
+        redirect: "follow",
 
         headers: {
           "User-Agent":
-            "Mozilla/5.0 LiveTV/1.0.1"
+            "Mozilla/5.0 LiveTV/1.0.3"
         }
       }
     );
 
-  if (
-    !response.ok
-  ) {
+  if (!response.ok) {
     throw new Error(
       `HTTP ${response.status}`
     );
@@ -1019,8 +915,7 @@ async function toDataUri(url) {
   const type =
     response.headers.get(
       "content-type"
-    ) ||
-    "image/png";
+    ) || "image/png";
 
   const buffer =
     Buffer.from(
@@ -1030,59 +925,37 @@ async function toDataUri(url) {
   const data =
     `data:${type};base64,${buffer.toString("base64")}`;
 
-  imageCache.set(
-    url,
-    data
-  );
+  imageCache.set(url, data);
 
   return data;
 }
 
 // ==================================================
-// POSTER LIVE
+// LIVE POSTER
 // ==================================================
 
 app.get(
   "/poster/live/:id.svg",
-  async (
-    req,
-    res
-  ) => {
+  async (req, res) => {
 
     const match =
       matches.find(
-        m =>
-          m.id ===
-          req.params.id
+        m => m.id === req.params.id
       );
 
-    if (
-      !match
-    ) {
+    if (!match) {
       return res
         .status(404)
-        .send(
-          "Not found"
-        );
+        .send("Not found");
     }
 
     try {
 
-      const [
-        home,
-        away
-      ] =
-        await Promise.all(
-          [
-            toDataUri(
-              match.homeLogo
-            ),
-
-            toDataUri(
-              match.awayLogo
-            )
-          ]
-        );
+      const [home, away] =
+        await Promise.all([
+          toDataUri(match.homeLogo),
+          toDataUri(match.awayLogo)
+        ]);
 
       const svg = `
 <svg
@@ -1092,83 +965,83 @@ app.get(
   viewBox="0 0 600 600"
 >
 
-  <rect
-    width="600"
-    height="600"
-    rx="38"
-    fill="#11151c"
-  />
+<rect
+  width="600"
+  height="600"
+  rx="38"
+  fill="#11151c"
+/>
 
-  <rect
-    x="25"
-    y="25"
-    width="550"
-    height="550"
-    rx="32"
-    fill="#171c24"
-  />
+<rect
+  x="25"
+  y="25"
+  width="550"
+  height="550"
+  rx="32"
+  fill="#171c24"
+/>
 
-  <image
-    href="${home}"
-    x="70"
-    y="155"
-    width="185"
-    height="185"
-    preserveAspectRatio="xMidYMid meet"
-  />
+<image
+  href="${home}"
+  x="70"
+  y="155"
+  width="185"
+  height="185"
+  preserveAspectRatio="xMidYMid meet"
+/>
 
-  <image
-    href="${away}"
-    x="345"
-    y="155"
-    width="185"
-    height="185"
-    preserveAspectRatio="xMidYMid meet"
-  />
+<image
+  href="${away}"
+  x="345"
+  y="155"
+  width="185"
+  height="185"
+  preserveAspectRatio="xMidYMid meet"
+/>
 
-  <circle
-    cx="300"
-    cy="248"
-    r="44"
-    fill="#0c1017"
-    stroke="#636c79"
-    stroke-width="3"
-  />
+<circle
+  cx="300"
+  cy="248"
+  r="44"
+  fill="#0c1017"
+  stroke="#636c79"
+  stroke-width="3"
+/>
 
-  <text
-    x="300"
-    y="260"
-    text-anchor="middle"
-    fill="#ffffff"
-    font-family="Arial,Helvetica,sans-serif"
-    font-size="32"
-    font-weight="800"
-  >
-    VS
-  </text>
+<text
+  x="300"
+  y="260"
+  text-anchor="middle"
+  fill="#ffffff"
+  font-family="Arial,Helvetica,sans-serif"
+  font-size="32"
+  font-weight="800"
+>
+VS
+</text>
 
-  <text
-    x="300"
-    y="430"
-    text-anchor="middle"
-    fill="#ffffff"
-    font-family="Arial,Helvetica,sans-serif"
-    font-size="46"
-    font-weight="800"
-  >
-    ${escapeXml(match.time)}
-  </text>
+<text
+  x="300"
+  y="430"
+  text-anchor="middle"
+  fill="#ffffff"
+  font-family="Arial,Helvetica,sans-serif"
+  font-size="46"
+  font-weight="800"
+>
+${escapeXml(match.time)}
+</text>
 
-  <text
-    x="300"
-    y="490"
-    text-anchor="middle"
-    fill="#aab2bf"
-    font-family="Arial,Helvetica,sans-serif"
-    font-size="24"
-  >
-    ${escapeXml(match.date)}
-  </text>
+<text
+  x="300"
+  y="490"
+  text-anchor="middle"
+  fill="#aab2bf"
+  font-family="Arial,Helvetica,sans-serif"
+  font-size="24"
+>
+${escapeXml(match.date)}
+</text>
 
 </svg>
 `;
@@ -1183,12 +1056,9 @@ app.get(
         "public,max-age=21600"
       );
 
-      res.send(
-        svg
-      );
-    }
+      res.send(svg);
 
-    catch (error) {
+    } catch (error) {
 
       console.error(
         "LIVE POSTER ERROR:",
@@ -1198,9 +1068,7 @@ app.get(
 
       res
         .status(500)
-        .send(
-          "Poster error"
-        );
+        .send("Poster error");
     }
   }
 );
@@ -1215,44 +1083,28 @@ const groupOrder = {
   sports4k: 3
 };
 
-channels.sort(
-  (
-    a,
-    b
-  ) => {
+channels.sort((a, b) => {
 
-    if (
-      a.group !==
-      b.group
-    ) {
-      return (
-        groupOrder[a.group] -
-        groupOrder[b.group]
-      );
-    }
-
-    return a.name.localeCompare(
-      b.name,
-      "en",
-      {
-        sensitivity:
-          "base",
-
-        numeric:
-          true
-      }
+  if (a.group !== b.group) {
+    return (
+      groupOrder[a.group] -
+      groupOrder[b.group]
     );
   }
-);
+
+  return a.name.localeCompare(
+    b.name,
+    "en",
+    {
+      sensitivity: "base",
+      numeric: true
+    }
+  );
+});
 
 matches.sort(
-  (
-    a,
-    b
-  ) =>
-    a.time.localeCompare(
-      b.time
-    )
+  (a, b) =>
+    a.time.localeCompare(b.time)
 );
 
 // ==================================================
@@ -1286,106 +1138,66 @@ const manifest = {
   catalogs: [
 
     {
-      type:
-        "tv",
-
-      id:
-        "live1080",
-
-      name:
-        "🔴 LIVE • 1080P / FHD",
+      type: "tv",
+      id: "live1080",
+      name: "🔴 LIVE • 1080P / FHD",
 
       extra: [
         {
-          name:
-            "search",
-
-          isRequired:
-            false
+          name: "search",
+          isRequired: false
         }
       ]
     },
 
     {
-      type:
-        "tv",
-
-      id:
-        "live4k",
-
-      name:
-        "🏆 LIVE • UHD / 4K",
+      type: "tv",
+      id: "live4k",
+      name: "🏆 LIVE • UHD / 4K",
 
       extra: [
         {
-          name:
-            "search",
-
-          isRequired:
-            false
+          name: "search",
+          isRequired: false
         }
       ]
     },
 
     {
-      type:
-        "tv",
-
-      id:
-        "vtv",
-
-      name:
-        "🇻🇳 VTV",
+      type: "tv",
+      id: "vtv",
+      name: "🇻🇳 VTV",
 
       extra: [
         {
-          name:
-            "search",
-
-          isRequired:
-            false
+          name: "search",
+          isRequired: false
         }
       ]
     },
 
     {
-      type:
-        "tv",
-
-      id:
-        "sports1080",
-
-      name:
-        "📺 Sports 1080P • 60 FPS",
+      type: "tv",
+      id: "sports1080",
+      name: "📺 Sports 1080P • 60 FPS",
 
       extra: [
         {
-          name:
-            "search",
-
-          isRequired:
-            false
+          name: "search",
+          isRequired: false
         }
       ]
     },
 
     {
-      type:
-        "tv",
-
-      id:
-        "sports4k",
-
-      name:
-        "🏆 Sports UHD / 4K",
+      type: "tv",
+      id: "sports4k",
+      name: "🏆 Sports UHD / 4K",
 
       extra: [
         {
-          name:
-            "search",
-
-          isRequired:
-            false
+          name: "search",
+          isRequired: false
         }
       ]
     }
@@ -1393,9 +1205,7 @@ const manifest = {
 };
 
 const builder =
-  new addonBuilder(
-    manifest
-  );
+  new addonBuilder(manifest);
 
 // ==================================================
 // HELPERS LIVE
@@ -1408,49 +1218,37 @@ function liveName(match) {
   );
 }
 
-function channelPoster(
-  channel
-) {
+function channelPoster(channel) {
 
-  // VTV dùng thẳng logo do Render tự host.
-  if (
-    channel.group ===
-    "vtv"
-  ) {
+  /*
+    QUAN TRỌNG:
+    VTV dùng trực tiếp endpoint của Render.
+    KHÔNG đưa VTV qua weserv.
+  */
+
+  if (channel.group === "vtv") {
     return channel.logo;
   }
 
-  // Các kênh khác giữ cách cũ.
   return normalizedPng(
     channel.logo
   );
 }
 
-function livePoster(
-  match
-) {
+function livePoster(match) {
+
   return normalizedPng(
-    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=101`
+    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=103`
   );
 }
 
-function descriptionFor(
-  channel
-) {
+function descriptionFor(channel) {
 
-  if (
-    channel.group ===
-    "vtv"
-  ) {
-    return (
-      "VTV • Truyền hình Việt Nam"
-    );
+  if (channel.group === "vtv") {
+    return "VTV • Truyền hình Việt Nam";
   }
 
-  if (
-    channel.group ===
-    "sports1080"
-  ) {
+  if (channel.group === "sports1080") {
     return (
       "Sports • 1080P / FHD • " +
       `${channel.streams.length} luồng`
@@ -1463,57 +1261,36 @@ function descriptionFor(
   );
 }
 
-function liveStreams(
-  match,
-  quality
-) {
+function liveStreams(match, quality) {
 
   const ids =
-    quality ===
-    "4k"
-
+    quality === "4k"
       ? match.channels4k
-
       : match.channels1080;
 
-  const streams =
-    [];
+  const streams = [];
 
-  ids.forEach(
-    id => {
+  ids.forEach(id => {
 
-      const channel =
-        channelMap[
-          id
-        ];
+    const channel =
+      channelMap[id];
 
-      if (
-        !channel
-      ) {
-        return;
-      }
-
-      channel.streams.forEach(
-        (
-          url,
-          index
-        ) => {
-
-          streams.push(
-            {
-              name:
-                channel.name,
-
-              title:
-                `${channel.name} • ${index + 1}`,
-
-              url
-            }
-          );
-        }
-      );
+    if (!channel) {
+      return;
     }
-  );
+
+    channel.streams.forEach(
+      (url, index) => {
+
+        streams.push({
+          name: channel.name,
+          title:
+            `${channel.name} • ${index + 1}`,
+          url
+        });
+      }
+    );
+  });
 
   return streams;
 }
@@ -1528,171 +1305,135 @@ builder.defineCatalogHandler(
     const search =
       args.extra &&
       args.extra.search
-
         ? args.extra.search
             .toLowerCase()
             .trim()
-
         : "";
 
     // LIVE 1080
-    if (
-      args.id ===
-      "live1080"
-    ) {
+
+    if (args.id === "live1080") {
 
       let list =
         matches.filter(
-          m =>
-            m.channels1080.length >
-            0
+          m => m.channels1080.length > 0
         );
 
-      if (
-        search
-      ) {
+      if (search) {
         list =
           list.filter(
             m =>
               liveName(m)
                 .toLowerCase()
-                .includes(
-                  search
-                )
+                .includes(search)
           );
       }
 
       return {
-
         metas:
-          list.map(
-            m => ({
-              id:
-                `live-${m.id}-1080`,
-
-              type:
-                "tv",
-
-              name:
-                liveName(m),
-
-              poster:
-                livePoster(m),
-
-              posterShape:
-                "square",
-
-              description:
-                `${m.date} • 1080P / FHD`
-            })
-          )
-      };
-    }
-
-    // LIVE 4K
-    if (
-      args.id ===
-      "live4k"
-    ) {
-
-      let list =
-        matches.filter(
-          m =>
-            m.channels4k.length >
-            0
-        );
-
-      if (
-        search
-      ) {
-        list =
-          list.filter(
-            m =>
-              liveName(m)
-                .toLowerCase()
-                .includes(
-                  search
-                )
-          );
-      }
-
-      return {
-
-        metas:
-          list.map(
-            m => ({
-              id:
-                `live-${m.id}-4k`,
-
-              type:
-                "tv",
-
-              name:
-                liveName(m),
-
-              poster:
-                livePoster(m),
-
-              posterShape:
-                "square",
-
-              description:
-                `${m.date} • UHD / 4K`
-            })
-          )
-      };
-    }
-
-    // KÊNH GỐC
-    let list =
-      channels.filter(
-        c =>
-          c.group ===
-          args.id
-      );
-
-    if (
-      search
-    ) {
-      list =
-        list.filter(
-          c =>
-            c.name
-              .toLowerCase()
-              .includes(
-                search
-              )
-        );
-    }
-
-    return {
-
-      metas:
-        list.map(
-          channel => ({
+          list.map(m => ({
             id:
-              channel.id,
+              `live-${m.id}-1080`,
 
             type:
               "tv",
 
             name:
-              channel.name,
+              liveName(m),
 
             poster:
-              channelPoster(
-                channel
-              ),
+              livePoster(m),
 
             posterShape:
               "square",
 
             description:
-              descriptionFor(
-                channel
-              )
-          })
-        )
+              `${m.date} • 1080P / FHD`
+          }))
+      };
+    }
+
+    // LIVE 4K
+
+    if (args.id === "live4k") {
+
+      let list =
+        matches.filter(
+          m => m.channels4k.length > 0
+        );
+
+      if (search) {
+        list =
+          list.filter(
+            m =>
+              liveName(m)
+                .toLowerCase()
+                .includes(search)
+          );
+      }
+
+      return {
+        metas:
+          list.map(m => ({
+            id:
+              `live-${m.id}-4k`,
+
+            type:
+              "tv",
+
+            name:
+              liveName(m),
+
+            poster:
+              livePoster(m),
+
+            posterShape:
+              "square",
+
+            description:
+              `${m.date} • UHD / 4K`
+          }))
+      };
+    }
+
+    // ORIGINAL CHANNELS
+
+    let list =
+      channels.filter(
+        c => c.group === args.id
+      );
+
+    if (search) {
+      list =
+        list.filter(
+          c =>
+            c.name
+              .toLowerCase()
+              .includes(search)
+        );
+    }
+
+    return {
+      metas:
+        list.map(channel => ({
+          id:
+            channel.id,
+
+          type:
+            "tv",
+
+          name:
+            channel.name,
+
+          poster:
+            channelPoster(channel),
+
+          posterShape:
+            "square",
+
+          description:
+            descriptionFor(channel)
+        }))
     };
   }
 );
@@ -1705,15 +1446,11 @@ builder.defineMetaHandler(
   async args => {
 
     if (
-      args.id.startsWith(
-        "live-"
-      )
+      args.id.startsWith("live-")
     ) {
 
       const is4k =
-        args.id.endsWith(
-          "-4k"
-        );
+        args.id.endsWith("-4k");
 
       const suffix =
         is4k
@@ -1728,22 +1465,16 @@ builder.defineMetaHandler(
 
       const match =
         matches.find(
-          m =>
-            m.id ===
-            base
+          m => m.id === base
         );
 
-      if (
-        !match
-      ) {
+      if (!match) {
         return {
-          meta:
-            null
+          meta: null
         };
       }
 
       return {
-
         meta: {
           id:
             args.id,
@@ -1752,14 +1483,10 @@ builder.defineMetaHandler(
             "tv",
 
           name:
-            liveName(
-              match
-            ),
+            liveName(match),
 
           poster:
-            livePoster(
-              match
-            ),
+            livePoster(match),
 
           posterShape:
             "square",
@@ -1775,21 +1502,15 @@ builder.defineMetaHandler(
     }
 
     const channel =
-      channelMap[
-        args.id
-      ];
+      channelMap[args.id];
 
-    if (
-      !channel
-    ) {
+    if (!channel) {
       return {
-        meta:
-          null
+        meta: null
       };
     }
 
     return {
-
       meta: {
         id:
           channel.id,
@@ -1801,17 +1522,13 @@ builder.defineMetaHandler(
           channel.name,
 
         poster:
-          channelPoster(
-            channel
-          ),
+          channelPoster(channel),
 
         posterShape:
           "square",
 
         description:
-          descriptionFor(
-            channel
-          )
+          descriptionFor(channel)
       }
     };
   }
@@ -1825,15 +1542,11 @@ builder.defineStreamHandler(
   async args => {
 
     if (
-      args.id.startsWith(
-        "live-"
-      )
+      args.id.startsWith("live-")
     ) {
 
       const is4k =
-        args.id.endsWith(
-          "-4k"
-        );
+        args.id.endsWith("-4k");
 
       const suffix =
         is4k
@@ -1848,22 +1561,16 @@ builder.defineStreamHandler(
 
       const match =
         matches.find(
-          m =>
-            m.id ===
-            base
+          m => m.id === base
         );
 
-      if (
-        !match
-      ) {
+      if (!match) {
         return {
-          streams:
-            []
+          streams: []
         };
       }
 
       return {
-
         streams:
           liveStreams(
             match,
@@ -1875,27 +1582,18 @@ builder.defineStreamHandler(
     }
 
     const channel =
-      channelMap[
-        args.id
-      ];
+      channelMap[args.id];
 
-    if (
-      !channel
-    ) {
+    if (!channel) {
       return {
-        streams:
-          []
+        streams: []
       };
     }
 
     return {
-
       streams:
         channel.streams.map(
-          (
-            url,
-            index
-          ) => ({
+          (url, index) => ({
             name:
               channel.name,
 
@@ -1915,55 +1613,39 @@ builder.defineStreamHandler(
 
 app.get(
   "/",
-  (
-    req,
-    res
-  ) => {
+  (req, res) => {
 
     const manifestUrl =
       `${req.protocol}://${req.get("host")}/manifest.json`;
 
     const vtv =
       channels.filter(
-        c =>
-          c.group ===
-          "vtv"
+        c => c.group === "vtv"
       ).length;
 
     const sports1080 =
       channels.filter(
-        c =>
-          c.group ===
-          "sports1080"
+        c => c.group === "sports1080"
       ).length;
 
     const sports4k =
       channels.filter(
-        c =>
-          c.group ===
-          "sports4k"
+        c => c.group === "sports4k"
       ).length;
 
     const live1080 =
       matches.filter(
-        m =>
-          m.channels1080.length >
-          0
+        m => m.channels1080.length > 0
       ).length;
 
     const live4k =
       matches.filter(
-        m =>
-          m.channels4k.length >
-          0
+        m => m.channels4k.length > 0
       ).length;
 
     const totalStreams =
       channels.reduce(
-        (
-          total,
-          channel
-        ) =>
+        (total, channel) =>
           total +
           channel.streams.length,
         0
@@ -1975,20 +1657,14 @@ app.get(
 <html>
 
 <head>
-
-<meta
-  charset="UTF-8"
->
+<meta charset="UTF-8">
 
 <meta
   name="viewport"
   content="width=device-width,initial-scale=1"
 >
 
-<title>
-Live TV
-</title>
-
+<title>Live TV</title>
 </head>
 
 <body
@@ -2001,9 +1677,7 @@ line-height:1.7;
 "
 >
 
-<h1>
-📺 Live TV
-</h1>
+<h1>📺 Live TV</h1>
 
 <p>
 Version:
@@ -2054,7 +1728,6 @@ ${manifestUrl}
 </p>
 
 </body>
-
 </html>
 `);
   }
