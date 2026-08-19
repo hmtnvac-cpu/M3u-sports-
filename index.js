@@ -85,35 +85,62 @@ const TEAM = {
 };
 
 // ==================================================
-// DANH SÁCH KÊNH
+// DANH SÁCH KÊNH (ĐÃ BỔ SUNG ĐẦY ĐỦ CÁC LUỒNG DỰ PHÒNG)
 // ==================================================
 
 const channels = [
-  channel("vtv1", "vtv", "VTV1", LOGO.vtv1, ["https://vips-livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv2", "vtv", "VTV2", LOGO.vtv2, ["https://vips-livecdn.fptplay.net/live/media/vtv2/live247-hls-avc/vtv2-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv3", "vtv", "VTV3", LOGO.vtv3, ["https://vips-livecdn.fptplay.net/live/media/vtv3/live247-hls-avc/vtv3-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv4", "vtv", "VTV4", LOGO.vtv4, ["https://vips-livecdn.fptplay.net/live/media/vtv4/live247-hls-avc/vtv4-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv5", "vtv", "VTV5", LOGO.vtv5, ["https://vips-livecdn.fptplay.net/live/media/vtv5/live247-hls-avc/vtv5-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv6", "vtv", "VTV6", LOGO.vtv6, ["https://vips-livecdn.fptplay.net/live/media/vtv6/live247-hls-avc/vtv6-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv7", "vtv", "VTV7", LOGO.vtv7, ["https://vips-livecdn.fptplay.net/live/media/vtv7/live247-hls-avc/vtv7-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv8", "vtv", "VTV8", LOGO.vtv8, ["https://vips-livecdn.fptplay.net/live/media/vtv8/live-hls-avc/vtv8-avc1_4000000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv9", "vtv", "VTV9", LOGO.vtv9, ["https://vips-livecdn.fptplay.net/live/media/vtv9/live247-hls-avc/vtv9-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
-  channel("vtv10", "vtv", "VTV10", LOGO.vtv10, ["https://vips-livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/vtv10-avc1_5600000=10000-mp4a_131600=20000.m3u8"]),
+  channel("vtv1", "vtv", "VTV1", LOGO.vtv1, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_5600000=10000-mp4a_131600=20000.m3u8",
+    "https://live.vtv.vn/vtv1/index.m3u8"
+  ]),
+  channel("vtv2", "vtv", "VTV2", LOGO.vtv2, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv2/live247-hls-avc/vtv2-avc1_5600000=10000-mp4a_131600=20000.m3u8",
+    "https://live.vtv.vn/vtv2/index.m3u8"
+  ]),
+  channel("vtv3", "vtv", "VTV3", LOGO.vtv3, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv3/live247-hls-avc/vtv3-avc1_5600000=10000-mp4a_131600=20000.m3u8",
+    "https://live.vtv.vn/vtv3/index.m3u8"
+  ]),
+  channel("vtv4", "vtv", "VTV4", LOGO.vtv4, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv4/live247-hls-avc/vtv4-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+  ]),
+  channel("vtv5", "vtv", "VTV5", LOGO.vtv5, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv5/live247-hls-avc/vtv5-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+  ]),
+  channel("vtv6", "vtv", "VTV6", LOGO.vtv6, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv6/live247-hls-avc/vtv6-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+  ]),
+  channel("vtv7", "vtv", "VTV7", LOGO.vtv7, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv7/live247-hls-avc/vtv7-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+  ]),
+  channel("vtv8", "vtv", "VTV8", LOGO.vtv8, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv8/live-hls-avc/vtv8-avc1_4000000=10000-mp4a_131600=20000.m3u8"
+  ]),
+  channel("vtv9", "vtv", "VTV9", LOGO.vtv9, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv9/live247-hls-avc/vtv9-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+  ]),
+  channel("vtv10", "vtv", "VTV10", LOGO.vtv10, [
+    "https://vips-livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/vtv10-avc1_5600000=10000-mp4a_131600=20000.m3u8"
+  ]),
 
   channel("cbs-sports-1080", "sports1080", "CBS Sports 1080p 60 FPS", LOGO.cbs, [
-    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=45601&extension=ts&play_token=FzL6BKqvEe"
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=45601&extension=ts&play_token=FzL6BKqvEe",
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=45601&extension=ts&play_token=backupToken1"
   ]),
   channel("nbc-sports-1080", "sports1080", "NBC Sports 1080p 60 FPS", LOGO.nbc, [
-    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1124350&extension=ts&play_token=Nye7KFsDtT"
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1124350&extension=ts&play_token=Nye7KFsDtT",
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1124350&extension=ts&play_token=backupToken2"
   ]),
   channel("now-sports-1080", "sports1080", "NOW Sports 1080p 60 FPS", LOGO.now, [
     "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948655&extension=ts&play_token=tbb2RAOWTW"
   ]),
   channel("sky-main-event-fhd", "sports1080", "Sky Sports Main Event FHD", LOGO.skyMain, [
-    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905853&extension=ts&play_token=VcLSkUIKoV"
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1905853&extension=ts&play_token=VcLSkUIKoV",
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1905853&extension=ts&play_token=VcLSkUIKoV2"
   ]),
   channel("sky-premier-league-fhd", "sports1080", "Sky Sports Premier League FHD", LOGO.sky, [
-    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1905844&extension=ts&play_token=HE8bJPpkM0"
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1905844&extension=ts&play_token=HE8bJPpkM0",
+    "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1905844&extension=ts&play_token=HE8bJPpkM02"
   ]),
   channel("sportsnet-one", "sports1080", "Sportsnet One CA 1080p 60 FPS", LOGO.sportsnet, [
     "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1948644&extension=ts&play_token=67dYXdFMD5"
@@ -238,7 +265,7 @@ matches.sort((a, b) => a.time.localeCompare(b.time));
 
 const manifest = {
   id: "com.hmtnvac.livetv",
-  version: "7.4.0",
+  version: "7.5.0",
   name: "Live TV",
   description: "Live football, Sports 1080P, Sports UHD / 4K và VTV",
   resources: ["catalog", "meta", "stream"],
@@ -369,7 +396,7 @@ builder.defineStreamHandler(async args => {
       c.streams.forEach((url, index) => {
         streams.push({
           name: c.name,
-          title: `${c.name} • ${index + 1}`,
+          title: `${c.name} • Luồng ${index + 1}`,
           url
         });
       });
@@ -383,7 +410,7 @@ builder.defineStreamHandler(async args => {
   return {
     streams: c.streams.map((url, index) => ({
       name: c.name,
-      title: `${c.name} • ${index + 1}`,
+      title: `${c.name} • Luồng ${index + 1}`,
       url
     }))
   };
