@@ -8,11 +8,7 @@ const PUBLIC_BASE =
   process.env.PUBLIC_BASE_URL ||
   "https://m3u-sports-tv.onrender.com";
 
-// ==================================================
-// VERSION
-// ==================================================
-
-const VERSION = "1.0.0";
+const VERSION = "1.0.1";
 
 // ==================================================
 // HELPERS
@@ -28,15 +24,6 @@ const uniq = arr =>
 const espnTeam = id =>
   `https://a.espncdn.com/i/teamlogos/soccer/500/${id}.png`;
 
-// ==================================================
-// CHUẨN HÓA LOGO
-//
-// Mọi logo vẫn đi qua weserv như index đang hoạt động.
-// Không crop.
-// Không stretch.
-// Giữ tỷ lệ.
-// ==================================================
-
 function normalizedPng(url) {
   return (
     "https://images.weserv.nl/?url=" +
@@ -47,7 +34,7 @@ function normalizedPng(url) {
     "&bg=11151c" +
     "&output=png" +
     "&q=92" +
-    "&v=100"
+    "&v=101"
   );
 }
 
@@ -68,55 +55,199 @@ function makeChannel(
   };
 }
 
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 // ==================================================
-// LOGO
+// LOGO VTV TỰ HOST TRÊN RENDER
 //
-// CHỈ THAY:
-// VTV1 → VTV10
-// Universo
-// TNT Sports Ultimate
+// Không dùng link ảnh bên ngoài.
+// Tất cả cùng một mẫu.
+// Chỉ thay số 1 → 10.
+// ==================================================
+
+function vtvLogoUrl(number) {
+  return (
+    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=101`
+  );
+}
+
+app.get(
+  "/logo/vtv:num.svg",
+  (req, res) => {
+
+    const num =
+      String(req.params.num);
+
+    const allowed =
+      [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ];
+
+    if (!allowed.includes(num)) {
+      return res
+        .status(404)
+        .send("Not found");
+    }
+
+    // Số 10 dài hơn nên font nhỏ hơn một chút.
+    const numberSize =
+      num === "10"
+        ? 145
+        : 180;
+
+    const numberX =
+      num === "10"
+        ? 430
+        : 455;
+
+    const svg = `
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="600"
+  height="600"
+  viewBox="0 0 600 600"
+>
+
+  <!-- NỀN TRẮNG GIỐNG MẪU -->
+  <rect
+    width="600"
+    height="600"
+    fill="#ffffff"
+  />
+
+  <!-- V ĐỎ -->
+  <text
+    x="95"
+    y="365"
+    font-family="Arial Black,Arial,sans-serif"
+    font-size="220"
+    font-weight="900"
+    font-style="italic"
+    fill="#e6202a"
+    transform="skewX(-8)"
+  >
+    V
+  </text>
+
+  <!-- T XANH LÁ -->
+  <text
+    x="230"
+    y="365"
+    font-family="Arial Black,Arial,sans-serif"
+    font-size="220"
+    font-weight="900"
+    font-style="italic"
+    fill="#168647"
+    transform="skewX(-8)"
+  >
+    T
+  </text>
+
+  <!-- V XANH DƯƠNG -->
+  <text
+    x="325"
+    y="365"
+    font-family="Arial Black,Arial,sans-serif"
+    font-size="220"
+    font-weight="900"
+    font-style="italic"
+    fill="#1670b8"
+    transform="skewX(-8)"
+  >
+    V
+  </text>
+
+  <!-- SỐ KÊNH -->
+  <text
+    x="${numberX}"
+    y="350"
+    font-family="Arial Black,Arial,sans-serif"
+    font-size="${numberSize}"
+    font-weight="900"
+    font-style="italic"
+    fill="#186ead"
+  >
+    ${num}
+  </text>
+
+</svg>
+`;
+
+    res.set(
+      "Content-Type",
+      "image/svg+xml"
+    );
+
+    res.set(
+      "Cache-Control",
+      "public,max-age=604800"
+    );
+
+    res.send(svg);
+  }
+);
+
+// ==================================================
+// LOGOS
 //
-// CÁC LOGO KHÁC GIỮ NGUYÊN.
+// VTV tự host.
+// Tất cả logo khác giữ nguyên bản đang hoạt động.
 // ==================================================
 
 const LOGOS = {
 
   // ==================================================
-  // VTV - NGUỒN MỚI
+  // VTV
   // ==================================================
 
   vtv1:
-    "https://img.lichphatsong.xyz/logo/vtv1hd.jpg",
+    vtvLogoUrl(1),
 
   vtv2:
-    "https://img.lichphatsong.xyz/logo/vtv2hd.jpg",
+    vtvLogoUrl(2),
 
   vtv3:
-    "https://img.lichphatsong.xyz/logo/vtv3hd.jpg",
+    vtvLogoUrl(3),
 
   vtv4:
-    "https://img.lichphatsong.xyz/logo/vtv4hd.jpg",
+    vtvLogoUrl(4),
 
   vtv5:
-    "https://img.lichphatsong.xyz/logo/vtv5hd.jpg",
+    vtvLogoUrl(5),
 
   vtv6:
-    "https://raw.githubusercontent.com/ntd249/logochannel/refs/heads/main/VTV6.png",
+    vtvLogoUrl(6),
 
   vtv7:
-    "https://img.lichphatsong.xyz/logo/vtv7hd.jpg",
+    vtvLogoUrl(7),
 
   vtv8:
-    "https://img.lichphatsong.xyz/logo/vtv8hd.jpg",
+    vtvLogoUrl(8),
 
   vtv9:
-    "https://img.lichphatsong.xyz/logo/vtv9hd.jpg",
+    vtvLogoUrl(9),
 
   vtv10:
-    "https://raw.githubusercontent.com/ntd249/logochannel/refs/heads/main/VTV10.png",
+    vtvLogoUrl(10),
 
   // ==================================================
-  // SPORTS 1080 - GIỮ NGUYÊN
+  // SPORTS 1080
   // ==================================================
 
   cbs:
@@ -140,15 +271,11 @@ const LOGOS = {
   usa:
     "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/usa-us.png",
 
-  // ==================================================
-  // UNIVERSO - NGUỒN NBC
-  // ==================================================
-
   universo:
     "https://img.nbc.com/files/images/2019/4/26/Universo-logos-templateUniverso-Logo-Coloralt2-450x250.v2.png",
 
   // ==================================================
-  // SPORTS UHD - GIỮ NGUYÊN
+  // SPORTS UHD / 4K
   // ==================================================
 
   bein:
@@ -175,16 +302,8 @@ const LOGOS = {
   tnt:
     "https://www.tvlogo.org/united-kingdom/tnt-sports.png",
 
-  // ==================================================
-  // TNT SPORTS ULTIMATE - LOGO RIÊNG
-  // ==================================================
-
   tntUltimate:
     "https://static.wikia.nocookie.net/logopedia/images/a/a8/TNT_Sports_Ultimate_%282023%29_II.svg/revision/latest/scale-to-width-down/250?cb=20230719041550",
-
-  // ==================================================
-  // V SPORT - GIỮ NGUYÊN
-  // ==================================================
 
   vsport:
     "https://res.cloudinary.com/dnaoyj/image/upload/dpr_2,f_auto,q_auto,w_600/v1/Assets/KLT/DNA%20TV/Kanavapaketit/ohjelmakirjastot/V%20kanavat/v_sport_suomi__240X240"
@@ -192,7 +311,6 @@ const LOGOS = {
 
 // ==================================================
 // LOGO CLB
-// GIỮ NGUYÊN
 // ==================================================
 
 const TEAM = {
@@ -654,6 +772,10 @@ const channels = [
   )
 ];
 
+// ==================================================
+// CHANNEL MAP
+// ==================================================
+
 const channelMap =
   Object.fromEntries(
     channels.map(
@@ -666,7 +788,6 @@ const channelMap =
 
 // ==================================================
 // LIVE MATCHES
-// GIỮ NGUYÊN
 // ==================================================
 
 const matches = [
@@ -882,7 +1003,7 @@ async function toDataUri(url) {
 
         headers: {
           "User-Agent":
-            "Mozilla/5.0 LiveTV/1.0"
+            "Mozilla/5.0 LiveTV/1.0.1"
         }
       }
     );
@@ -915,30 +1036,6 @@ async function toDataUri(url) {
   );
 
   return data;
-}
-
-function escapeXml(value) {
-  return String(value)
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&apos;"
-    );
 }
 
 // ==================================================
@@ -988,93 +1085,93 @@ app.get(
         );
 
       const svg = `
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="600"
-          height="600"
-          viewBox="0 0 600 600"
-        >
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="600"
+  height="600"
+  viewBox="0 0 600 600"
+>
 
-          <rect
-            width="600"
-            height="600"
-            rx="38"
-            fill="#11151c"
-          />
+  <rect
+    width="600"
+    height="600"
+    rx="38"
+    fill="#11151c"
+  />
 
-          <rect
-            x="25"
-            y="25"
-            width="550"
-            height="550"
-            rx="32"
-            fill="#171c24"
-          />
+  <rect
+    x="25"
+    y="25"
+    width="550"
+    height="550"
+    rx="32"
+    fill="#171c24"
+  />
 
-          <image
-            href="${home}"
-            x="70"
-            y="155"
-            width="185"
-            height="185"
-            preserveAspectRatio="xMidYMid meet"
-          />
+  <image
+    href="${home}"
+    x="70"
+    y="155"
+    width="185"
+    height="185"
+    preserveAspectRatio="xMidYMid meet"
+  />
 
-          <image
-            href="${away}"
-            x="345"
-            y="155"
-            width="185"
-            height="185"
-            preserveAspectRatio="xMidYMid meet"
-          />
+  <image
+    href="${away}"
+    x="345"
+    y="155"
+    width="185"
+    height="185"
+    preserveAspectRatio="xMidYMid meet"
+  />
 
-          <circle
-            cx="300"
-            cy="248"
-            r="44"
-            fill="#0c1017"
-            stroke="#636c79"
-            stroke-width="3"
-          />
+  <circle
+    cx="300"
+    cy="248"
+    r="44"
+    fill="#0c1017"
+    stroke="#636c79"
+    stroke-width="3"
+  />
 
-          <text
-            x="300"
-            y="260"
-            text-anchor="middle"
-            fill="#ffffff"
-            font-family="Arial,Helvetica,sans-serif"
-            font-size="32"
-            font-weight="800"
-          >
-            VS
-          </text>
+  <text
+    x="300"
+    y="260"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="Arial,Helvetica,sans-serif"
+    font-size="32"
+    font-weight="800"
+  >
+    VS
+  </text>
 
-          <text
-            x="300"
-            y="430"
-            text-anchor="middle"
-            fill="#ffffff"
-            font-family="Arial,Helvetica,sans-serif"
-            font-size="46"
-            font-weight="800"
-          >
-            ${escapeXml(match.time)}
-          </text>
+  <text
+    x="300"
+    y="430"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="Arial,Helvetica,sans-serif"
+    font-size="46"
+    font-weight="800"
+  >
+    ${escapeXml(match.time)}
+  </text>
 
-          <text
-            x="300"
-            y="490"
-            text-anchor="middle"
-            fill="#aab2bf"
-            font-family="Arial,Helvetica,sans-serif"
-            font-size="24"
-          >
-            ${escapeXml(match.date)}
-          </text>
+  <text
+    x="300"
+    y="490"
+    text-anchor="middle"
+    fill="#aab2bf"
+    font-family="Arial,Helvetica,sans-serif"
+    font-size="24"
+  >
+    ${escapeXml(match.date)}
+  </text>
 
-        </svg>
-      `;
+</svg>
+`;
 
       res.set(
         "Content-Type",
@@ -1314,6 +1411,16 @@ function liveName(match) {
 function channelPoster(
   channel
 ) {
+
+  // VTV dùng thẳng logo do Render tự host.
+  if (
+    channel.group ===
+    "vtv"
+  ) {
+    return channel.logo;
+  }
+
+  // Các kênh khác giữ cách cũ.
   return normalizedPng(
     channel.logo
   );
@@ -1323,7 +1430,7 @@ function livePoster(
   match
 ) {
   return normalizedPng(
-    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=100`
+    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=101`
   );
 }
 
@@ -1863,91 +1970,93 @@ app.get(
       );
 
     res.send(`
-      <!doctype html>
+<!doctype html>
 
-      <html>
+<html>
 
-        <head>
+<head>
 
-          <meta
-            charset="UTF-8"
-          >
+<meta
+  charset="UTF-8"
+>
 
-          <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1"
-          >
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
 
-          <title>
-            Live TV
-          </title>
+<title>
+Live TV
+</title>
 
-        </head>
+</head>
 
-        <body
-          style="
-            background:#111;
-            color:white;
-            font-family:Arial;
-            padding:30px;
-            line-height:1.7;
-          "
-        >
+<body
+style="
+background:#111;
+color:white;
+font-family:Arial;
+padding:30px;
+line-height:1.7;
+"
+>
 
-          <h1>
-            📺 Live TV
-          </h1>
+<h1>
+📺 Live TV
+</h1>
 
-          <p>
-            Version:
-            <b>${VERSION}</b>
-          </p>
+<p>
+Version:
+<b>${VERSION}</b>
+</p>
 
-          <p>
-            🔴 LIVE 1080P:
-            <b>${live1080}</b>
-          </p>
+<p>
+🔴 LIVE 1080P:
+<b>${live1080}</b>
+</p>
 
-          <p>
-            🏆 LIVE 4K:
-            <b>${live4k}</b>
-          </p>
+<p>
+🏆 LIVE 4K:
+<b>${live4k}</b>
+</p>
 
-          <p>
-            🇻🇳 VTV:
-            <b>${vtv}</b>
-          </p>
+<p>
+🇻🇳 VTV:
+<b>${vtv}</b>
+</p>
 
-          <p>
-            📺 Sports 1080P:
-            <b>${sports1080}</b>
-          </p>
+<p>
+📺 Sports 1080P:
+<b>${sports1080}</b>
+</p>
 
-          <p>
-            🏆 Sports UHD / 4K:
-            <b>${sports4k}</b>
-          </p>
+<p>
+🏆 Sports UHD / 4K:
+<b>${sports4k}</b>
+</p>
 
-          <p>
-            Tổng kênh:
-            <b>${channels.length}</b>
-          </p>
+<p>
+Tổng kênh:
+<b>${channels.length}</b>
+</p>
 
-          <p>
-            Tổng luồng:
-            <b>${totalStreams}</b>
-          </p>
+<p>
+Tổng luồng:
+<b>${totalStreams}</b>
+</p>
 
-          <hr>
+<hr>
 
-          <p>
-            ${manifestUrl}
-          </p>
+<p>
+Manifest:
+<br>
+${manifestUrl}
+</p>
 
-        </body>
+</body>
 
-      </html>
-    `);
+</html>
+`);
   }
 );
 
