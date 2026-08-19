@@ -1,13 +1,12 @@
 {
   "name": "live-tv-stremio",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.21.2",
-    "sharp": "^0.34.3",
     "stremio-addon-sdk": "^1.6.10"
   }
 }
