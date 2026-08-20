@@ -1,9 +1,66 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120">
-<rect x="3" y="3" width="174" height="114" rx="19" fill="#0b0b0b" stroke="#00C8FF" stroke-width="6"/>
-<text x="90" y="21" text-anchor="middle" font-family="Arial Black,Arial" font-size="15" font-weight="900" fill="#00C8FF">4K</text>
-<path d="M38 43c5-21 36-30 56-15 20-15 51-6 56 15 7 27-13 57-56 57S31 70 38 43z" fill="#f2d0ad" stroke="#111" stroke-width="5"/>
-<path d="M49 48q15-15 29 0-15 12-29 0zm53 0q15-15 29 0-15 12-29 0z" fill="#fff" stroke="#111" stroke-width="4"/>
-<circle cx="66" cy="48" r="4"/><circle cx="115" cy="48" r="4"/>
-<path d="M48 70q42 30 84 0-7 30-42 30S55 92 48 70z" fill="#fff" stroke="#111" stroke-width="5"/>
-<path d="M60 82h60M68 74v20M89 76v20M110 74v20" stroke="#111" stroke-width="3"/>
+  <rect x="3" y="3" width="174" height="114" rx="18"
+        fill="#090b0d" stroke="#00C8FF" stroke-width="6"/>
+
+  <text x="90" y="20" text-anchor="middle"
+        font-family="Arial Black,Arial" font-size="15"
+        font-weight="900" fill="#00C8FF">4K</text>
+
+  <!-- đầu troll -->
+  <path d="M39 45
+           C43 26 61 25 77 31
+           C86 22 101 22 111 31
+           C132 25 145 35 144 51
+           C143 76 124 99 91 100
+           C57 100 34 77 39 45Z"
+        fill="#F1D0AD" stroke="#111" stroke-width="5"/>
+
+  <!-- mắt trợn cực lớn -->
+  <ellipse cx="65" cy="51" rx="18" ry="15"
+           fill="white" stroke="#111" stroke-width="4"/>
+  <ellipse cx="118" cy="51" rx="18" ry="15"
+           fill="white" stroke="#111" stroke-width="4"/>
+
+  <circle cx="69" cy="51" r="5" fill="#111"/>
+  <circle cx="114" cy="51" r="5" fill="#111"/>
+
+  <!-- lông mày kiểu soi cực nét -->
+  <path d="M45 34 Q64 24 81 35"
+        fill="none" stroke="#111" stroke-width="5"
+        stroke-linecap="round"/>
+  <path d="M101 35 Q120 24 139 34"
+        fill="none" stroke="#111" stroke-width="5"
+        stroke-linecap="round"/>
+
+  <!-- kính lúp -->
+  <circle cx="118" cy="51" r="23"
+          fill="none" stroke="#00C8FF" stroke-width="5"/>
+  <path d="M135 68 L154 88"
+        stroke="#00C8FF" stroke-width="7"
+        stroke-linecap="round"/>
+
+  <!-- cười troll -->
+  <path d="M52 73
+           Q91 105 130 72
+           Q122 103 91 104
+           Q60 103 52 73Z"
+        fill="white" stroke="#111" stroke-width="5"/>
+
+  <path d="M62 84 H120
+           M70 78 V96
+           M90 82 V101
+           M110 78 V96"
+        stroke="#111" stroke-width="3"/>
+
+  <!-- tia nét căng -->
+  <path d="M23 48 H36
+           M27 32 L40 39
+           M25 66 L38 62"
+        stroke="#00C8FF" stroke-width="4"
+        stroke-linecap="round"/>
+
+  <text x="90" y="115" text-anchor="middle"
+        font-family="Arial Black,Arial"
+        font-size="10" font-weight="900"
+        fill="#00C8FF">NÉT CĂNG</text>
 </svg>
