@@ -8,10 +8,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/4k.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#00C8FF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#1422D9FF",
+      "textColor": "#E9FCFF",
+      "borderColor": "#00D9FF"
     },
     {
       "groupId": "gr",
@@ -21,10 +21,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/1080p.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#4499FF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#14204D99",
+      "textColor": "#F1F7FF",
+      "borderColor": "#4D8DFF"
     },
     {
       "groupId": "gr",
@@ -34,10 +34,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/720p.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#5577FF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#12182E99",
+      "textColor": "#DDE8FF",
+      "borderColor": "#637BFF"
     },
     {
       "groupId": "gr",
@@ -47,10 +47,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/480p.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#778899",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#12161A99",
+      "textColor": "#D4D8DD",
+      "borderColor": "#7A8794"
     },
     {
       "groupId": "gq",
@@ -60,10 +60,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/remux.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FFD700",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#2A220A99",
+      "textColor": "#FFF7CF",
+      "borderColor": "#FFD54A"
     },
     {
       "groupId": "gq",
@@ -73,10 +73,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/bluray.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FFB800",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#2A190A99",
+      "textColor": "#FFF3D6",
+      "borderColor": "#FFB52E"
     },
     {
       "groupId": "gq",
@@ -86,10 +86,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/webdl.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FF9500",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#29160899",
+      "textColor": "#FFF0DC",
+      "borderColor": "#FF922E"
     },
     {
       "groupId": "gq",
@@ -99,10 +99,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/webrip.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FF7700",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#29100899",
+      "textColor": "#FFE8D6",
+      "borderColor": "#FF6B2E"
     },
     {
       "groupId": "gq",
@@ -112,10 +112,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/cam.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FF5500",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#2B080899",
+      "textColor": "#FFE0DC",
+      "borderColor": "#FF3B30"
     },
     {
       "groupId": "ghdr",
@@ -125,10 +125,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/dv.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#EE44FF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#28102D99",
+      "textColor": "#FFE7FF",
+      "borderColor": "#F052FF"
     },
     {
       "groupId": "ghdr",
@@ -138,10 +138,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/hdr10plus.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#BB33EE",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#24102E99",
+      "textColor": "#F6E8FF",
+      "borderColor": "#C65CFF"
     },
     {
       "groupId": "ghdr",
@@ -151,10 +151,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/hdr.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#9922DD",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#1D102C99",
+      "textColor": "#EEDFFF",
+      "borderColor": "#9D55FF"
     },
     {
       "groupId": "gau",
@@ -164,10 +164,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/atmos.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#00FFBB",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#09271E99",
+      "textColor": "#DFFFF5",
+      "borderColor": "#21E6B0"
     },
     {
       "groupId": "gch",
@@ -177,10 +177,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/71.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#00DDFF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#09242A99",
+      "textColor": "#DDFBFF",
+      "borderColor": "#26D9FF"
     },
     {
       "groupId": "gch",
@@ -190,10 +190,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/51.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#00BBDD",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#09212999",
+      "textColor": "#E1FAFF",
+      "borderColor": "#26BFE8"
     },
     {
       "groupId": "gau",
@@ -203,10 +203,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/aac.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#007733",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#0A241499",
+      "textColor": "#DDF7E7",
+      "borderColor": "#42C875"
     },
     {
       "groupId": "gau",
@@ -216,10 +216,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/lossless.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#00CC77",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#09261999",
+      "textColor": "#DEFFF0",
+      "borderColor": "#27D98A"
     },
     {
       "groupId": "gvc",
@@ -229,10 +229,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/hevc.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#66DDFF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#0A222A99",
+      "textColor": "#E1FAFF",
+      "borderColor": "#57D8FF"
     },
     {
       "groupId": "gvc",
@@ -242,10 +242,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/av1.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#55CCFF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#0A202999",
+      "textColor": "#E3F8FF",
+      "borderColor": "#50C8FF"
     },
     {
       "groupId": "gvc",
@@ -255,10 +255,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/h264.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#99AABB",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#15191D99",
+      "textColor": "#E3E7EB",
+      "borderColor": "#91A0AE"
     },
     {
       "groupId": "gfmt",
@@ -268,10 +268,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/imax.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FF66AA",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#2A0C1A99",
+      "textColor": "#FFE6F2",
+      "borderColor": "#FF5CA8"
     },
     {
       "groupId": "ged",
@@ -281,10 +281,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/repack.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#BBBBBB",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#1A1A1A99",
+      "textColor": "#ECECEC",
+      "borderColor": "#B9B9B9"
     },
     {
       "groupId": "glang",
@@ -294,10 +294,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/vie.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FF4444",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#2B0C0C99",
+      "textColor": "#FFE4E4",
+      "borderColor": "#FF5353"
     },
     {
       "groupId": "glang",
@@ -307,10 +307,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/eng.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#4488FF",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#0C183099",
+      "textColor": "#E2ECFF",
+      "borderColor": "#4F87FF"
     },
     {
       "groupId": "glang",
@@ -320,10 +320,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/multi.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#44DD88",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#0B281499",
+      "textColor": "#E0FFEA",
+      "borderColor": "#46D879"
     },
     {
       "groupId": "gsub",
@@ -333,10 +333,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/vietsub.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FFDD44",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#2B230899",
+      "textColor": "#FFF8D8",
+      "borderColor": "#FFD43B"
     },
     {
       "groupId": "gdub",
@@ -346,10 +346,10 @@
       "imageURL": "https://raw.githubusercontent.com/hmtnvac-cpu/M3u-sports-/main/troll-badges/vietdub.png",
       "isEnabled": true,
       "type": "filter",
-      "tagStyle": "bordered",
-      "tagColor": "#00000000",
-      "textColor": "#FFAA44",
-      "borderColor": "#00000000"
+      "tagStyle": "filled",
+      "tagColor": "#2B180899",
+      "textColor": "#FFF0DA",
+      "borderColor": "#FFAA3B"
     }
   ]
 }
