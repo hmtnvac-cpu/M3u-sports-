@@ -1,8 +1,58 @@
 const { addonBuilder, getRouter } = require("stremio-addon-sdk");
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
-const { channels } = require("./channels");
-const matches = require("./live.json");
+// ==================================================
+// SAFE LOADERS
+// ==================================================
+
+function loadChannels() {
+  const mod = require("./channels");
+
+  if (Array.isArray(mod)) return mod;
+  if (mod && Array.isArray(mod.channels)) return mod.channels;
+
+  throw new Error(
+    "channels.js phải export array hoặc { channels }"
+  );
+}
+
+function loadMatches() {
+  const liveJs = path.join(__dirname, "live.js");
+  const liveJson = path.join(__dirname, "live.json");
+
+  if (fs.existsSync(liveJs)) {
+    const mod = require(liveJs);
+
+    if (Array.isArray(mod)) return mod;
+    if (mod && Array.isArray(mod.matches)) return mod.matches;
+
+    throw new Error(
+      "live.js phải export array hoặc { matches }"
+    );
+  }
+
+  if (fs.existsSync(liveJson)) {
+    const mod = require(liveJson);
+
+    if (Array.isArray(mod)) return mod;
+    if (mod && Array.isArray(mod.matches)) return mod.matches;
+
+    throw new Error(
+      "live.json phải là array hoặc có { matches }"
+    );
+  }
+
+  console.warn(
+    "Không tìm thấy live.js/live.json. LIVE sẽ rỗng."
+  );
+
+  return [];
+}
+
+const channels = loadChannels();
+const matches = loadMatches();
 
 const app = express();
 
@@ -15,7 +65,7 @@ const PUBLIC_BASE =
   "https://m3u-sports-tv.onrender.com";
 
 const VERSION =
-  "1.0.6";
+  "1.0.7";
 
 // ==================================================
 // HELPERS
@@ -31,7 +81,7 @@ function normalizedPng(url) {
     "&bg=11151c" +
     "&output=png" +
     "&q=92" +
-    "&v=106"
+    "&v=107"
   );
 }
 
@@ -43,10 +93,6 @@ function escapeXml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&apos;");
 }
-
-// ==================================================
-// MAC HELPERS
-// ==================================================
 
 function isMacStream(url) {
   const value =
@@ -74,16 +120,15 @@ function getMacFromUrl(url) {
       );
 
     return match
-      ? decodeURIComponent(match[1])
+      ? decodeURIComponent(
+          match[1]
+        )
       : "UNKNOWN";
   }
 }
 
 // ==================================================
-// STREAM HEALTH CHECK
-//
-// Chỉ kiểm tra link MAC.
-// VTV / HTTPS thông thường giữ nguyên.
+// HEALTH CHECK
 // ==================================================
 
 const streamHealthCache =
@@ -95,13 +140,14 @@ const HEALTH_CACHE_MS =
 const HEALTH_TIMEOUT_MS =
   7000;
 
-function isHtmlError(
+function looksLikeHtml(
   contentType,
   sample
 ) {
   const type =
-    String(contentType || "")
-      .toLowerCase();
+    String(
+      contentType || ""
+    ).toLowerCase();
 
   const text =
     sample
@@ -109,33 +155,39 @@ function isHtmlError(
       .trim()
       .toLowerCase();
 
-  if (
-    type.includes("text/html")
-  ) {
-    return true;
-  }
-
-  if (
-    text.startsWith("<!doctype html") ||
-    text.startsWith("<html") ||
-    text.includes("<body") ||
-    text.includes("<head")
-  ) {
-    return true;
-  }
-
-  return false;
+  return (
+    type.includes(
+      "text/html"
+    ) ||
+    text.startsWith(
+      "<!doctype html"
+    ) ||
+    text.startsWith(
+      "<html"
+    ) ||
+    text.includes(
+      "<body"
+    ) ||
+    text.includes(
+      "<head"
+    )
+  );
 }
 
-async function checkMacStream(url) {
+async function checkMacStream(
+  url
+) {
 
-  // Không phải MAC → không kiểm tra.
-  if (!isMacStream(url)) {
+  if (
+    !isMacStream(url)
+  ) {
     return true;
   }
 
   const cached =
-    streamHealthCache.get(url);
+    streamHealthCache.get(
+      url
+    );
 
   if (
     cached &&
@@ -149,7 +201,7 @@ async function checkMacStream(url) {
   const controller =
     new AbortController();
 
-  const timeout =
+  const timer =
     setTimeout(
       () =>
         controller.abort(),
@@ -192,7 +244,9 @@ async function checkMacStream(url) {
       response.status !== 206
     ) {
 
-      clearTimeout(timeout);
+      clearTimeout(
+        timer
+      );
 
       try {
         await response.body?.cancel();
@@ -201,15 +255,22 @@ async function checkMacStream(url) {
       streamHealthCache.set(
         url,
         {
-          ok: false,
-          checkedAt: Date.now(),
-          status: response.status
+          ok:
+            false,
+
+          checkedAt:
+            Date.now(),
+
+          status:
+            response.status,
+
+          reason:
+            `HTTP_${response.status}`
         }
       );
 
       console.log(
-        `[MAC FAIL] ${getMacFromUrl(url)} ` +
-        `HTTP ${response.status}`
+        `[MAC FAIL] ${getMacFromUrl(url)} HTTP ${response.status}`
       );
 
       return false;
@@ -223,7 +284,9 @@ async function checkMacStream(url) {
     let sample =
       Buffer.alloc(0);
 
-    if (response.body) {
+    if (
+      response.body
+    ) {
 
       const reader =
         response.body.getReader();
@@ -255,33 +318,13 @@ async function checkMacStream(url) {
       }
     }
 
-    clearTimeout(timeout);
+    clearTimeout(
+      timer
+    );
 
-    // HTTP 200 nhưng không có dữ liệu → coi là chết.
     if (
-      sample.length === 0
-    ) {
-
-      streamHealthCache.set(
-        url,
-        {
-          ok: false,
-          checkedAt: Date.now(),
-          status: response.status,
-          reason: "EMPTY_BODY"
-        }
-      );
-
-      console.log(
-        `[MAC FAIL] ${getMacFromUrl(url)} EMPTY BODY`
-      );
-
-      return false;
-    }
-
-    // HTTP trả trang lỗi HTML → không phải video.
-    if (
-      isHtmlError(
+      sample.length === 0 ||
+      looksLikeHtml(
         contentType,
         sample
       )
@@ -290,15 +333,24 @@ async function checkMacStream(url) {
       streamHealthCache.set(
         url,
         {
-          ok: false,
-          checkedAt: Date.now(),
-          status: response.status,
-          reason: "HTML_RESPONSE"
+          ok:
+            false,
+
+          checkedAt:
+            Date.now(),
+
+          status:
+            response.status,
+
+          reason:
+            sample.length === 0
+              ? "EMPTY_BODY"
+              : "HTML_RESPONSE"
         }
       );
 
       console.log(
-        `[MAC FAIL] ${getMacFromUrl(url)} HTML RESPONSE`
+        `[MAC FAIL] ${getMacFromUrl(url)} EMPTY/HTML`
       );
 
       return false;
@@ -307,31 +359,43 @@ async function checkMacStream(url) {
     streamHealthCache.set(
       url,
       {
-        ok: true,
-        checkedAt: Date.now(),
-        status: response.status,
-        bytes: sample.length,
+        ok:
+          true,
+
+        checkedAt:
+          Date.now(),
+
+        status:
+          response.status,
+
+        bytes:
+          sample.length,
+
         contentType
       }
     );
 
     console.log(
-      `[MAC OK] ${getMacFromUrl(url)} ` +
-      `${response.status} ` +
-      `${sample.length} bytes`
+      `[MAC OK] ${getMacFromUrl(url)} ${response.status} ${sample.length} bytes`
     );
 
     return true;
 
   } catch (error) {
 
-    clearTimeout(timeout);
+    clearTimeout(
+      timer
+    );
 
     streamHealthCache.set(
       url,
       {
-        ok: false,
-        checkedAt: Date.now(),
+        ok:
+          false,
+
+        checkedAt:
+          Date.now(),
+
         error:
           error.name ===
           "AbortError"
@@ -341,9 +405,9 @@ async function checkMacStream(url) {
     );
 
     console.log(
-      `[MAC FAIL] ${getMacFromUrl(url)} ` +
-      `${
-        error.name === "AbortError"
+      `[MAC FAIL] ${getMacFromUrl(url)} ${
+        error.name ===
+        "AbortError"
           ? "TIMEOUT"
           : error.message
       }`
@@ -358,7 +422,9 @@ async function filterWorkingStreams(
 ) {
 
   if (
-    !Array.isArray(streams) ||
+    !Array.isArray(
+      streams
+    ) ||
     streams.length === 0
   ) {
     return [];
@@ -369,8 +435,6 @@ async function filterWorkingStreams(
       streams.map(
         async stream => {
 
-          // Không phải stream MAC:
-          // giữ nguyên, không health check.
           if (
             !isMacStream(
               stream.url
@@ -400,9 +464,11 @@ async function filterWorkingStreams(
 // VTV TROLL LOGO
 // ==================================================
 
-function vtvLogoUrl(number) {
+function vtvLogoUrl(
+  number
+) {
   return (
-    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=106`
+    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=107`
   );
 }
 
@@ -462,48 +528,21 @@ app.get(
 >
 
 <path
- d="
- M25 30
- L135 30
- L190 200
- L245 30
- L345 30
- L245 305
- L155 305
- Z
- "
+ d="M25 30 L135 30 L190 200 L245 30 L345 30 L245 305 L155 305 Z"
  fill="#e71928"
  stroke="#111"
  stroke-width="7"
 />
 
 <path
- d="
- M210 30
- L330 30
- L375 195
- L420 30
- L515 30
- L420 305
- L330 305
- Z
- "
+ d="M210 30 L330 30 L375 195 L420 30 L515 30 L420 305 L330 305 Z"
  fill="#11984a"
  stroke="#111"
  stroke-width="7"
 />
 
 <path
- d="
- M375 30
- L475 30
- L505 160
- L545 30
- L590 30
- L525 305
- L445 305
- Z
- "
+ d="M375 30 L475 30 L505 160 L545 30 L590 30 L525 305 L445 305 Z"
  fill="#1253b7"
  stroke="#111"
  stroke-width="7"
@@ -544,11 +583,7 @@ app.get(
 />
 
 <path
- d="
- M150 180
- Q195 235 240 178
- Q200 255 150 180
- "
+ d="M150 180 Q195 235 240 178 Q200 255 150 180"
  fill="white"
  stroke="#111"
  stroke-width="6"
@@ -589,11 +624,7 @@ app.get(
 />
 
 <path
- d="
- M320 180
- Q365 235 410 178
- Q370 255 320 180
- "
+ d="M320 180 Q365 235 410 178 Q370 255 320 180"
  fill="white"
  stroke="#111"
  stroke-width="6"
@@ -654,7 +685,7 @@ ${number}
 
     res.set(
       "Content-Type",
-      "image/svg+xml"
+      "image/svg+xml; charset=utf-8"
     );
 
     res.set(
@@ -675,15 +706,15 @@ ${number}
 const channelMap =
   Object.fromEntries(
     channels.map(
-      channel => [
-        channel.id,
-        channel
+      c => [
+        c.id,
+        c
       ]
     )
   );
 
 // ==================================================
-// IMAGE CACHE
+// LIVE POSTER
 // ==================================================
 
 const imageCache =
@@ -694,7 +725,9 @@ async function toDataUri(
 ) {
 
   if (
-    imageCache.has(url)
+    imageCache.has(
+      url
+    )
   ) {
     return imageCache.get(
       url
@@ -710,7 +743,7 @@ async function toDataUri(
 
         headers: {
           "User-Agent":
-            "Mozilla/5.0 LiveTV/1.0.6"
+            "Mozilla/5.0 LiveTV/1.0.7"
         }
       }
     );
@@ -745,13 +778,8 @@ async function toDataUri(
   return data;
 }
 
-// ==================================================
-// LIVE POSTER
-// ==================================================
-
 app.get(
   "/poster/live/:id.svg",
-
   async (
     req,
     res
@@ -881,7 +909,7 @@ ${escapeXml(match.date)}
 
       res.set(
         "Content-Type",
-        "image/svg+xml"
+        "image/svg+xml; charset=utf-8"
       );
 
       res.set(
@@ -938,12 +966,16 @@ channels.sort(
       b.group
     ) {
       return (
-        groupOrder[
-          a.group
-        ] -
-        groupOrder[
-          b.group
-        ]
+        (
+          groupOrder[
+            a.group
+          ] || 99
+        ) -
+        (
+          groupOrder[
+            b.group
+          ] || 99
+        )
       );
     }
 
@@ -966,8 +998,12 @@ matches.sort(
     a,
     b
   ) =>
-    a.time.localeCompare(
-      b.time
+    String(
+      a.time
+    ).localeCompare(
+      String(
+        b.time
+      )
     )
 );
 
@@ -1137,7 +1173,9 @@ function channelPoster(
 
     const number =
       Number(
-        channel.id.replace(
+        String(
+          channel.id
+        ).replace(
           "vtv",
           ""
         )
@@ -1157,7 +1195,7 @@ function livePoster(
   match
 ) {
   return normalizedPng(
-    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=106`
+    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=107`
   );
 }
 
@@ -1190,10 +1228,6 @@ function descriptionFor(
   );
 }
 
-// ==================================================
-// BUILD LIVE STREAMS
-// ==================================================
-
 function liveStreams(
   match,
   quality
@@ -1202,8 +1236,14 @@ function liveStreams(
   const ids =
     quality ===
     "4k"
-      ? match.channels4k
-      : match.channels1080;
+      ? (
+          match.channels4k ||
+          []
+        )
+      : (
+          match.channels1080 ||
+          []
+        );
 
   const streams =
     [];
@@ -1212,10 +1252,15 @@ function liveStreams(
     id => {
 
       const channel =
-        channelMap[id];
+        channelMap[
+          id
+        ];
 
       if (
-        !channel
+        !channel ||
+        !Array.isArray(
+          channel.streams
+        )
       ) {
         return;
       }
@@ -1236,7 +1281,9 @@ function liveStreams(
               channel.name,
 
             title:
-              isMacStream(url)
+              isMacStream(
+                url
+              )
                 ? `${channel.name} • MAC ${mac} • ${index + 1}`
                 : `${channel.name} • ${index + 1}`,
 
@@ -1260,14 +1307,12 @@ builder.defineCatalogHandler(
     const search =
       args.extra &&
       args.extra.search
-        ? args.extra.search
+        ? String(
+            args.extra.search
+          )
             .toLowerCase()
             .trim()
         : "";
-
-    // ==================================================
-    // LIVE 1080
-    // ==================================================
 
     if (
       args.id ===
@@ -1330,10 +1375,6 @@ builder.defineCatalogHandler(
       };
     }
 
-    // ==================================================
-    // LIVE 4K
-    // ==================================================
-
     if (
       args.id ===
       "live4k"
@@ -1395,10 +1436,6 @@ builder.defineCatalogHandler(
       };
     }
 
-    // ==================================================
-    // CHANNELS
-    // ==================================================
-
     let list =
       channels.filter(
         c =>
@@ -1412,7 +1449,9 @@ builder.defineCatalogHandler(
       list =
         list.filter(
           c =>
-            c.name
+            String(
+              c.name
+            )
               .toLowerCase()
               .includes(
                 search
@@ -1571,22 +1610,10 @@ builder.defineMetaHandler(
 
 // ==================================================
 // STREAM
-//
-// MAC:
-// - kiểm tra song song
-// - link chết tự loại
-// - link sống mới trả về Stremio
-//
-// NON-MAC:
-// - giữ nguyên
 // ==================================================
 
 builder.defineStreamHandler(
   async args => {
-
-    // ==================================================
-    // LIVE
-    // ==================================================
 
     if (
       args.id.startsWith(
@@ -1640,9 +1667,8 @@ builder.defineStreamHandler(
         );
 
       console.log(
-        `[LIVE] ` +
-        `${match.home} vs ${match.away} ` +
-        `${workingStreams.length}/${allStreams.length} sources working`
+        `[LIVE] ${match.home} vs ${match.away}: ` +
+        `${workingStreams.length}/${allStreams.length} working`
       );
 
       return {
@@ -1650,10 +1676,6 @@ builder.defineStreamHandler(
           workingStreams
       };
     }
-
-    // ==================================================
-    // NORMAL CHANNEL
-    // ==================================================
 
     const channel =
       channelMap[
@@ -1670,7 +1692,10 @@ builder.defineStreamHandler(
     }
 
     const allStreams =
-      channel.streams.map(
+      (
+        channel.streams ||
+        []
+      ).map(
         (
           url,
           index
@@ -1704,7 +1729,7 @@ builder.defineStreamHandler(
 
     console.log(
       `[CHANNEL] ${channel.name}: ` +
-      `${workingStreams.length}/${allStreams.length} sources working`
+      `${workingStreams.length}/${allStreams.length} working`
     );
 
     return {
@@ -1715,13 +1740,7 @@ builder.defineStreamHandler(
 );
 
 // ==================================================
-// HEALTH STATUS PAGE
-//
-// Mở:
-// /health
-//
-// Hiển thị trạng thái đã cache.
-// Nó không tự quét toàn bộ kênh.
+// HEALTH PAGE
 // ==================================================
 
 app.get(
@@ -1751,6 +1770,15 @@ app.get(
         ok:
           info.ok,
 
+        status:
+          info.status ||
+          "",
+
+        error:
+          info.error ||
+          info.reason ||
+          "",
+
         checkedAt:
           new Date(
             info.checkedAt
@@ -1760,16 +1788,7 @@ app.get(
               timeZone:
                 "Asia/Ho_Chi_Minh"
             }
-          ),
-
-        status:
-          info.status ||
-          "",
-
-        error:
-          info.error ||
-          info.reason ||
-          ""
+          )
       });
     }
 
@@ -1860,13 +1879,13 @@ MAC Stream Health
 </h1>
 
 <p>
-Cache:
-5 phút
+Cache: 5 phút
 </p>
 
 <table>
 
 <thead>
+
 <tr>
 <th>MAC</th>
 <th>Trạng thái</th>
@@ -1874,10 +1893,13 @@ Cache:
 <th>Lỗi</th>
 <th>Kiểm tra lúc</th>
 </tr>
+
 </thead>
 
 <tbody>
+
 ${htmlRows}
+
 </tbody>
 
 </table>
@@ -1954,7 +1976,10 @@ app.get(
           channel
         ) =>
           total +
-          channel.streams.length,
+          (
+            channel.streams ||
+            []
+          ).length,
         0
       );
 
@@ -1965,11 +1990,24 @@ app.get(
           channel
         ) =>
           total +
-          channel.streams.filter(
+          (
+            channel.streams ||
+            []
+          ).filter(
             isMacStream
           ).length,
         0
       );
+
+    const liveSource =
+      fs.existsSync(
+        path.join(
+          __dirname,
+          "live.js"
+        )
+      )
+        ? "live.js"
+        : "live.json";
 
     res.send(`
 <!doctype html>
@@ -2051,12 +2089,12 @@ Luồng MAC:
 </p>
 
 <p>
-LIVE data:
-<b>live.json</b>
+LIVE source:
+<b>${liveSource}</b>
 </p>
 
 <p>
-MAC Health:
+Health:
 <br>
 ${healthUrl}
 </p>
@@ -2077,7 +2115,7 @@ ${manifestUrl}
 );
 
 // ==================================================
-// STREMIO ROUTER
+// STREMIO
 // ==================================================
 
 app.use(
@@ -2108,21 +2146,17 @@ app.listen(
       `Live matches: ${matches.length}`
     );
 
-    const macCount =
-      channels.reduce(
-        (
-          total,
-          channel
-        ) =>
-          total +
-          channel.streams.filter(
-            isMacStream
-          ).length,
-        0
-      );
-
     console.log(
-      `MAC streams: ${macCount}`
+      `LIVE source: ${
+        fs.existsSync(
+          path.join(
+            __dirname,
+            "live.js"
+          )
+        )
+          ? "live.js"
+          : "live.json"
+      }`
     );
 
     console.log(
