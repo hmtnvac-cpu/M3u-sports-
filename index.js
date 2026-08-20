@@ -1,71 +1,17 @@
 const { addonBuilder, getRouter } = require("stremio-addon-sdk");
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
 
-// ==================================================
-// SAFE LOADERS
-// ==================================================
-
-function loadChannels() {
-  const mod = require("./channels");
-
-  if (Array.isArray(mod)) return mod;
-  if (mod && Array.isArray(mod.channels)) return mod.channels;
-
-  throw new Error(
-    "channels.js phải export array hoặc { channels }"
-  );
-}
-
-function loadMatches() {
-  const liveJs = path.join(__dirname, "live.js");
-  const liveJson = path.join(__dirname, "live.json");
-
-  if (fs.existsSync(liveJs)) {
-    const mod = require(liveJs);
-
-    if (Array.isArray(mod)) return mod;
-    if (mod && Array.isArray(mod.matches)) return mod.matches;
-
-    throw new Error(
-      "live.js phải export array hoặc { matches }"
-    );
-  }
-
-  if (fs.existsSync(liveJson)) {
-    const mod = require(liveJson);
-
-    if (Array.isArray(mod)) return mod;
-    if (mod && Array.isArray(mod.matches)) return mod.matches;
-
-    throw new Error(
-      "live.json phải là array hoặc có { matches }"
-    );
-  }
-
-  console.warn(
-    "Không tìm thấy live.js/live.json. LIVE sẽ rỗng."
-  );
-
-  return [];
-}
-
-const channels = loadChannels();
-const matches = loadMatches();
+const { channels } = require("./channels");
+const matches = require("./live.json");
 
 const app = express();
-
-const PORT =
-  process.env.PORT ||
-  7000;
+const PORT = process.env.PORT || 7000;
 
 const PUBLIC_BASE =
   process.env.PUBLIC_BASE_URL ||
   "https://m3u-sports-tv.onrender.com";
 
-const VERSION =
-  "1.0.7";
+const VERSION = "1.0.8";
 
 // ==================================================
 // HELPERS
@@ -75,13 +21,7 @@ function normalizedPng(url) {
   return (
     "https://images.weserv.nl/?url=" +
     encodeURIComponent(url) +
-    "&w=600" +
-    "&h=600" +
-    "&fit=contain" +
-    "&bg=11151c" +
-    "&output=png" +
-    "&q=92" +
-    "&v=107"
+    "&w=600&h=600&fit=contain&bg=11151c&output=png&q=92&v=108"
   );
 }
 
@@ -95,179 +35,75 @@ function escapeXml(value) {
 }
 
 function isMacStream(url) {
-  const value =
-    String(url || "");
-
-  return (
-    /[?&]mac=/i.test(value) ||
-    /\/play\/live\.php/i.test(value)
-  );
+  const value = String(url || "");
+  return /[?&]mac=/i.test(value) || /\/play\/live\.php/i.test(value);
 }
 
 function getMacFromUrl(url) {
   try {
-    const parsed =
-      new URL(url);
-
-    return (
-      parsed.searchParams.get("mac") ||
-      "UNKNOWN"
-    );
+    const parsed = new URL(url);
+    return parsed.searchParams.get("mac") || "UNKNOWN";
   } catch (_) {
-    const match =
-      String(url).match(
-        /[?&]mac=([^&]+)/i
-      );
-
-    return match
-      ? decodeURIComponent(
-          match[1]
-        )
-      : "UNKNOWN";
+    const m = String(url || "").match(/[?&]mac=([^&]+)/i);
+    return m ? decodeURIComponent(m[1]) : "UNKNOWN";
   }
 }
 
 // ==================================================
-// HEALTH CHECK
+// STREAM HEALTH CHECK
 // ==================================================
 
-const streamHealthCache =
-  new Map();
+const streamHealthCache = new Map();
+const HEALTH_CACHE_MS = 5 * 60 * 1000;
+const HEALTH_TIMEOUT_MS = 6000;
 
-const HEALTH_CACHE_MS =
-  5 * 60 * 1000;
+async function checkStream(url) {
+  if (!isMacStream(url)) return true;
 
-const HEALTH_TIMEOUT_MS =
-  7000;
-
-function looksLikeHtml(
-  contentType,
-  sample
-) {
-  const type =
-    String(
-      contentType || ""
-    ).toLowerCase();
-
-  const text =
-    sample
-      .toString("utf8")
-      .trim()
-      .toLowerCase();
-
-  return (
-    type.includes(
-      "text/html"
-    ) ||
-    text.startsWith(
-      "<!doctype html"
-    ) ||
-    text.startsWith(
-      "<html"
-    ) ||
-    text.includes(
-      "<body"
-    ) ||
-    text.includes(
-      "<head"
-    )
-  );
-}
-
-async function checkMacStream(
-  url
-) {
-
-  if (
-    !isMacStream(url)
-  ) {
-    return true;
-  }
-
-  const cached =
-    streamHealthCache.get(
-      url
-    );
+  const cached = streamHealthCache.get(url);
 
   if (
     cached &&
-    Date.now() -
-      cached.checkedAt <
-      HEALTH_CACHE_MS
+    Date.now() - cached.checkedAt < HEALTH_CACHE_MS
   ) {
     return cached.ok;
   }
 
-  const controller =
-    new AbortController();
+  const controller = new AbortController();
 
-  const timer =
-    setTimeout(
-      () =>
-        controller.abort(),
-      HEALTH_TIMEOUT_MS
-    );
+  const timer = setTimeout(
+    () => controller.abort(),
+    HEALTH_TIMEOUT_MS
+  );
 
   try {
-
-    const response =
-      await fetch(
-        url,
-        {
-          method:
-            "GET",
-
-          redirect:
-            "follow",
-
-          signal:
-            controller.signal,
-
-          headers: {
-            "User-Agent":
-              "VLC/3.0.21 LibVLC/3.0.21",
-
-            "Accept":
-              "*/*",
-
-            "Range":
-              "bytes=0-65535",
-
-            "Connection":
-              "close"
-          }
-        }
-      );
+    const response = await fetch(url, {
+      method: "GET",
+      redirect: "follow",
+      signal: controller.signal,
+      headers: {
+        "User-Agent": "VLC/3.0.21 LibVLC/3.0.21",
+        "Accept": "*/*",
+        "Range": "bytes=0-32767"
+      }
+    });
 
     if (
       response.status !== 200 &&
       response.status !== 206
     ) {
-
-      clearTimeout(
-        timer
-      );
+      clearTimeout(timer);
 
       try {
         await response.body?.cancel();
       } catch (_) {}
 
-      streamHealthCache.set(
-        url,
-        {
-          ok:
-            false,
-
-          checkedAt:
-            Date.now(),
-
-          status:
-            response.status,
-
-          reason:
-            `HTTP_${response.status}`
-        }
-      );
+      streamHealthCache.set(url, {
+        ok: false,
+        checkedAt: Date.now(),
+        status: response.status,
+        reason: `HTTP_${response.status}`
+      });
 
       console.log(
         `[MAC FAIL] ${getMacFromUrl(url)} HTTP ${response.status}`
@@ -276,38 +112,20 @@ async function checkMacStream(
       return false;
     }
 
-    const contentType =
-      response.headers.get(
-        "content-type"
-      ) || "";
+    let bytes = 0;
+    let firstChunk = Buffer.alloc(0);
 
-    let sample =
-      Buffer.alloc(0);
-
-    if (
-      response.body
-    ) {
-
-      const reader =
-        response.body.getReader();
+    if (response.body) {
+      const reader = response.body.getReader();
 
       try {
+        const result = await reader.read();
 
-        const result =
-          await reader.read();
-
-        if (
-          result &&
-          result.value
-        ) {
-          sample =
-            Buffer.from(
-              result.value
-            );
+        if (result && result.value) {
+          firstChunk = Buffer.from(result.value);
+          bytes = firstChunk.length;
         }
-
       } finally {
-
         try {
           await reader.cancel();
         } catch (_) {}
@@ -318,96 +136,63 @@ async function checkMacStream(
       }
     }
 
-    clearTimeout(
-      timer
-    );
+    clearTimeout(timer);
 
-    if (
-      sample.length === 0 ||
-      looksLikeHtml(
-        contentType,
-        sample
-      )
-    ) {
+    const contentType = String(
+      response.headers.get("content-type") || ""
+    ).toLowerCase();
 
-      streamHealthCache.set(
-        url,
-        {
-          ok:
-            false,
+    const textStart = firstChunk
+      .subarray(0, 200)
+      .toString("utf8")
+      .trim()
+      .toLowerCase();
 
-          checkedAt:
-            Date.now(),
+    const html =
+      contentType.includes("text/html") ||
+      textStart.startsWith("<!doctype html") ||
+      textStart.startsWith("<html") ||
+      textStart.includes("<body");
 
-          status:
-            response.status,
+    const ok =
+      bytes > 0 &&
+      !html;
 
-          reason:
-            sample.length === 0
-              ? "EMPTY_BODY"
-              : "HTML_RESPONSE"
-        }
-      );
-
-      console.log(
-        `[MAC FAIL] ${getMacFromUrl(url)} EMPTY/HTML`
-      );
-
-      return false;
-    }
-
-    streamHealthCache.set(
-      url,
-      {
-        ok:
-          true,
-
-        checkedAt:
-          Date.now(),
-
-        status:
-          response.status,
-
-        bytes:
-          sample.length,
-
-        contentType
-      }
-    );
+    streamHealthCache.set(url, {
+      ok,
+      checkedAt: Date.now(),
+      status: response.status,
+      bytes,
+      reason: ok
+        ? ""
+        : html
+          ? "HTML_RESPONSE"
+          : "EMPTY_BODY"
+    });
 
     console.log(
-      `[MAC OK] ${getMacFromUrl(url)} ${response.status} ${sample.length} bytes`
+      `[MAC ${ok ? "OK" : "FAIL"}] ${getMacFromUrl(url)} ` +
+      `${response.status} ${bytes} bytes`
     );
 
-    return true;
+    return ok;
 
   } catch (error) {
+    clearTimeout(timer);
 
-    clearTimeout(
-      timer
-    );
-
-    streamHealthCache.set(
-      url,
-      {
-        ok:
-          false,
-
-        checkedAt:
-          Date.now(),
-
-        error:
-          error.name ===
-          "AbortError"
-            ? "TIMEOUT"
-            : error.message
-      }
-    );
+    streamHealthCache.set(url, {
+      ok: false,
+      checkedAt: Date.now(),
+      error:
+        error.name === "AbortError"
+          ? "TIMEOUT"
+          : error.message
+    });
 
     console.log(
-      `[MAC FAIL] ${getMacFromUrl(url)} ${
-        error.name ===
-        "AbortError"
+      `[MAC FAIL] ${getMacFromUrl(url)} ` +
+      `${
+        error.name === "AbortError"
           ? "TIMEOUT"
           : error.message
       }`
@@ -417,287 +202,231 @@ async function checkMacStream(
   }
 }
 
-async function filterWorkingStreams(
-  streams
-) {
+async function filterWorkingStreams(streams) {
+  const results = await Promise.all(
+    streams.map(async stream => {
+      if (!isMacStream(stream.url)) {
+        return stream;
+      }
 
-  if (
-    !Array.isArray(
-      streams
-    ) ||
-    streams.length === 0
-  ) {
-    return [];
-  }
-
-  const results =
-    await Promise.all(
-      streams.map(
-        async stream => {
-
-          if (
-            !isMacStream(
-              stream.url
-            )
-          ) {
-            return stream;
-          }
-
-          const ok =
-            await checkMacStream(
-              stream.url
-            );
-
-          return ok
-            ? stream
-            : null;
-        }
-      )
-    );
-
-  return results.filter(
-    Boolean
+      return (await checkStream(stream.url))
+        ? stream
+        : null;
+    })
   );
+
+  return results.filter(Boolean);
 }
 
 // ==================================================
 // VTV TROLL LOGO
 // ==================================================
 
-function vtvLogoUrl(
-  number
-) {
-  return (
-    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=107`
-  );
+function vtvLogoUrl(number) {
+  return `${PUBLIC_BASE}/logo/vtv${number}.svg?v=108`;
 }
 
-app.get(
-  "/logo/vtv:num.svg",
-  (
-    req,
-    res
-  ) => {
+app.get("/logo/vtv:num.svg", (req, res) => {
+  const number = Number(req.params.num);
 
-    const number =
-      Number(
-        req.params.num
-      );
+  if (
+    !Number.isInteger(number) ||
+    number < 1 ||
+    number > 10
+  ) {
+    return res.status(404).send("Not found");
+  }
 
-    if (
-      !Number.isInteger(
-        number
-      ) ||
-      number < 1 ||
-      number > 10
-    ) {
-      return res
-        .status(404)
-        .send(
-          "Not found"
-        );
-    }
+  const numberSize =
+    number === 10
+      ? 105
+      : 145;
 
-    const numberSize =
-      number === 10
-        ? 105
-        : 145;
+  const numberX =
+    number === 10
+      ? 465
+      : 490;
 
-    const numberX =
-      number === 10
-        ? 465
-        : 490;
+  const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
 
-    const svg = `
-<svg
- xmlns="http://www.w3.org/2000/svg"
- width="600"
- height="600"
- viewBox="0 0 600 600"
->
+  <rect
+    width="600"
+    height="600"
+    rx="38"
+    fill="#ffffff"
+  />
 
-<rect
- width="600"
- height="600"
- rx="38"
- fill="#ffffff"
-/>
+  <g transform="translate(25 155) rotate(-3 275 145)">
 
-<g
- transform="translate(25 155) rotate(-3 275 145)"
->
+    <path
+      d="M25 30 L135 30 L190 200 L245 30 L345 30 L245 305 L155 305 Z"
+      fill="#e71928"
+      stroke="#111"
+      stroke-width="7"
+    />
 
-<path
- d="M25 30 L135 30 L190 200 L245 30 L345 30 L245 305 L155 305 Z"
- fill="#e71928"
- stroke="#111"
- stroke-width="7"
-/>
+    <path
+      d="M210 30 L330 30 L375 195 L420 30 L515 30 L420 305 L330 305 Z"
+      fill="#11984a"
+      stroke="#111"
+      stroke-width="7"
+    />
 
-<path
- d="M210 30 L330 30 L375 195 L420 30 L515 30 L420 305 L330 305 Z"
- fill="#11984a"
- stroke="#111"
- stroke-width="7"
-/>
+    <path
+      d="M375 30 L475 30 L505 160 L545 30 L590 30 L525 305 L445 305 Z"
+      fill="#1253b7"
+      stroke="#111"
+      stroke-width="7"
+    />
 
-<path
- d="M375 30 L475 30 L505 160 L545 30 L590 30 L525 305 L445 305 Z"
- fill="#1253b7"
- stroke="#111"
- stroke-width="7"
-/>
+    <ellipse
+      cx="173"
+      cy="135"
+      rx="17"
+      ry="11"
+      fill="white"
+      stroke="#111"
+      stroke-width="5"
+    />
 
-<ellipse
- cx="173"
- cy="135"
- rx="17"
- ry="11"
- fill="white"
- stroke="#111"
- stroke-width="5"
-/>
+    <ellipse
+      cx="218"
+      cy="132"
+      rx="17"
+      ry="11"
+      fill="white"
+      stroke="#111"
+      stroke-width="5"
+    />
 
-<ellipse
- cx="218"
- cy="132"
- rx="17"
- ry="11"
- fill="white"
- stroke="#111"
- stroke-width="5"
-/>
+    <circle
+      cx="178"
+      cy="136"
+      r="4"
+      fill="#111"
+    />
 
-<circle
- cx="178"
- cy="136"
- r="4"
- fill="#111"
-/>
+    <circle
+      cx="213"
+      cy="133"
+      r="4"
+      fill="#111"
+    />
 
-<circle
- cx="213"
- cy="133"
- r="4"
- fill="#111"
-/>
+    <path
+      d="M150 180 Q195 235 240 178 Q200 255 150 180"
+      fill="white"
+      stroke="#111"
+      stroke-width="6"
+    />
 
-<path
- d="M150 180 Q195 235 240 178 Q200 255 150 180"
- fill="white"
- stroke="#111"
- stroke-width="6"
-/>
+    <ellipse
+      cx="344"
+      cy="135"
+      rx="17"
+      ry="11"
+      fill="white"
+      stroke="#111"
+      stroke-width="5"
+    />
 
-<ellipse
- cx="344"
- cy="135"
- rx="17"
- ry="11"
- fill="white"
- stroke="#111"
- stroke-width="5"
-/>
+    <ellipse
+      cx="389"
+      cy="132"
+      rx="17"
+      ry="11"
+      fill="white"
+      stroke="#111"
+      stroke-width="5"
+    />
 
-<ellipse
- cx="389"
- cy="132"
- rx="17"
- ry="11"
- fill="white"
- stroke="#111"
- stroke-width="5"
-/>
+    <circle
+      cx="349"
+      cy="136"
+      r="4"
+      fill="#111"
+    />
 
-<circle
- cx="349"
- cy="136"
- r="4"
- fill="#111"
-/>
+    <circle
+      cx="384"
+      cy="133"
+      r="4"
+      fill="#111"
+    />
 
-<circle
- cx="384"
- cy="133"
- r="4"
- fill="#111"
-/>
+    <path
+      d="M320 180 Q365 235 410 178 Q370 255 320 180"
+      fill="white"
+      stroke="#111"
+      stroke-width="6"
+    />
 
-<path
- d="M320 180 Q365 235 410 178 Q370 255 320 180"
- fill="white"
- stroke="#111"
- stroke-width="6"
-/>
+  </g>
 
-</g>
+  <text
+    x="${numberX}"
+    y="470"
+    text-anchor="middle"
+    fill="#e71928"
+    stroke="#111111"
+    stroke-width="5"
+    paint-order="stroke"
+    font-family="Arial Black,Arial,sans-serif"
+    font-size="${numberSize}"
+    font-weight="900"
+    transform="rotate(-7 ${numberX} 470)"
+  >
+    ${number}
+  </text>
 
-<text
- x="${numberX}"
- y="470"
- text-anchor="middle"
- fill="#e71928"
- stroke="#111111"
- stroke-width="5"
- paint-order="stroke"
- font-family="Arial Black,Arial,sans-serif"
- font-size="${numberSize}"
- font-weight="900"
- transform="rotate(-7 ${numberX} 470)"
->
-${number}
-</text>
+  <circle
+    cx="${numberX - 22}"
+    cy="420"
+    r="10"
+    fill="white"
+    stroke="#111"
+    stroke-width="4"
+  />
 
-<circle
- cx="${numberX - 22}"
- cy="420"
- r="10"
- fill="white"
- stroke="#111"
- stroke-width="4"
-/>
+  <circle
+    cx="${numberX + 22}"
+    cy="416"
+    r="10"
+    fill="white"
+    stroke="#111"
+    stroke-width="4"
+  />
 
-<circle
- cx="${numberX + 22}"
- cy="416"
- r="10"
- fill="white"
- stroke="#111"
- stroke-width="4"
-/>
+  <circle
+    cx="${numberX - 19}"
+    cy="421"
+    r="3"
+    fill="#111"
+  />
 
-<circle
- cx="${numberX - 19}"
- cy="421"
- r="3"
- fill="#111"
-/>
-
-<circle
- cx="${numberX + 19}"
- cy="417"
- r="3"
- fill="#111"
-/>
+  <circle
+    cx="${numberX + 19}"
+    cy="417"
+    r="3"
+    fill="#111"
+  />
 
 </svg>
 `;
 
-    res.set(
-      "Content-Type",
-      "image/svg+xml; charset=utf-8"
-    );
+  res.set(
+    "Content-Type",
+    "image/svg+xml; charset=utf-8"
+  );
 
-    res.set(
-      "Cache-Control",
-      "public,max-age=86400"
-    );
+  res.set(
+    "Cache-Control",
+    "public,max-age=86400"
+  );
 
-    res.send(
-      svg
-    );
-  }
-);
+  res.send(svg);
+});
 
 // ==================================================
 // CHANNEL MAP
@@ -706,9 +435,9 @@ ${number}
 const channelMap =
   Object.fromEntries(
     channels.map(
-      c => [
-        c.id,
-        c
+      channel => [
+        channel.id,
+        channel
       ]
     )
   );
@@ -720,37 +449,25 @@ const channelMap =
 const imageCache =
   new Map();
 
-async function toDataUri(
-  url
-) {
-
-  if (
-    imageCache.has(
-      url
-    )
-  ) {
-    return imageCache.get(
-      url
-    );
+async function toDataUri(url) {
+  if (imageCache.has(url)) {
+    return imageCache.get(url);
   }
 
   const response =
     await fetch(
       url,
       {
-        redirect:
-          "follow",
+        redirect: "follow",
 
         headers: {
           "User-Agent":
-            "Mozilla/5.0 LiveTV/1.0.7"
+            "Mozilla/5.0 LiveTV/1.0.8"
         }
       }
     );
 
-  if (
-    !response.ok
-  ) {
+  if (!response.ok) {
     throw new Error(
       `HTTP ${response.status}`
     );
@@ -792,9 +509,7 @@ app.get(
           req.params.id
       );
 
-    if (
-      !match
-    ) {
+    if (!match) {
       return res
         .status(404)
         .send(
@@ -819,90 +534,85 @@ app.get(
         ]);
 
       const svg = `
-<svg
- xmlns="http://www.w3.org/2000/svg"
- width="600"
- height="600"
- viewBox="0 0 600 600"
->
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
 
-<rect
- width="600"
- height="600"
- rx="38"
- fill="#11151c"
-/>
+  <rect
+    width="600"
+    height="600"
+    rx="38"
+    fill="#11151c"
+  />
 
-<rect
- x="25"
- y="25"
- width="550"
- height="550"
- rx="32"
- fill="#171c24"
-/>
+  <rect
+    x="25"
+    y="25"
+    width="550"
+    height="550"
+    rx="32"
+    fill="#171c24"
+  />
 
-<image
- href="${home}"
- x="70"
- y="155"
- width="185"
- height="185"
- preserveAspectRatio="xMidYMid meet"
-/>
+  <image
+    href="${home}"
+    x="70"
+    y="155"
+    width="185"
+    height="185"
+    preserveAspectRatio="xMidYMid meet"
+  />
 
-<image
- href="${away}"
- x="345"
- y="155"
- width="185"
- height="185"
- preserveAspectRatio="xMidYMid meet"
-/>
+  <image
+    href="${away}"
+    x="345"
+    y="155"
+    width="185"
+    height="185"
+    preserveAspectRatio="xMidYMid meet"
+  />
 
-<circle
- cx="300"
- cy="248"
- r="44"
- fill="#0c1017"
- stroke="#636c79"
- stroke-width="3"
-/>
+  <circle
+    cx="300"
+    cy="248"
+    r="44"
+    fill="#0c1017"
+    stroke="#636c79"
+    stroke-width="3"
+  />
 
-<text
- x="300"
- y="260"
- text-anchor="middle"
- fill="#ffffff"
- font-family="Arial,Helvetica,sans-serif"
- font-size="32"
- font-weight="800"
->
-VS
-</text>
+  <text
+    x="300"
+    y="260"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="Arial,Helvetica,sans-serif"
+    font-size="32"
+    font-weight="800"
+  >
+    VS
+  </text>
 
-<text
- x="300"
- y="430"
- text-anchor="middle"
- fill="#ffffff"
- font-family="Arial,Helvetica,sans-serif"
- font-size="46"
- font-weight="800"
->
-${escapeXml(match.time)}
-</text>
+  <text
+    x="300"
+    y="430"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="Arial,Helvetica,sans-serif"
+    font-size="46"
+    font-weight="800"
+  >
+    ${escapeXml(match.time)}
+  </text>
 
-<text
- x="300"
- y="490"
- text-anchor="middle"
- fill="#aab2bf"
- font-family="Arial,Helvetica,sans-serif"
- font-size="24"
->
-${escapeXml(match.date)}
-</text>
+  <text
+    x="300"
+    y="490"
+    text-anchor="middle"
+    fill="#aab2bf"
+    font-family="Arial,Helvetica,sans-serif"
+    font-size="24"
+  >
+    ${escapeXml(match.date)}
+  </text>
 
 </svg>
 `;
@@ -917,13 +627,9 @@ ${escapeXml(match.date)}
         "public,max-age=21600"
       );
 
-      res.send(
-        svg
-      );
+      res.send(svg);
 
-    } catch (
-      error
-    ) {
+    } catch (error) {
 
       console.error(
         "LIVE POSTER ERROR:",
@@ -945,14 +651,9 @@ ${escapeXml(match.date)}
 // ==================================================
 
 const groupOrder = {
-  vtv:
-    1,
-
-  sports1080:
-    2,
-
-  sports4k:
-    3
+  vtv: 1,
+  sports1080: 2,
+  sports4k: 3
 };
 
 channels.sort(
@@ -967,14 +668,12 @@ channels.sort(
     ) {
       return (
         (
-          groupOrder[
-            a.group
-          ] || 99
+          groupOrder[a.group] ||
+          99
         ) -
         (
-          groupOrder[
-            b.group
-          ] || 99
+          groupOrder[b.group] ||
+          99
         )
       );
     }
@@ -1195,7 +894,7 @@ function livePoster(
   match
 ) {
   return normalizedPng(
-    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=107`
+    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=108`
   );
 }
 
@@ -1245,8 +944,7 @@ function liveStreams(
           []
         );
 
-  const streams =
-    [];
+  const streams = [];
 
   ids.forEach(
     id => {
@@ -1329,9 +1027,7 @@ builder.defineCatalogHandler(
               0
         );
 
-      if (
-        search
-      ) {
+      if (search) {
         list =
           list.filter(
             m =>
@@ -1390,9 +1086,7 @@ builder.defineCatalogHandler(
               0
         );
 
-      if (
-        search
-      ) {
+      if (search) {
         list =
           list.filter(
             m =>
@@ -1443,9 +1137,7 @@ builder.defineCatalogHandler(
           args.id
       );
 
-    if (
-      search
-    ) {
+    if (search) {
       list =
         list.filter(
           c =>
@@ -1526,9 +1218,7 @@ builder.defineMetaHandler(
             base
         );
 
-      if (
-        !match
-      ) {
+      if (!match) {
         return {
           meta:
             null
@@ -1571,9 +1261,7 @@ builder.defineMetaHandler(
         args.id
       ];
 
-    if (
-      !channel
-    ) {
+    if (!channel) {
       return {
         meta:
           null
@@ -1644,9 +1332,7 @@ builder.defineStreamHandler(
             base
         );
 
-      if (
-        !match
-      ) {
+      if (!match) {
         return {
           streams:
             []
@@ -1682,9 +1368,7 @@ builder.defineStreamHandler(
         args.id
       ];
 
-    if (
-      !channel
-    ) {
+    if (!channel) {
       return {
         streams:
           []
@@ -1750,8 +1434,7 @@ app.get(
     res
   ) => {
 
-    const rows =
-      [];
+    const rows = [];
 
     for (
       const [
@@ -1808,20 +1491,20 @@ app.get(
             .map(
               row => `
 <tr>
-<td>${escapeXml(row.mac)}</td>
-<td>${row.ok ? "✅ OK" : "❌ FAIL"}</td>
-<td>${escapeXml(row.status)}</td>
-<td>${escapeXml(row.error)}</td>
-<td>${escapeXml(row.checkedAt)}</td>
+  <td>${escapeXml(row.mac)}</td>
+  <td>${row.ok ? "✅ OK" : "❌ FAIL"}</td>
+  <td>${escapeXml(row.status)}</td>
+  <td>${escapeXml(row.error)}</td>
+  <td>${escapeXml(row.checkedAt)}</td>
 </tr>
 `
             )
             .join("")
         : `
 <tr>
-<td colspan="5">
-Chưa có dữ liệu. Hãy mở một kênh MAC trước.
-</td>
+  <td colspan="5">
+    Chưa có dữ liệu. Hãy mở một kênh MAC trước.
+  </td>
 </tr>
 `;
 
@@ -1835,8 +1518,8 @@ Chưa có dữ liệu. Hãy mở một kênh MAC trước.
 <meta charset="UTF-8">
 
 <meta
- name="viewport"
- content="width=device-width,initial-scale=1"
+  name="viewport"
+  content="width=device-width,initial-scale=1"
 >
 
 <title>
@@ -1887,11 +1570,11 @@ Cache: 5 phút
 <thead>
 
 <tr>
-<th>MAC</th>
-<th>Trạng thái</th>
-<th>HTTP</th>
-<th>Lỗi</th>
-<th>Kiểm tra lúc</th>
+  <th>MAC</th>
+  <th>Trạng thái</th>
+  <th>HTTP</th>
+  <th>Lỗi</th>
+  <th>Kiểm tra lúc</th>
 </tr>
 
 </thead>
@@ -1993,21 +1676,13 @@ app.get(
           (
             channel.streams ||
             []
-          ).filter(
-            isMacStream
-          ).length,
+          )
+            .filter(
+              isMacStream
+            )
+            .length,
         0
       );
-
-    const liveSource =
-      fs.existsSync(
-        path.join(
-          __dirname,
-          "live.js"
-        )
-      )
-        ? "live.js"
-        : "live.json";
 
     res.send(`
 <!doctype html>
@@ -2019,8 +1694,8 @@ app.get(
 <meta charset="UTF-8">
 
 <meta
- name="viewport"
- content="width=device-width,initial-scale=1"
+  name="viewport"
+  content="width=device-width,initial-scale=1"
 >
 
 <title>
@@ -2030,13 +1705,13 @@ Live TV
 </head>
 
 <body
- style="
- background:#111;
- color:white;
- font-family:Arial;
- padding:30px;
- line-height:1.7;
- "
+style="
+background:#111;
+color:white;
+font-family:Arial;
+padding:30px;
+line-height:1.7;
+"
 >
 
 <h1>
@@ -2089,12 +1764,7 @@ Luồng MAC:
 </p>
 
 <p>
-LIVE source:
-<b>${liveSource}</b>
-</p>
-
-<p>
-Health:
+MAC Health:
 <br>
 ${healthUrl}
 </p>
@@ -2115,7 +1785,7 @@ ${manifestUrl}
 );
 
 // ==================================================
-// STREMIO
+// STREMIO ROUTER
 // ==================================================
 
 app.use(
@@ -2144,19 +1814,6 @@ app.listen(
 
     console.log(
       `Live matches: ${matches.length}`
-    );
-
-    console.log(
-      `LIVE source: ${
-        fs.existsSync(
-          path.join(
-            __dirname,
-            "live.js"
-          )
-        )
-          ? "live.js"
-          : "live.json"
-      }`
     );
 
     console.log(
