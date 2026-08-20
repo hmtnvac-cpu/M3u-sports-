@@ -13,32 +13,37 @@
     "channels4k": []
   },
   {
-    "id": "crystal-palace-nottingham-forest-20260823",
+    "id": "manchester-city-bournemouth-20260823",
     "time": "20:00",
     "date": "23/08/2026",
-    "home": "Crystal Palace",
-    "away": "Nottingham Forest",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
-    "channels1080": [
-      "sky-sports-premier-league-fhd"
-    ],
-    "channels4k": []
-  },
-  {
-    "id": "manchester-united-arsenal-20260823",
-    "time": "22:30",
-    "date": "23/08/2026",
-    "home": "Manchester United",
-    "away": "Arsenal",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+    "home": "Manchester City",
+    "away": "AFC Bournemouth",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
     "channels1080": [
       "sky-sports-main-event-fhd",
-      "sky-sports-premier-league-fhd"
+      "usa-network-1080",
+      "universo-1080"
     ],
     "channels4k": [
-      "sky-sports-uhd"
+      "sky-sports-main-event"
+    ]
+  },
+  {
+    "id": "newcastle-liverpool-20260823",
+    "time": "22:30",
+    "date": "23/08/2026",
+    "home": "Newcastle United",
+    "away": "Liverpool",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+    "channels1080": [
+      "sky-sports-main-event-fhd",
+      "sky-sports-premier-league-fhd",
+      "usa-network-1080"
+    ],
+    "channels4k": [
+      "sky-sports-main-event"
     ]
   }
 ]
