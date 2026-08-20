@@ -1,52 +1,224 @@
-[
+// ==================================================
+// LIVE.JS
+// AUTO SWITCH: 09:00 20/08/2026 VIETNAM
+// ==================================================
+
+const SWITCH_TIME =
+  new Date("2026-08-20T09:00:00+07:00").getTime();
+
+const espnTeam = id =>
+  `https://a.espncdn.com/i/teamlogos/soccer/500/${id}.png`;
+
+
+// ==================================================
+// TRƯỚC 09:00 — LIVE CHỦ NHẬT 23/08
+// ==================================================
+
+const sunday = [
+
   {
-    "id": "brighton-aston-villa-20260823",
-    "time": "20:00",
-    "date": "23/08/2026",
-    "home": "Brighton & Hove Albion",
-    "away": "Aston Villa",
-    "homeLogo": "https://media.api-sports.io/football/teams/51.png",
-    "awayLogo": "https://media.api-sports.io/football/teams/66.png",
-    "channels1080": [
+    id: "brighton-aston-villa-20260823",
+    time: "20:00",
+    date: "23/08/2026",
+
+    home: "Brighton & Hove Albion",
+    away: "Aston Villa",
+
+    homeLogo: espnTeam(331),
+    awayLogo: espnTeam(362),
+
+    channels1080: [
       "sky-sports-premier-league-fhd"
     ],
-    "channels4k": [
-      "sky-sports-uhd"
-    ]
+
+    channels4k: []
   },
+
   {
-    "id": "man-city-bournemouth-20260823",
-    "time": "20:00",
-    "date": "23/08/2026",
-    "home": "Manchester City",
-    "away": "AFC Bournemouth",
-    "homeLogo": "https://media.api-sports.io/football/teams/50.png",
-    "awayLogo": "https://media.api-sports.io/football/teams/35.png",
-    "channels1080": [
+    id: "man-city-bournemouth-20260823",
+    time: "20:00",
+    date: "23/08/2026",
+
+    home: "Manchester City",
+    away: "AFC Bournemouth",
+
+    homeLogo: espnTeam(382),
+    awayLogo: espnTeam(349),
+
+    channels1080: [
       "sky-sports-main-event-fhd",
       "usa-network-1080"
     ],
-    "channels4k": [
+
+    channels4k: [
       "sky-sports-main-event",
       "sky-sports-uhd"
     ]
   },
+
   {
-    "id": "newcastle-liverpool-20260823",
-    "time": "22:30",
-    "date": "23/08/2026",
-    "home": "Newcastle United",
-    "away": "Liverpool",
-    "homeLogo": "https://media.api-sports.io/football/teams/34.png",
-    "awayLogo": "https://media.api-sports.io/football/teams/40.png",
-    "channels1080": [
+    id: "newcastle-liverpool-20260823",
+    time: "22:30",
+    date: "23/08/2026",
+
+    home: "Newcastle United",
+    away: "Liverpool",
+
+    homeLogo: espnTeam(361),
+    awayLogo: espnTeam(364),
+
+    channels1080: [
       "sky-sports-main-event-fhd",
-      "sky-sports-premier-league-fhd",
       "usa-network-1080"
     ],
-    "channels4k": [
+
+    channels4k: [
       "sky-sports-main-event",
       "sky-sports-uhd"
     ]
   }
-]
+];
+
+
+// ==================================================
+// TỪ 09:00 — LIVE THỨ BẢY 22/08
+// ==================================================
+
+const saturday = [
+
+  // ==============================
+  // HULL vs MANCHESTER UNITED
+  // ==============================
+
+  {
+    id: "hull-man-united-20260822",
+    time: "18:30",
+    date: "22/08/2026",
+
+    home: "Hull City",
+    away: "Manchester United",
+
+    homeLogo: espnTeam(306),
+    awayLogo: espnTeam(360),
+
+    channels1080: [
+      "usa-network-1080"
+    ],
+
+    channels4k: [
+      "tnt-sports-uhd",
+      "tnt-sports-ultimate-uhd"
+    ]
+  },
+
+
+  // ==============================
+  // EVERTON vs CRYSTAL PALACE
+  // ==============================
+
+  {
+    id: "everton-crystal-palace-20260822",
+    time: "21:00",
+    date: "22/08/2026",
+
+    home: "Everton",
+    away: "Crystal Palace",
+
+    homeLogo: espnTeam(368),
+    awayLogo: espnTeam(384),
+
+    channels1080: [
+      "usa-network-1080"
+    ],
+
+    channels4k: []
+  },
+
+
+  // ==============================
+  // IPSWICH vs SUNDERLAND
+  // ==============================
+
+  {
+    id: "ipswich-sunderland-20260822",
+    time: "21:00",
+    date: "22/08/2026",
+
+    home: "Ipswich Town",
+    away: "Sunderland",
+
+    homeLogo: espnTeam(373),
+    awayLogo: espnTeam(366),
+
+    channels1080: [],
+
+    channels4k: []
+  },
+
+
+  // ==============================
+  // NOTTINGHAM FOREST vs LEEDS
+  // ==============================
+
+  {
+    id: "forest-leeds-20260822",
+    time: "21:00",
+    date: "22/08/2026",
+
+    home: "Nottingham Forest",
+    away: "Leeds United",
+
+    homeLogo: espnTeam(393),
+    awayLogo: espnTeam(357),
+
+    channels1080: [
+      "nbc-sports-1080"
+    ],
+
+    channels4k: []
+  },
+
+
+  // ==============================
+  // BRENTFORD vs TOTTENHAM
+  // ==============================
+
+  {
+    id: "brentford-tottenham-20260822",
+    time: "23:30",
+    date: "22/08/2026",
+
+    home: "Brentford",
+    away: "Tottenham Hotspur",
+
+    homeLogo: espnTeam(337),
+    awayLogo: espnTeam(367),
+
+    channels1080: [
+      "sky-sports-main-event-fhd",
+      "sky-sports-premier-league-fhd"
+    ],
+
+    channels4k: [
+      "sky-sports-main-event",
+      "sky-sports-uhd"
+    ]
+  }
+];
+
+
+// ==================================================
+// AUTO SWITCH
+// ==================================================
+
+const matches =
+  Date.now() >= SWITCH_TIME
+    ? saturday
+    : sunday;
+
+
+// ==================================================
+// EXPORT
+// ==================================================
+
+module.exports = matches;
