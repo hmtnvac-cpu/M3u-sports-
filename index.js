@@ -15,7 +15,7 @@ const PUBLIC_BASE =
   "https://m3u-sports-tv.onrender.com";
 
 const VERSION =
-  "1.0.5";
+  "1.0.6";
 
 // ==================================================
 // HELPERS
@@ -31,7 +31,7 @@ function normalizedPng(url) {
     "&bg=11151c" +
     "&output=png" +
     "&q=92" +
-    "&v=105"
+    "&v=106"
   );
 }
 
@@ -45,30 +45,391 @@ function escapeXml(value) {
 }
 
 // ==================================================
+// MAC HELPERS
+// ==================================================
+
+function isMacStream(url) {
+  const value =
+    String(url || "");
+
+  return (
+    /[?&]mac=/i.test(value) ||
+    /\/play\/live\.php/i.test(value)
+  );
+}
+
+function getMacFromUrl(url) {
+  try {
+    const parsed =
+      new URL(url);
+
+    return (
+      parsed.searchParams.get("mac") ||
+      "UNKNOWN"
+    );
+  } catch (_) {
+    const match =
+      String(url).match(
+        /[?&]mac=([^&]+)/i
+      );
+
+    return match
+      ? decodeURIComponent(match[1])
+      : "UNKNOWN";
+  }
+}
+
+// ==================================================
+// STREAM HEALTH CHECK
+//
+// Chỉ kiểm tra link MAC.
+// VTV / HTTPS thông thường giữ nguyên.
+// ==================================================
+
+const streamHealthCache =
+  new Map();
+
+const HEALTH_CACHE_MS =
+  5 * 60 * 1000;
+
+const HEALTH_TIMEOUT_MS =
+  7000;
+
+function isHtmlError(
+  contentType,
+  sample
+) {
+  const type =
+    String(contentType || "")
+      .toLowerCase();
+
+  const text =
+    sample
+      .toString("utf8")
+      .trim()
+      .toLowerCase();
+
+  if (
+    type.includes("text/html")
+  ) {
+    return true;
+  }
+
+  if (
+    text.startsWith("<!doctype html") ||
+    text.startsWith("<html") ||
+    text.includes("<body") ||
+    text.includes("<head")
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+async function checkMacStream(url) {
+
+  // Không phải MAC → không kiểm tra.
+  if (!isMacStream(url)) {
+    return true;
+  }
+
+  const cached =
+    streamHealthCache.get(url);
+
+  if (
+    cached &&
+    Date.now() -
+      cached.checkedAt <
+      HEALTH_CACHE_MS
+  ) {
+    return cached.ok;
+  }
+
+  const controller =
+    new AbortController();
+
+  const timeout =
+    setTimeout(
+      () =>
+        controller.abort(),
+      HEALTH_TIMEOUT_MS
+    );
+
+  try {
+
+    const response =
+      await fetch(
+        url,
+        {
+          method:
+            "GET",
+
+          redirect:
+            "follow",
+
+          signal:
+            controller.signal,
+
+          headers: {
+            "User-Agent":
+              "VLC/3.0.21 LibVLC/3.0.21",
+
+            "Accept":
+              "*/*",
+
+            "Range":
+              "bytes=0-65535",
+
+            "Connection":
+              "close"
+          }
+        }
+      );
+
+    if (
+      response.status !== 200 &&
+      response.status !== 206
+    ) {
+
+      clearTimeout(timeout);
+
+      try {
+        await response.body?.cancel();
+      } catch (_) {}
+
+      streamHealthCache.set(
+        url,
+        {
+          ok: false,
+          checkedAt: Date.now(),
+          status: response.status
+        }
+      );
+
+      console.log(
+        `[MAC FAIL] ${getMacFromUrl(url)} ` +
+        `HTTP ${response.status}`
+      );
+
+      return false;
+    }
+
+    const contentType =
+      response.headers.get(
+        "content-type"
+      ) || "";
+
+    let sample =
+      Buffer.alloc(0);
+
+    if (response.body) {
+
+      const reader =
+        response.body.getReader();
+
+      try {
+
+        const result =
+          await reader.read();
+
+        if (
+          result &&
+          result.value
+        ) {
+          sample =
+            Buffer.from(
+              result.value
+            );
+        }
+
+      } finally {
+
+        try {
+          await reader.cancel();
+        } catch (_) {}
+
+        try {
+          reader.releaseLock();
+        } catch (_) {}
+      }
+    }
+
+    clearTimeout(timeout);
+
+    // HTTP 200 nhưng không có dữ liệu → coi là chết.
+    if (
+      sample.length === 0
+    ) {
+
+      streamHealthCache.set(
+        url,
+        {
+          ok: false,
+          checkedAt: Date.now(),
+          status: response.status,
+          reason: "EMPTY_BODY"
+        }
+      );
+
+      console.log(
+        `[MAC FAIL] ${getMacFromUrl(url)} EMPTY BODY`
+      );
+
+      return false;
+    }
+
+    // HTTP trả trang lỗi HTML → không phải video.
+    if (
+      isHtmlError(
+        contentType,
+        sample
+      )
+    ) {
+
+      streamHealthCache.set(
+        url,
+        {
+          ok: false,
+          checkedAt: Date.now(),
+          status: response.status,
+          reason: "HTML_RESPONSE"
+        }
+      );
+
+      console.log(
+        `[MAC FAIL] ${getMacFromUrl(url)} HTML RESPONSE`
+      );
+
+      return false;
+    }
+
+    streamHealthCache.set(
+      url,
+      {
+        ok: true,
+        checkedAt: Date.now(),
+        status: response.status,
+        bytes: sample.length,
+        contentType
+      }
+    );
+
+    console.log(
+      `[MAC OK] ${getMacFromUrl(url)} ` +
+      `${response.status} ` +
+      `${sample.length} bytes`
+    );
+
+    return true;
+
+  } catch (error) {
+
+    clearTimeout(timeout);
+
+    streamHealthCache.set(
+      url,
+      {
+        ok: false,
+        checkedAt: Date.now(),
+        error:
+          error.name ===
+          "AbortError"
+            ? "TIMEOUT"
+            : error.message
+      }
+    );
+
+    console.log(
+      `[MAC FAIL] ${getMacFromUrl(url)} ` +
+      `${
+        error.name === "AbortError"
+          ? "TIMEOUT"
+          : error.message
+      }`
+    );
+
+    return false;
+  }
+}
+
+async function filterWorkingStreams(
+  streams
+) {
+
+  if (
+    !Array.isArray(streams) ||
+    streams.length === 0
+  ) {
+    return [];
+  }
+
+  const results =
+    await Promise.all(
+      streams.map(
+        async stream => {
+
+          // Không phải stream MAC:
+          // giữ nguyên, không health check.
+          if (
+            !isMacStream(
+              stream.url
+            )
+          ) {
+            return stream;
+          }
+
+          const ok =
+            await checkMacStream(
+              stream.url
+            );
+
+          return ok
+            ? stream
+            : null;
+        }
+      )
+    );
+
+  return results.filter(
+    Boolean
+  );
+}
+
+// ==================================================
 // VTV TROLL LOGO
 // ==================================================
 
 function vtvLogoUrl(number) {
   return (
-    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=105`
+    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=106`
   );
 }
 
 app.get(
   "/logo/vtv:num.svg",
-  (req, res) => {
+  (
+    req,
+    res
+  ) => {
 
     const number =
-      Number(req.params.num);
+      Number(
+        req.params.num
+      );
 
     if (
-      !Number.isInteger(number) ||
+      !Number.isInteger(
+        number
+      ) ||
       number < 1 ||
       number > 10
     ) {
       return res
         .status(404)
-        .send("Not found");
+        .send(
+          "Not found"
+        );
     }
 
     const numberSize =
@@ -301,7 +662,9 @@ ${number}
       "public,max-age=86400"
     );
 
-    res.send(svg);
+    res.send(
+      svg
+    );
   }
 );
 
@@ -326,26 +689,35 @@ const channelMap =
 const imageCache =
   new Map();
 
-async function toDataUri(url) {
+async function toDataUri(
+  url
+) {
 
-  if (imageCache.has(url)) {
-    return imageCache.get(url);
+  if (
+    imageCache.has(url)
+  ) {
+    return imageCache.get(
+      url
+    );
   }
 
   const response =
     await fetch(
       url,
       {
-        redirect: "follow",
+        redirect:
+          "follow",
 
         headers: {
           "User-Agent":
-            "Mozilla/5.0 LiveTV/1.0.5"
+            "Mozilla/5.0 LiveTV/1.0.6"
         }
       }
     );
 
-  if (!response.ok) {
+  if (
+    !response.ok
+  ) {
     throw new Error(
       `HTTP ${response.status}`
     );
@@ -392,10 +764,14 @@ app.get(
           req.params.id
       );
 
-    if (!match) {
+    if (
+      !match
+    ) {
       return res
         .status(404)
-        .send("Not found");
+        .send(
+          "Not found"
+        );
     }
 
     try {
@@ -513,9 +889,13 @@ ${escapeXml(match.date)}
         "public,max-age=21600"
       );
 
-      res.send(svg);
+      res.send(
+        svg
+      );
 
-    } catch (error) {
+    } catch (
+      error
+    ) {
 
       console.error(
         "LIVE POSTER ERROR:",
@@ -537,21 +917,33 @@ ${escapeXml(match.date)}
 // ==================================================
 
 const groupOrder = {
-  vtv: 1,
-  sports1080: 2,
-  sports4k: 3
+  vtv:
+    1,
+
+  sports1080:
+    2,
+
+  sports4k:
+    3
 };
 
 channels.sort(
-  (a, b) => {
+  (
+    a,
+    b
+  ) => {
 
     if (
       a.group !==
       b.group
     ) {
       return (
-        groupOrder[a.group] -
-        groupOrder[b.group]
+        groupOrder[
+          a.group
+        ] -
+        groupOrder[
+          b.group
+        ]
       );
     }
 
@@ -570,7 +962,10 @@ channels.sort(
 );
 
 matches.sort(
-  (a, b) =>
+  (
+    a,
+    b
+  ) =>
     a.time.localeCompare(
       b.time
     )
@@ -722,7 +1117,9 @@ const builder =
 // POSTER HELPERS
 // ==================================================
 
-function liveName(match) {
+function liveName(
+  match
+) {
   return (
     `${match.time} • ` +
     `${match.home} vs ${match.away}`
@@ -760,7 +1157,7 @@ function livePoster(
   match
 ) {
   return normalizedPng(
-    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=105`
+    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=106`
   );
 }
 
@@ -793,17 +1190,23 @@ function descriptionFor(
   );
 }
 
+// ==================================================
+// BUILD LIVE STREAMS
+// ==================================================
+
 function liveStreams(
   match,
   quality
 ) {
 
   const ids =
-    quality === "4k"
+    quality ===
+    "4k"
       ? match.channels4k
       : match.channels1080;
 
-  const streams = [];
+  const streams =
+    [];
 
   ids.forEach(
     id => {
@@ -811,19 +1214,31 @@ function liveStreams(
       const channel =
         channelMap[id];
 
-      if (!channel) {
+      if (
+        !channel
+      ) {
         return;
       }
 
       channel.streams.forEach(
-        (url, index) => {
+        (
+          url,
+          index
+        ) => {
+
+          const mac =
+            getMacFromUrl(
+              url
+            );
 
           streams.push({
             name:
               channel.name,
 
             title:
-              `${channel.name} • ${index + 1}`,
+              isMacStream(url)
+                ? `${channel.name} • MAC ${mac} • ${index + 1}`
+                : `${channel.name} • ${index + 1}`,
 
             url
           });
@@ -850,6 +1265,10 @@ builder.defineCatalogHandler(
             .trim()
         : "";
 
+    // ==================================================
+    // LIVE 1080
+    // ==================================================
+
     if (
       args.id ===
       "live1080"
@@ -865,13 +1284,19 @@ builder.defineCatalogHandler(
               0
         );
 
-      if (search) {
+      if (
+        search
+      ) {
         list =
           list.filter(
             m =>
-              liveName(m)
+              liveName(
+                m
+              )
                 .toLowerCase()
-                .includes(search)
+                .includes(
+                  search
+                )
           );
       }
 
@@ -886,10 +1311,14 @@ builder.defineCatalogHandler(
                 "tv",
 
               name:
-                liveName(m),
+                liveName(
+                  m
+                ),
 
               poster:
-                livePoster(m),
+                livePoster(
+                  m
+                ),
 
               posterShape:
                 "square",
@@ -900,6 +1329,10 @@ builder.defineCatalogHandler(
           )
       };
     }
+
+    // ==================================================
+    // LIVE 4K
+    // ==================================================
 
     if (
       args.id ===
@@ -916,13 +1349,19 @@ builder.defineCatalogHandler(
               0
         );
 
-      if (search) {
+      if (
+        search
+      ) {
         list =
           list.filter(
             m =>
-              liveName(m)
+              liveName(
+                m
+              )
                 .toLowerCase()
-                .includes(search)
+                .includes(
+                  search
+                )
           );
       }
 
@@ -937,10 +1376,14 @@ builder.defineCatalogHandler(
                 "tv",
 
               name:
-                liveName(m),
+                liveName(
+                  m
+                ),
 
               poster:
-                livePoster(m),
+                livePoster(
+                  m
+                ),
 
               posterShape:
                 "square",
@@ -952,6 +1395,10 @@ builder.defineCatalogHandler(
       };
     }
 
+    // ==================================================
+    // CHANNELS
+    // ==================================================
+
     let list =
       channels.filter(
         c =>
@@ -959,13 +1406,17 @@ builder.defineCatalogHandler(
           args.id
       );
 
-    if (search) {
+    if (
+      search
+    ) {
       list =
         list.filter(
           c =>
             c.name
               .toLowerCase()
-              .includes(search)
+              .includes(
+                search
+              )
         );
     }
 
@@ -1036,7 +1487,9 @@ builder.defineMetaHandler(
             base
         );
 
-      if (!match) {
+      if (
+        !match
+      ) {
         return {
           meta:
             null
@@ -1079,7 +1532,9 @@ builder.defineMetaHandler(
         args.id
       ];
 
-    if (!channel) {
+    if (
+      !channel
+    ) {
       return {
         meta:
           null
@@ -1116,10 +1571,22 @@ builder.defineMetaHandler(
 
 // ==================================================
 // STREAM
+//
+// MAC:
+// - kiểm tra song song
+// - link chết tự loại
+// - link sống mới trả về Stremio
+//
+// NON-MAC:
+// - giữ nguyên
 // ==================================================
 
 builder.defineStreamHandler(
   async args => {
+
+    // ==================================================
+    // LIVE
+    // ==================================================
 
     if (
       args.id.startsWith(
@@ -1150,50 +1617,275 @@ builder.defineStreamHandler(
             base
         );
 
-      if (!match) {
+      if (
+        !match
+      ) {
         return {
           streams:
             []
         };
       }
 
+      const allStreams =
+        liveStreams(
+          match,
+          is4k
+            ? "4k"
+            : "1080"
+        );
+
+      const workingStreams =
+        await filterWorkingStreams(
+          allStreams
+        );
+
+      console.log(
+        `[LIVE] ` +
+        `${match.home} vs ${match.away} ` +
+        `${workingStreams.length}/${allStreams.length} sources working`
+      );
+
       return {
         streams:
-          liveStreams(
-            match,
-            is4k
-              ? "4k"
-              : "1080"
-          )
+          workingStreams
       };
     }
+
+    // ==================================================
+    // NORMAL CHANNEL
+    // ==================================================
 
     const channel =
       channelMap[
         args.id
       ];
 
-    if (!channel) {
+    if (
+      !channel
+    ) {
       return {
         streams:
           []
       };
     }
 
-    return {
-      streams:
-        channel.streams.map(
-          (url, index) => ({
+    const allStreams =
+      channel.streams.map(
+        (
+          url,
+          index
+        ) => {
+
+          const mac =
+            getMacFromUrl(
+              url
+            );
+
+          return {
             name:
               channel.name,
 
             title:
-              `${channel.name} • ${index + 1}`,
+              isMacStream(
+                url
+              )
+                ? `${channel.name} • MAC ${mac} • ${index + 1}`
+                : `${channel.name} • ${index + 1}`,
 
             url
-          })
-        )
+          };
+        }
+      );
+
+    const workingStreams =
+      await filterWorkingStreams(
+        allStreams
+      );
+
+    console.log(
+      `[CHANNEL] ${channel.name}: ` +
+      `${workingStreams.length}/${allStreams.length} sources working`
+    );
+
+    return {
+      streams:
+        workingStreams
     };
+  }
+);
+
+// ==================================================
+// HEALTH STATUS PAGE
+//
+// Mở:
+// /health
+//
+// Hiển thị trạng thái đã cache.
+// Nó không tự quét toàn bộ kênh.
+// ==================================================
+
+app.get(
+  "/health",
+  (
+    req,
+    res
+  ) => {
+
+    const rows =
+      [];
+
+    for (
+      const [
+        url,
+        info
+      ] of
+      streamHealthCache.entries()
+    ) {
+
+      rows.push({
+        mac:
+          getMacFromUrl(
+            url
+          ),
+
+        ok:
+          info.ok,
+
+        checkedAt:
+          new Date(
+            info.checkedAt
+          ).toLocaleString(
+            "vi-VN",
+            {
+              timeZone:
+                "Asia/Ho_Chi_Minh"
+            }
+          ),
+
+        status:
+          info.status ||
+          "",
+
+        error:
+          info.error ||
+          info.reason ||
+          ""
+      });
+    }
+
+    rows.sort(
+      (
+        a,
+        b
+      ) =>
+        a.mac.localeCompare(
+          b.mac
+        )
+    );
+
+    const htmlRows =
+      rows.length
+        ? rows
+            .map(
+              row => `
+<tr>
+<td>${escapeXml(row.mac)}</td>
+<td>${row.ok ? "✅ OK" : "❌ FAIL"}</td>
+<td>${escapeXml(row.status)}</td>
+<td>${escapeXml(row.error)}</td>
+<td>${escapeXml(row.checkedAt)}</td>
+</tr>
+`
+            )
+            .join("")
+        : `
+<tr>
+<td colspan="5">
+Chưa có dữ liệu. Hãy mở một kênh MAC trước.
+</td>
+</tr>
+`;
+
+    res.send(`
+<!doctype html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+ name="viewport"
+ content="width=device-width,initial-scale=1"
+>
+
+<title>
+MAC Health
+</title>
+
+<style>
+
+body {
+  background:#11151c;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  padding:24px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td {
+  border:1px solid #444;
+  padding:10px;
+  text-align:left;
+}
+
+th {
+  background:#222a35;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+MAC Stream Health
+</h1>
+
+<p>
+Cache:
+5 phút
+</p>
+
+<table>
+
+<thead>
+<tr>
+<th>MAC</th>
+<th>Trạng thái</th>
+<th>HTTP</th>
+<th>Lỗi</th>
+<th>Kiểm tra lúc</th>
+</tr>
+</thead>
+
+<tbody>
+${htmlRows}
+</tbody>
+
+</table>
+
+</body>
+
+</html>
+`);
   }
 );
 
@@ -1203,23 +1895,35 @@ builder.defineStreamHandler(
 
 app.get(
   "/",
-  (req, res) => {
+  (
+    req,
+    res
+  ) => {
 
     const manifestUrl =
       `${req.protocol}://${req.get("host")}/manifest.json`;
 
+    const healthUrl =
+      `${req.protocol}://${req.get("host")}/health`;
+
     const live1080 =
       matches.filter(
         m =>
+          Array.isArray(
+            m.channels1080
+          ) &&
           m.channels1080.length >
-          0
+            0
       ).length;
 
     const live4k =
       matches.filter(
         m =>
+          Array.isArray(
+            m.channels4k
+          ) &&
           m.channels4k.length >
-          0
+            0
       ).length;
 
     const vtv =
@@ -1251,6 +1955,19 @@ app.get(
         ) =>
           total +
           channel.streams.length,
+        0
+      );
+
+    const macStreams =
+      channels.reduce(
+        (
+          total,
+          channel
+        ) =>
+          total +
+          channel.streams.filter(
+            isMacStream
+          ).length,
         0
       );
 
@@ -1329,13 +2046,26 @@ Tổng luồng:
 </p>
 
 <p>
-LIVE:
+Luồng MAC:
+<b>${macStreams}</b>
+</p>
+
+<p>
+LIVE data:
 <b>live.json</b>
+</p>
+
+<p>
+MAC Health:
+<br>
+${healthUrl}
 </p>
 
 <hr>
 
 <p>
+Manifest:
+<br>
 ${manifestUrl}
 </p>
 
@@ -1347,7 +2077,7 @@ ${manifestUrl}
 );
 
 // ==================================================
-// STREMIO
+// STREMIO ROUTER
 // ==================================================
 
 app.use(
@@ -1376,6 +2106,27 @@ app.listen(
 
     console.log(
       `Live matches: ${matches.length}`
+    );
+
+    const macCount =
+      channels.reduce(
+        (
+          total,
+          channel
+        ) =>
+          total +
+          channel.streams.filter(
+            isMacStream
+          ).length,
+        0
+      );
+
+    console.log(
+      `MAC streams: ${macCount}`
+    );
+
+    console.log(
+      "MAC health check enabled"
     );
   }
 );
