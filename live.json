@@ -1,3 +1,20 @@
+{
+  "id": "arsenal-coventry-20260822",
+  "time": "02:00",
+  "date": "22/08/2026",
+  "home": "Arsenal",
+  "away": "Coventry City",
+  "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+  "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/3882.png",
+  "channels1080": [
+    "sky-sports-premier-league-fhd",
+    "sky-sports-main-event-fhd"
+  ],
+  "channels4k": [
+    "sky-sports-main-event",
+    "sky-sports-uhd"
+  ]
+}
 [
   {
     "id": "hull-man-united-20260822",
