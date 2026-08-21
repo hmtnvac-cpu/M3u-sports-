@@ -359,7 +359,12 @@ const channels = [
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1479591&extension=ts&play_token=vzYU4fDUAQ",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1479591&extension=ts&play_token=9JzXAViV1F",
-      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1479591&extension=ts&play_token=mSsCW5SfPM"
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1479591&extension=ts&play_token=mSsCW5SfPM",
+
+      "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:01:61:C9&stream=1479591&extension=ts&play_token=101Jqk1thO",
+      "http://185.80.197.55:80/play/live.php?mac=00:1A:79:7B:3D:32&stream=1479591&extension=ts&play_token=CZqZdke3qF",
+      "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:6A:9F:C9&stream=1479591&extension=ts&play_token=QZNYxuNWq4",
+      "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:7B:3D:55&stream=1479591&extension=ts&play_token=OqmNudlSUh"
     ]
   ),
 
@@ -369,7 +374,12 @@ const channels = [
     "TNT Sports Ultimate UHD",
     LOGOS.tntUltimate,
     [
-      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1595637&extension=ts&play_token=YdoiZErSQZ"
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1595637&extension=ts&play_token=YdoiZErSQZ",
+
+      "http://185.80.197.55:80/play/live.php?mac=00:1A:79:7B:3D:32&stream=1595637&extension=ts&play_token=PuG14Be1Qz",
+      "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:6A:9F:C9&stream=1595637&extension=ts&play_token=qgqSEflsHD",
+      "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:01:61:C9&stream=1595637&extension=ts&play_token=GDsx4k0mnD",
+      "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:7B:3D:55&stream=1379047&extension=ts&play_token=XF5wvYKaij"
     ]
   ),
 
