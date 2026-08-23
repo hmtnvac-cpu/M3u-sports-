@@ -315,6 +315,11 @@ const channels = [
     ]
   ),
 
+  // ==================================================
+  // SKY SPORTS MAIN EVENT
+  // ĐÃ NHẬN THÊM LUỒNG 1 + 2 CŨ CỦA SKY SPORTS UHD
+  // ==================================================
+
   makeChannel(
     "sky-sports-main-event",
     "sports4k",
@@ -323,9 +328,18 @@ const channels = [
     [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1608071&extension=ts&play_token=BZa17svpdY",
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1608071&extension=ts&play_token=YPIwjxNGfQ",
-      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1641636&extension=ts&play_token=Oxc5PyW4yK"
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1641636&extension=ts&play_token=Oxc5PyW4yK",
+
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471387&extension=ts&play_token=54v3D6UwQT",
+      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1753227&extension=ts&play_token=3Ea6Hxt5oq"
     ]
   ),
+
+  // ==================================================
+  // SKY SPORTS UHD
+  // ĐÃ BỎ LUỒNG 1 + 2
+  // CHỈ GIỮ LUỒNG 3
+  // ==================================================
 
   makeChannel(
     "sky-sports-uhd",
@@ -333,8 +347,6 @@ const channels = [
     "Sky Sports UHD",
     LOGOS.sky,
     [
-      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1471387&extension=ts&play_token=54v3D6UwQT",
-      "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:e8:95:b7&stream=1753227&extension=ts&play_token=3Ea6Hxt5oq",
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1471387&extension=ts&play_token=Bx3mlhSM6x"
     ]
   ),
@@ -350,6 +362,11 @@ const channels = [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1640379&extension=ts&play_token=qXUKertYkr"
     ]
   ),
+
+  // ==================================================
+  // TNT SPORTS UHD
+  // 3 CŨ + 4 MỚI = 7 LUỒNG
+  // ==================================================
 
   makeChannel(
     "tnt-sports-uhd",
@@ -367,6 +384,11 @@ const channels = [
       "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:7B:3D:55&stream=1479591&extension=ts&play_token=OqmNudlSUh"
     ]
   ),
+
+  // ==================================================
+  // TNT SPORTS ULTIMATE UHD
+  // 1 CŨ + 4 MỚI = 5 LUỒNG
+  // ==================================================
 
   makeChannel(
     "tnt-sports-ultimate-uhd",
