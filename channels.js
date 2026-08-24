@@ -71,7 +71,7 @@ const LOGOS = {
     "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/512px-DAZN_Logo_Master.svg.png",
 
   peacock:
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/NBCUniversal_Peacock_Logo.svg/512px-NBCUniversal_Peacock_Logo.svg.png"
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/NBCUniversal_Peacock_Logo_(2026%3B_icon).svg"
 };
 
 const channels = [
