@@ -15,13 +15,15 @@ const PUBLIC_BASE =
   "https://m3u-sports-tv.onrender.com";
 
 const VERSION =
-  "1.0.9";
+  "1.0.10";
 
 // ==================================================
 // HELPERS
 // ==================================================
 
 function normalizedPng(url) {
+  if (!url) return null;
+
   return (
     "https://images.weserv.nl/?url=" +
     encodeURIComponent(url) +
@@ -31,7 +33,7 @@ function normalizedPng(url) {
     "&bg=11151c" +
     "&output=png" +
     "&q=92" +
-    "&v=109"
+    "&v=110"
   );
 }
 
@@ -45,12 +47,12 @@ function escapeXml(value) {
 }
 
 // ==================================================
-// VTV TROLL LOGO
+// VTV LOGO
 // ==================================================
 
 function vtvLogoUrl(number) {
   return (
-    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=109`
+    `${PUBLIC_BASE}/logo/vtv${number}.svg?v=110`
   );
 }
 
@@ -261,38 +263,6 @@ app.get(
 ${number}
 </text>
 
-<circle
- cx="${numberX - 22}"
- cy="420"
- r="10"
- fill="#ffffff"
- stroke="#111"
- stroke-width="4"
-/>
-
-<circle
- cx="${numberX + 22}"
- cy="416"
- r="10"
- fill="#ffffff"
- stroke="#111"
- stroke-width="4"
-/>
-
-<circle
- cx="${numberX - 19}"
- cy="421"
- r="3"
- fill="#111"
-/>
-
-<circle
- cx="${numberX + 19}"
- cy="417"
- r="3"
- fill="#111"
-/>
-
 </svg>
 `;
 
@@ -327,7 +297,7 @@ const channelMap =
   );
 
 // ==================================================
-// IMAGE CACHE
+// LIVE POSTER CACHE
 // ==================================================
 
 const imageCache =
@@ -352,7 +322,7 @@ async function toDataUri(url) {
 
         headers: {
           "User-Agent":
-            "Mozilla/5.0 LiveTV/1.0.9"
+            "Mozilla/5.0 LiveTV/1.0.10"
         }
       }
     );
@@ -393,7 +363,6 @@ async function toDataUri(url) {
 
 app.get(
   "/poster/live/:id.svg",
-
   async (
     req,
     res
@@ -566,7 +535,10 @@ const groupOrder = {
     2,
 
   sports4k:
-    3
+    3,
+
+  peacock:
+    4
 };
 
 channels.sort(
@@ -579,18 +551,50 @@ channels.sort(
       a.group !==
       b.group
     ) {
-
       return (
         (
           groupOrder[
             a.group
-          ] || 99
+          ] ||
+          99
         ) -
         (
           groupOrder[
             b.group
-          ] || 99
+          ] ||
+          99
         )
+      );
+    }
+
+    if (
+      a.group ===
+      "peacock"
+    ) {
+
+      const aNumber =
+        Number(
+          String(
+            a.id
+          ).replace(
+            "peacock-event-",
+            ""
+          )
+        );
+
+      const bNumber =
+        Number(
+          String(
+            b.id
+          ).replace(
+            "peacock-event-",
+            ""
+          )
+        );
+
+      return (
+        aNumber -
+        bNumber
       );
     }
 
@@ -642,7 +646,7 @@ const manifest = {
     "Live TV",
 
   description:
-    "Live Football • Sports 1080P • Sports UHD / 4K • VTV",
+    "Live Football • Sports 1080P • Sports UHD / 4K • VTV • Peacock Event",
 
   resources: [
     "catalog",
@@ -759,6 +763,27 @@ const manifest = {
             false
         }
       ]
+    },
+
+    {
+      type:
+        "tv",
+
+      id:
+        "peacock",
+
+      name:
+        "🇺🇸 Peacock Event FHD • 60 FPS",
+
+      extra: [
+        {
+          name:
+            "search",
+
+          isRequired:
+            false
+        }
+      ]
     }
   ]
 };
@@ -769,10 +794,12 @@ const builder =
   );
 
 // ==================================================
-// LIVE HELPERS
+// HELPERS
 // ==================================================
 
-function liveName(match) {
+function liveName(
+  match
+) {
 
   return (
     `${match.time} • ` +
@@ -814,7 +841,7 @@ function livePoster(
 ) {
 
   return normalizedPng(
-    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=109`
+    `${PUBLIC_BASE}/poster/live/${match.id}.svg?v=110`
   );
 }
 
@@ -828,6 +855,15 @@ function descriptionFor(
   ) {
     return (
       "VTV • Truyền hình Việt Nam"
+    );
+  }
+
+  if (
+    channel.group ===
+    "peacock"
+  ) {
+    return (
+      channel.name
     );
   }
 
@@ -1074,7 +1110,7 @@ builder.defineCatalogHandler(
     }
 
     // ==================================================
-    // CHANNELS
+    // NORMAL CHANNEL GROUPS
     // ==================================================
 
     let list =
@@ -1261,11 +1297,9 @@ builder.defineMetaHandler(
 // ==================================================
 // STREAM
 //
-// QUAN TRỌNG:
-// - TRẢ TOÀN BỘ LINK
-// - KHÔNG HEALTH CHECK
-// - KHÔNG LỌC
-// - KHÔNG HIỆN MAC
+// KHÔNG HEALTH CHECK
+// KHÔNG FILTER
+// TRẢ TOÀN BỘ LINK
 // ==================================================
 
 builder.defineStreamHandler(
@@ -1425,6 +1459,13 @@ app.get(
           "sports4k"
       ).length;
 
+    const peacock =
+      channels.filter(
+        c =>
+          c.group ===
+          "peacock"
+      ).length;
+
     const totalStreams =
       channels.reduce(
         (
@@ -1504,6 +1545,11 @@ Version:
 </p>
 
 <p>
+🇺🇸 Peacock Event:
+<b>${peacock}</b>
+</p>
+
+<p>
 Tổng kênh:
 <b>${channels.length}</b>
 </p>
@@ -1515,6 +1561,11 @@ Tổng luồng:
 
 <p>
 Stream filtering:
+<b>OFF</b>
+</p>
+
+<p>
+Health check:
 <b>OFF</b>
 </p>
 
@@ -1570,26 +1621,12 @@ app.listen(
       `Live matches: ${matches.length}`
     );
 
-    const totalStreams =
-      channels.reduce(
-        (
-          total,
-          channel
-        ) =>
-          total +
-          (
-            channel.streams ||
-            []
-          ).length,
-        0
-      );
-
     console.log(
-      `Streams: ${totalStreams}`
+      "Stream filtering: OFF"
     );
 
     console.log(
-      "Stream filtering: OFF"
+      "Health check: OFF"
     );
   }
 );
