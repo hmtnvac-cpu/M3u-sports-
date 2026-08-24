@@ -65,12 +65,20 @@ const LOGOS = {
     "https://pixvid.org/images/2025/01/16/TNT-Sports-Ultimate.png",
 
   vsport:
-    "https://res.cloudinary.com/dnaoyj/image/upload/dpr_2,f_auto,q_auto,w_600/v1/Assets/KLT/DNA%20TV/Kanavapaketit/ohjelmakirjastot/V%20kanavat/v_sport_suomi__240X240"
+    "https://res.cloudinary.com/dnaoyj/image/upload/dpr_2,f_auto,q_auto,w_600/v1/Assets/KLT/DNA%20TV/Kanavapaketit/ohjelmakirjastot/V%20kanavat/v_sport_suomi__240X240",
+
+  dazn:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/512px-DAZN_Logo_Master.svg.png",
+
+  peacock:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/NBCUniversal_Peacock_Logo.svg/512px-NBCUniversal_Peacock_Logo.svg.png"
 };
 
 const channels = [
 
-  // ================= VTV =================
+  // ==================================================
+  // VTV
+  // ==================================================
 
   makeChannel("vtv1","vtv","VTV1",null,[
     "https://vips-livecdn.fptplay.net/live/media/vtv1/live247-hls-avc/vtv1-avc1_5600000=10000-mp4a_131600=20000.m3u8"
@@ -112,7 +120,9 @@ const channels = [
     "https://vips-livecdn.fptplay.net/live/media/vtv10/live247-hls-avc/vtv10-avc1_5600000=10000-mp4a_131600=20000.m3u8"
   ]),
 
-  // ================= 1080 =================
+  // ==================================================
+  // SPORTS 1080P
+  // ==================================================
 
   makeChannel(
     "cbs-sports-1080",
@@ -219,7 +229,9 @@ const channels = [
     ]
   ),
 
-  // ================= UHD / 4K =================
+  // ==================================================
+  // SPORTS UHD / 4K
+  // ==================================================
 
   makeChannel(
     "bein-sports-uhd",
@@ -288,7 +300,10 @@ const channels = [
     "Sky Sports Bundesliga UHD",
     LOGOS.sky,
     [
-      "http://mag.tivi-one-iptv.net:80/play/live.php?mac=00:1A:79:0E:0F:8E&stream=893917&extension=ts&play_token=5QPOI5t6D3"
+      "http://mag.tivi-one-iptv.net:80/play/live.php?mac=00:1A:79:0E:0F:8E&stream=893917&extension=ts&play_token=5QPOI5t6D3",
+      "http://lefante01.com:8080/7LyNERpSAM/pZbJCEprH1/763751?play_token=F9RgVChzs0",
+      "http://fx0101.com:8080/7LyNERpSAM/pZbJCEprH1/763751?play_token=svgiWylK7P",
+      "http://sny57.com:8080/7LyNERpSAM/pZbJCEprH1/763751?play_token=Rlm90yEDe9"
     ]
   ),
 
@@ -315,10 +330,8 @@ const channels = [
     ]
   ),
 
-  // ==================================================
-  // SKY SPORTS MAIN EVENT
-  // ĐÃ NHẬN THÊM LUỒNG 1 + 2 CŨ CỦA SKY SPORTS UHD
-  // ==================================================
+  // Hai luồng cũ #1 và #2 của Sky Sports UHD
+  // đã chuyển sang Sky Sports Main Event.
 
   makeChannel(
     "sky-sports-main-event",
@@ -335,19 +348,17 @@ const channels = [
     ]
   ),
 
-  // ==================================================
-  // SKY SPORTS UHD
-  // ĐÃ BỎ LUỒNG 1 + 2
-  // CHỈ GIỮ LUỒNG 3
-  // ==================================================
-
   makeChannel(
     "sky-sports-uhd",
     "sports4k",
     "Sky Sports UHD",
     LOGOS.sky,
     [
-      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1471387&extension=ts&play_token=Bx3mlhSM6x"
+      "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1471387&extension=ts&play_token=Bx3mlhSM6x",
+
+      "http://lefante01.com:8080/7LyNERpSAM/pZbJCEprH1/1424394?play_token=kBBI06amMH",
+      "http://fx0101.com:8080/7LyNERpSAM/pZbJCEprH1/1424394?play_token=twtmNfATTO",
+      "http://sny57.com:8080/7LyNERpSAM/pZbJCEprH1/1424394?play_token=Bvsi5EWG5m"
     ]
   ),
 
@@ -362,11 +373,6 @@ const channels = [
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1640379&extension=ts&play_token=qXUKertYkr"
     ]
   ),
-
-  // ==================================================
-  // TNT SPORTS UHD
-  // 3 CŨ + 4 MỚI = 7 LUỒNG
-  // ==================================================
 
   makeChannel(
     "tnt-sports-uhd",
@@ -384,11 +390,6 @@ const channels = [
       "http://185.80.197.55:80/play/live.php?mac=A0:BB:3E:7B:3D:55&stream=1479591&extension=ts&play_token=OqmNudlSUh"
     ]
   ),
-
-  // ==================================================
-  // TNT SPORTS ULTIMATE UHD
-  // 1 CŨ + 4 MỚI = 5 LUỒNG
-  // ==================================================
 
   makeChannel(
     "tnt-sports-ultimate-uhd",
@@ -416,7 +417,106 @@ const channels = [
       "http://line.moja-teve9.me:80/play/live.php?mac=00:1A:79:10:01:3e&stream=1632123&extension=ts&play_token=E6ziX5leBT",
       "http://chaotic-streams.cc:80/play/live.php?mac=00:1A:79:7F:A7:54&stream=1632123&extension=ts&play_token=6GO8Kiqjfm"
     ]
+  ),
+
+  // ==================================================
+  // DAZN UHD
+  // ==================================================
+
+  makeChannel(
+    "dazn-1-uhd",
+    "sports4k",
+    "DAZN 1 UHD",
+    LOGOS.dazn,
+    [
+      "http://lefante01.com:8080/7LyNERpSAM/pZbJCEprH1/1445983?play_token=qC6hrTsFTx",
+      "http://fx0101.com:8080/7LyNERpSAM/pZbJCEprH1/1445983?play_token=KPwKQ8VAKk",
+      "http://sny57.com:8080/7LyNERpSAM/pZbJCEprH1/1445983?play_token=dREhptBBhx"
+    ]
+  ),
+
+  makeChannel(
+    "dazn-2-uhd",
+    "sports4k",
+    "DAZN 2 UHD",
+    LOGOS.dazn,
+    [
+      "http://lefante01.com:8080/7LyNERpSAM/pZbJCEprH1/1445986?play_token=jPcBL0DnYr",
+      "http://fx0101.com:8080/7LyNERpSAM/pZbJCEprH1/1445986?play_token=MBROlvAmnk",
+      "http://sny57.com:8080/7LyNERpSAM/pZbJCEprH1/1445986?play_token=NJwcCFXTLJ"
+    ]
   )
 ];
+
+// ==================================================
+// PEACOCK EVENT — CHÙM RIÊNG
+// Mỗi Event có 2 luồng
+// Tên chỉ: USA PEACOCK EVENT X
+// ==================================================
+
+const peacockA = {
+  1:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934834&extension=ts&play_token=LghPH26m3f",
+  2:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934835&extension=ts&play_token=I77uJWumDM",
+  3:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934836&extension=ts&play_token=GI560hG5su",
+  4:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934837&extension=ts&play_token=7tuFVBKQbk",
+  5:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934838&extension=ts&play_token=cttWj5nsxU",
+  6:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934839&extension=ts&play_token=Gvpab28um9",
+  7:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934840&extension=ts&play_token=19yT62QvPQ",
+  8:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934841&extension=ts&play_token=65HxZlZyrE",
+  9:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934842&extension=ts&play_token=QYK2z4fYoe",
+  10:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934843&extension=ts&play_token=NcuCRFaijZ",
+  11:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934844&extension=ts&play_token=twqfZQgCM4",
+  12:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934845&extension=ts&play_token=eWutIEZGz5",
+  13:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934846&extension=ts&play_token=eUbXNSusJd",
+  14:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934847&extension=ts&play_token=JTVppbg9Vf",
+  15:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934848&extension=ts&play_token=xOEmRTlkc0",
+  16:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934849&extension=ts&play_token=CaFOSUE8gB",
+  17:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934850&extension=ts&play_token=tasYbS6JsT",
+  18:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934851&extension=ts&play_token=rIFxq4wvPk",
+  19:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934852&extension=ts&play_token=vnZPteaOif",
+  20:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934853&extension=ts&play_token=yElyiaQ5jN",
+  21:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934854&extension=ts&play_token=XrRzTc1Jqo",
+  22:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:A2:B8:2E&stream=934855&extension=ts&play_token=5Prrs1jdbn"
+};
+
+const peacockB = {
+  1:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934834&extension=ts&play_token=3Y1ASHrV6l",
+  2:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934835&extension=ts&play_token=gTOdkRWrNB",
+  3:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934836&extension=ts&play_token=2prb6HG0Wt",
+  4:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934837&extension=ts&play_token=52cdc4TCU7",
+  5:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934838&extension=ts&play_token=Y9gqd67McU",
+  6:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934839&extension=ts&play_token=UsGoVui1WC",
+  7:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934840&extension=ts&play_token=SD0Mts0PMv",
+  8:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934841&extension=ts&play_token=iVw2eygTRw",
+  9:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934842&extension=ts&play_token=SCQbZQSslQ",
+  10:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934843&extension=ts&play_token=STP8UOJr7s",
+  11:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934844&extension=ts&play_token=8UTtupAvRg",
+  12:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934845&extension=ts&play_token=3IcMffGLSv",
+  13:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934846&extension=ts&play_token=tHzHz9MdZN",
+  14:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934847&extension=ts&play_token=xCfuB6BYu3",
+  15:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934848&extension=ts&play_token=7gE4l4CnBW",
+  16:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934849&extension=ts&play_token=n1jCGgr4es",
+  17:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934850&extension=ts&play_token=gSF28E8S74",
+  18:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934851&extension=ts&play_token=VDcG5FtcYo",
+  19:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934852&extension=ts&play_token=gmOwBwu8MD",
+  20:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934853&extension=ts&play_token=wu7kWxPvmh",
+  21:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934854&extension=ts&play_token=TaApcx5uj8",
+  22:"http://nexusconnects.org:80/play/live.php?mac=00:1A:79:C6:EE:76&stream=934855&extension=ts&play_token=LQmUozyaFE"
+};
+
+for (let i = 1; i <= 22; i++) {
+  channels.push(
+    makeChannel(
+      `peacock-event-${i}`,
+      "peacock",
+      `USA PEACOCK EVENT ${i}`,
+      LOGOS.peacock,
+      [
+        peacockA[i],
+        peacockB[i]
+      ]
+    )
+  );
+}
 
 module.exports = { channels };
