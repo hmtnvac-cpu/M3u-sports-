@@ -1,47 +1,17 @@
 [
   {
-    "id": "brighton-aston-villa-20260823",
-    "time": "20:00",
-    "date": "23/08/2026",
-    "home": "Brighton & Hove Albion",
-    "away": "Aston Villa",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
-    "channels1080": [
-      "sky-sports-premier-league-fhd"
-    ],
-    "channels4k": [
-      "sky-sports-uhd"
-    ]
-  },
-  {
-    "id": "manchester-city-bournemouth-20260823",
-    "time": "20:00",
-    "date": "23/08/2026",
-    "home": "Manchester City",
-    "away": "AFC Bournemouth",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "id": "fulham-chelsea-20260825",
+    "time": "02:00",
+    "date": "25/08/2026",
+    "home": "Fulham",
+    "away": "Chelsea",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
     "channels1080": [
       "sky-sports-main-event-fhd",
-      "usa-network-1080"
-    ],
-    "channels4k": [
-      "sky-sports-main-event",
-      "sky-sports-uhd"
-    ]
-  },
-  {
-    "id": "newcastle-liverpool-20260823",
-    "time": "22:30",
-    "date": "23/08/2026",
-    "home": "Newcastle United",
-    "away": "Liverpool",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
-    "channels1080": [
-      "sky-sports-main-event-fhd",
-      "usa-network-1080"
+      "sky-sports-premier-league-fhd",
+      "usa-network-1080",
+      "universo-1080"
     ],
     "channels4k": [
       "sky-sports-main-event",
