@@ -3,10 +3,12 @@
   "version": "1.0.5",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "check-streams": "node scripts/check-streams.js"
   },
   "dependencies": {
     "express": "^4.21.2",
+    "ffprobe-static": "^3.1.0",
     "stremio-addon-sdk": "^1.6.10"
   }
 }
