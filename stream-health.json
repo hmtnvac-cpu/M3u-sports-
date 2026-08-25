@@ -1,0 +1,2092 @@
+{
+  "checkedAt": "2026-08-25T14:42:29.870Z",
+  "timeoutMs": 8000,
+  "concurrency": 8,
+  "totals": {
+    "channels": 56,
+    "streams": 146,
+    "liveStreams": 91,
+    "deadStreams": 55,
+    "liveChannels": 27,
+    "partialChannels": 16,
+    "deadChannels": 13
+  },
+  "channels": [
+    {
+      "id": "vtv1",
+      "name": "VTV1",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 904,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv2",
+      "name": "VTV2",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 839,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv3",
+      "name": "VTV3",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 1053,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv4",
+      "name": "VTV4",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 1045,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv5",
+      "name": "VTV5",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 1262,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv6",
+      "name": "VTV6",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 1258,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv7",
+      "name": "VTV7",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 1253,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv8",
+      "name": "VTV8",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 1260,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv9",
+      "name": "VTV9",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 827,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "vtv10",
+      "name": "VTV10",
+      "group": "vtv",
+      "total": 1,
+      "live": 0,
+      "dead": 1,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "vips-livecdn.fptplay.net",
+          "alive": false,
+          "httpStatus": 403,
+          "bytes": 150,
+          "contentType": "text/html",
+          "durationMs": 201,
+          "error": "HTTP 403 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "cbs-sports-1080",
+      "name": "CBS Sports 1080p 60 FPS",
+      "group": "sports1080",
+      "total": 4,
+      "live": 2,
+      "dead": 2,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 1160,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 574,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 1039,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14128,
+          "contentType": "video/mp2t",
+          "durationMs": 1493,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "nbc-sports-1080",
+      "name": "NBC Sports 1080p 60 FPS",
+      "group": "sports1080",
+      "total": 5,
+      "live": 0,
+      "dead": 5,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 1006,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 1000,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 1001,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 654,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 5,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 611,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "now-sports-1080",
+      "name": "NOW Sports 1080p 60 FPS",
+      "group": "sports1080",
+      "total": 5,
+      "live": 2,
+      "dead": 3,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 725,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 2706,
+          "contentType": "video/mp2t",
+          "durationMs": 1002,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 287,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 151,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 5,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-main-event-fhd",
+      "name": "Sky Sports Main Event FHD",
+      "group": "sports1080",
+      "total": 4,
+      "live": 1,
+      "dead": 3,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 142,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 794,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 142,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-premier-league-fhd",
+      "name": "Sky Sports Premier League FHD",
+      "group": "sports1080",
+      "total": 4,
+      "live": 1,
+      "dead": 3,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 145,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 142,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5562,
+          "contentType": "video/mp2t",
+          "durationMs": 821,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 151,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sportsnet-one-ca-1080",
+      "name": "Sportsnet One CA 1080p 60 FPS",
+      "group": "sports1080",
+      "total": 3,
+      "live": 1,
+      "dead": 2,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 140,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 6990,
+          "contentType": "video/mp2t",
+          "durationMs": 606,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "usa-network-1080",
+      "name": "USA Network 1080p 60 FPS",
+      "group": "sports1080",
+      "total": 5,
+      "live": 1,
+      "dead": 4,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 154,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 140,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 151,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5560,
+          "contentType": "video/mp2t",
+          "durationMs": 600,
+          "error": null
+        },
+        {
+          "index": 5,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "universo-1080",
+      "name": "Universo 1080p 60 FPS",
+      "group": "sports1080",
+      "total": 3,
+      "live": 1,
+      "dead": 2,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 140,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 144,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14128,
+          "contentType": "video/mp2t",
+          "durationMs": 744,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "bein-sports-uhd",
+      "name": "beIN Sports UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 1,
+      "dead": 2,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 143,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 206,
+          "bytes": 1024,
+          "contentType": "video/mp2t",
+          "durationMs": 483,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "digi-sport-uhd",
+      "name": "Digi Sport UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 0,
+      "dead": 3,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 144,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 144,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "eleven-sports-1-uhd",
+      "name": "Eleven Sports 1 UHD",
+      "group": "sports4k",
+      "total": 4,
+      "live": 1,
+      "dead": 3,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14095,
+          "contentType": "video/mp2t",
+          "durationMs": 730,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 140,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 145,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 151,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-1-uhd",
+      "name": "Sky Sports 1 UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 1,
+      "dead": 2,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 2467,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 145,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-2-uhd",
+      "name": "Sky Sports 2 UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 0,
+      "dead": 3,
+      "status": "DEAD",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 140,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 144,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 150,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-bundesliga-uhd",
+      "name": "Sky Sports Bundesliga UHD",
+      "group": "sports4k",
+      "total": 4,
+      "live": 3,
+      "dead": 1,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "mag.tivi-one-iptv.net",
+          "alive": false,
+          "httpStatus": null,
+          "bytes": 0,
+          "contentType": null,
+          "durationMs": 8001,
+          "error": "timeout"
+        },
+        {
+          "index": 2,
+          "host": "lefante01.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 388,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "fx0101.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 406,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "sny57.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 370,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-darts-uhd",
+      "name": "Sky Sports Darts UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 2,
+      "dead": 1,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 1278,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 144,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 1144,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-f1-uhd",
+      "name": "Sky Sports F1 UHD",
+      "group": "sports4k",
+      "total": 2,
+      "live": 1,
+      "dead": 1,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 11274,
+          "contentType": "video/mp2t",
+          "durationMs": 1884,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "chaotic-streams.cc",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 145,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-main-event",
+      "name": "Sky Sports Main Event",
+      "group": "sports4k",
+      "total": 5,
+      "live": 2,
+      "dead": 3,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 142,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 141,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 3250,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 1302,
+          "error": null
+        },
+        {
+          "index": 5,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 142,
+          "error": "HTTP 429 / no media bytes"
+        }
+      ]
+    },
+    {
+      "id": "sky-sports-uhd",
+      "name": "Sky Sports UHD",
+      "group": "sports4k",
+      "total": 4,
+      "live": 4,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 739,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "lefante01.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 156,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "fx0101.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 158,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "sny57.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 159,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "tf1-hdr-uhd",
+      "name": "TF1 HDR UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 2,
+      "dead": 1,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5562,
+          "contentType": "video/mp2t",
+          "durationMs": 581,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 142,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 11274,
+          "contentType": "video/mp2t",
+          "durationMs": 590,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "tnt-sports-uhd",
+      "name": "TNT Sports UHD",
+      "group": "sports4k",
+      "total": 7,
+      "live": 7,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 2706,
+          "contentType": "video/mp2t",
+          "durationMs": 722,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 982,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 713,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 1570,
+          "error": null
+        },
+        {
+          "index": 5,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 6990,
+          "contentType": "video/mp2t",
+          "durationMs": 701,
+          "error": null
+        },
+        {
+          "index": 6,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 11274,
+          "contentType": "video/mp2t",
+          "durationMs": 931,
+          "error": null
+        },
+        {
+          "index": 7,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 11274,
+          "contentType": "video/mp2t",
+          "durationMs": 799,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "tnt-sports-ultimate-uhd",
+      "name": "TNT Sports Ultimate UHD",
+      "group": "sports4k",
+      "total": 5,
+      "live": 5,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 7007,
+          "contentType": "video/mp2t",
+          "durationMs": 1991,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 2172,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 2194,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 2171,
+          "error": null
+        },
+        {
+          "index": 5,
+          "host": "185.80.197.55",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 1965,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "v-sport-plus-uhd",
+      "name": "V Sport+ UHD",
+      "group": "sports4k",
+      "total": 4,
+      "live": 3,
+      "dead": 1,
+      "status": "PARTIAL",
+      "sources": [
+        {
+          "index": 1,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 549,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "line.moja-teve9.me",
+          "alive": false,
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 142,
+          "error": "HTTP 429 / no media bytes"
+        },
+        {
+          "index": 3,
+          "host": "line.moja-teve9.me",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 11274,
+          "contentType": "video/mp2t",
+          "durationMs": 828,
+          "error": null
+        },
+        {
+          "index": 4,
+          "host": "chaotic-streams.cc",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 8418,
+          "contentType": "video/mp2t",
+          "durationMs": 574,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "dazn-1-uhd",
+      "name": "DAZN 1 UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 3,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "lefante01.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 155,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "fx0101.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 160,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "sny57.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 156,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "dazn-2-uhd",
+      "name": "DAZN 2 UHD",
+      "group": "sports4k",
+      "total": 3,
+      "live": 3,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "lefante01.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 356,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "fx0101.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 360,
+          "error": null
+        },
+        {
+          "index": 3,
+          "host": "sny57.com:8080",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 90,
+          "contentType": "application/json",
+          "durationMs": 322,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-1",
+      "name": "USA PEACOCK EVENT 1",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 1133,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 7007,
+          "contentType": "video/mp2t",
+          "durationMs": 1183,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-2",
+      "name": "USA PEACOCK EVENT 2",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 1072,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 2723,
+          "contentType": "video/mp2t",
+          "durationMs": 923,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-3",
+      "name": "USA PEACOCK EVENT 3",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 932,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 9863,
+          "contentType": "video/mp2t",
+          "durationMs": 974,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-4",
+      "name": "USA PEACOCK EVENT 4",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 896,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 2723,
+          "contentType": "video/mp2t",
+          "durationMs": 938,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-5",
+      "name": "USA PEACOCK EVENT 5",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5579,
+          "contentType": "video/mp2t",
+          "durationMs": 523,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 8435,
+          "contentType": "video/mp2t",
+          "durationMs": 525,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-6",
+      "name": "USA PEACOCK EVENT 6",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5579,
+          "contentType": "video/mp2t",
+          "durationMs": 537,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5579,
+          "contentType": "video/mp2t",
+          "durationMs": 537,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-7",
+      "name": "USA PEACOCK EVENT 7",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 2723,
+          "contentType": "video/mp2t",
+          "durationMs": 850,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 696,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-8",
+      "name": "USA PEACOCK EVENT 8",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 605,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 592,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-9",
+      "name": "USA PEACOCK EVENT 9",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 615,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 4151,
+          "contentType": "video/mp2t",
+          "durationMs": 575,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-10",
+      "name": "USA PEACOCK EVENT 10",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 8435,
+          "contentType": "video/mp2t",
+          "durationMs": 1015,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 919,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-11",
+      "name": "USA PEACOCK EVENT 11",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 7007,
+          "contentType": "video/mp2t",
+          "durationMs": 752,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 11291,
+          "contentType": "video/mp2t",
+          "durationMs": 754,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-12",
+      "name": "USA PEACOCK EVENT 12",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 12719,
+          "contentType": "video/mp2t",
+          "durationMs": 658,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 614,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-13",
+      "name": "USA PEACOCK EVENT 13",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 691,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5579,
+          "contentType": "video/mp2t",
+          "durationMs": 532,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-14",
+      "name": "USA PEACOCK EVENT 14",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 531,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 11291,
+          "contentType": "video/mp2t",
+          "durationMs": 528,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-15",
+      "name": "USA PEACOCK EVENT 15",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 699,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 607,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-16",
+      "name": "USA PEACOCK EVENT 16",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 575,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 566,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-17",
+      "name": "USA PEACOCK EVENT 17",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 8435,
+          "contentType": "video/mp2t",
+          "durationMs": 846,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 520,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-18",
+      "name": "USA PEACOCK EVENT 18",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 535,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5579,
+          "contentType": "video/mp2t",
+          "durationMs": 521,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-19",
+      "name": "USA PEACOCK EVENT 19",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 9863,
+          "contentType": "video/mp2t",
+          "durationMs": 523,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 1295,
+          "contentType": "video/mp2t",
+          "durationMs": 519,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-20",
+      "name": "USA PEACOCK EVENT 20",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 5579,
+          "contentType": "video/mp2t",
+          "durationMs": 576,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 7007,
+          "contentType": "video/mp2t",
+          "durationMs": 713,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-21",
+      "name": "USA PEACOCK EVENT 21",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 8435,
+          "contentType": "video/mp2t",
+          "durationMs": 731,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 708,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "peacock-event-22",
+      "name": "USA PEACOCK EVENT 22",
+      "group": "peacock",
+      "total": 2,
+      "live": 2,
+      "dead": 0,
+      "status": "LIVE",
+      "sources": [
+        {
+          "index": 1,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 4151,
+          "contentType": "video/mp2t",
+          "durationMs": 557,
+          "error": null
+        },
+        {
+          "index": 2,
+          "host": "nexusconnects.org",
+          "alive": true,
+          "httpStatus": 200,
+          "bytes": 14147,
+          "contentType": "video/mp2t",
+          "durationMs": 579,
+          "error": null
+        }
+      ]
+    }
+  ]
+}
