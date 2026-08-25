@@ -1,15 +1,23 @@
 {
-  "checkedAt": "2026-08-25T14:42:29.870Z",
+  "checkedAt": "2026-08-25T14:46:29.453Z",
   "timeoutMs": 8000,
   "concurrency": 8,
+  "meaning": {
+    "LIVE": "GitHub runner received media bytes",
+    "PARTIAL": "At least one source confirmed LIVE; other sources may be UNKNOWN/DEAD",
+    "UNKNOWN": "Runner could not verify; do not treat as dead",
+    "DEAD": "All sources returned explicit 404/410"
+  },
   "totals": {
     "channels": 56,
     "streams": 146,
-    "liveStreams": 91,
-    "deadStreams": 55,
-    "liveChannels": 27,
+    "liveStreams": 78,
+    "unknownStreams": 68,
+    "deadStreams": 0,
+    "liveChannels": 23,
     "partialChannels": 16,
-    "deadChannels": 13
+    "unknownChannels": 17,
+    "deadChannels": 0
   },
   "channels": [
     {
@@ -18,18 +26,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 904,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 1196,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -39,18 +48,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 839,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 1131,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -60,18 +70,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 1053,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 1733,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -81,18 +92,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 1045,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 1728,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -102,18 +114,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 1262,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 2000,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -123,18 +136,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 1258,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 1996,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -144,18 +158,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 1253,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 1991,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -165,18 +180,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 1260,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 2011,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -186,18 +202,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 827,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 1128,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -207,18 +224,19 @@
       "group": "vtv",
       "total": 1,
       "live": 0,
-      "dead": 1,
-      "status": "DEAD",
+      "unknown": 1,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 403,
           "bytes": 150,
           "contentType": "text/html",
-          "durationMs": 201,
-          "error": "HTTP 403 / no media bytes"
+          "durationMs": 259,
+          "note": "HTTP 403 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -227,49 +245,50 @@
       "name": "CBS Sports 1080p 60 FPS",
       "group": "sports1080",
       "total": 4,
-      "live": 2,
-      "dead": 2,
+      "live": 3,
+      "unknown": 1,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 1160,
-          "error": null
+          "durationMs": 647,
+          "note": null
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 574,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14128,
+          "contentType": "video/mp2t",
+          "durationMs": 657,
+          "note": null
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 1039,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14128,
+          "contentType": "video/mp2t",
+          "durationMs": 878,
+          "note": null
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14128,
-          "contentType": "video/mp2t",
-          "durationMs": 1493,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 308,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -278,59 +297,60 @@
       "name": "NBC Sports 1080p 60 FPS",
       "group": "sports1080",
       "total": 5,
-      "live": 0,
-      "dead": 5,
-      "status": "DEAD",
+      "live": 3,
+      "unknown": 2,
+      "dead": 0,
+      "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 1006,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14128,
+          "contentType": "video/mp2t",
+          "durationMs": 1073,
+          "note": null
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 1000,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 197,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 1001,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14128,
+          "contentType": "video/mp2t",
+          "durationMs": 1290,
+          "note": null
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 654,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14095,
+          "contentType": "video/mp2t",
+          "durationMs": 881,
+          "note": null
         },
         {
           "index": 5,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 611,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 232,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -339,59 +359,60 @@
       "name": "NOW Sports 1080p 60 FPS",
       "group": "sports1080",
       "total": 5,
-      "live": 2,
-      "dead": 3,
+      "live": 1,
+      "unknown": 4,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 725,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 90,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 2706,
-          "contentType": "video/mp2t",
-          "durationMs": 1002,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 287,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 5562,
+          "contentType": "video/mp2t",
+          "durationMs": 731,
+          "note": null
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 151,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 5,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 212,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -400,49 +421,50 @@
       "name": "Sky Sports Main Event FHD",
       "group": "sports1080",
       "total": 4,
-      "live": 1,
-      "dead": 3,
-      "status": "PARTIAL",
+      "live": 0,
+      "unknown": 4,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 142,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 90,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 86,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 794,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 109,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 142,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -452,48 +474,49 @@
       "group": "sports1080",
       "total": 4,
       "live": 1,
-      "dead": 3,
+      "unknown": 3,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "chaotic-streams.cc",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 145,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 523,
+          "note": null
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 142,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 5562,
-          "contentType": "video/mp2t",
-          "durationMs": 821,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 151,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 101,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -502,39 +525,40 @@
       "name": "Sportsnet One CA 1080p 60 FPS",
       "group": "sports1080",
       "total": 3,
-      "live": 1,
-      "dead": 2,
+      "live": 2,
+      "unknown": 1,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 660,
+          "note": null
         },
         {
           "index": 2,
           "host": "chaotic-streams.cc",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 140,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 8418,
+          "contentType": "video/mp2t",
+          "durationMs": 558,
+          "note": null
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 6990,
-          "contentType": "video/mp2t",
-          "durationMs": 606,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -543,59 +567,60 @@
       "name": "USA Network 1080p 60 FPS",
       "group": "sports1080",
       "total": 5,
-      "live": 1,
-      "dead": 4,
+      "live": 2,
+      "unknown": 3,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 154,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 90,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 140,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 8418,
+          "contentType": "video/mp2t",
+          "durationMs": 568,
+          "note": null
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 151,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 86,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 5560,
+          "bytes": 2704,
           "contentType": "video/mp2t",
-          "durationMs": 600,
-          "error": null
+          "durationMs": 486,
+          "note": null
         },
         {
           "index": 5,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 94,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -605,38 +630,39 @@
       "group": "sports1080",
       "total": 3,
       "live": 1,
-      "dead": 2,
+      "unknown": 2,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 140,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 144,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14128,
+          "contentType": "video/mp2t",
+          "durationMs": 554,
+          "note": null
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14128,
-          "contentType": "video/mp2t",
-          "durationMs": 744,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -646,38 +672,39 @@
       "group": "sports4k",
       "total": 3,
       "live": 1,
-      "dead": 2,
+      "unknown": 2,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 143,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 96,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 206,
+          "bytes": 1024,
+          "contentType": "video/mp2t",
+          "durationMs": 273,
+          "note": null
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 206,
-          "bytes": 1024,
-          "contentType": "video/mp2t",
-          "durationMs": 483,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -687,38 +714,39 @@
       "group": "sports4k",
       "total": 3,
       "live": 0,
-      "dead": 3,
-      "status": "DEAD",
+      "unknown": 3,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 144,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 97,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 144,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -728,48 +756,49 @@
       "group": "sports4k",
       "total": 4,
       "live": 1,
-      "dead": 3,
+      "unknown": 3,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14095,
-          "contentType": "video/mp2t",
-          "durationMs": 730,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 95,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 140,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 440,
+          "note": null
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 145,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 151,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 94,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -779,38 +808,39 @@
       "group": "sports4k",
       "total": 3,
       "live": 1,
-      "dead": 2,
+      "unknown": 2,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 11274,
+          "contentType": "video/mp2t",
+          "durationMs": 2308,
+          "note": null
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 2467,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 145,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 88,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -820,38 +850,39 @@
       "group": "sports4k",
       "total": 3,
       "live": 0,
-      "dead": 3,
-      "status": "DEAD",
+      "unknown": 3,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 140,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 144,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 94,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 150,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -860,49 +891,50 @@
       "name": "Sky Sports Bundesliga UHD",
       "group": "sports4k",
       "total": 4,
-      "live": 3,
-      "dead": 1,
-      "status": "PARTIAL",
+      "live": 0,
+      "unknown": 4,
+      "dead": 0,
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "mag.tivi-one-iptv.net",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": null,
           "bytes": 0,
           "contentType": null,
-          "durationMs": 8001,
-          "error": "timeout"
+          "durationMs": 8000,
+          "note": "timeout - inconclusive"
         },
         {
           "index": 2,
           "host": "lefante01.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 388,
-          "error": null
+          "durationMs": 304,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "fx0101.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 406,
-          "error": null
+          "durationMs": 348,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 4,
           "host": "sny57.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 370,
-          "error": null
+          "durationMs": 277,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -912,38 +944,39 @@
       "group": "sports4k",
       "total": 3,
       "live": 2,
-      "dead": 1,
+      "unknown": 1,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 1278,
-          "error": null
+          "durationMs": 1077,
+          "note": null
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 144,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14130,
+          "bytes": 8418,
           "contentType": "video/mp2t",
-          "durationMs": 1144,
-          "error": null
+          "durationMs": 1084,
+          "note": null
         }
       ]
     },
@@ -953,28 +986,29 @@
       "group": "sports4k",
       "total": 2,
       "live": 1,
-      "dead": 1,
+      "unknown": 1,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 11274,
-          "contentType": "video/mp2t",
-          "durationMs": 1884,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "chaotic-streams.cc",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 145,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 1108,
+          "note": null
         }
       ]
     },
@@ -983,59 +1017,60 @@
       "name": "Sky Sports Main Event",
       "group": "sports4k",
       "total": 5,
-      "live": 2,
-      "dead": 3,
+      "live": 1,
+      "unknown": 4,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 142,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 86,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 141,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 84,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 3250,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 89,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 4,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 1302,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 93,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 5,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 142,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 11274,
+          "contentType": "video/mp2t",
+          "durationMs": 513,
+          "note": null
         }
       ]
     },
@@ -1044,49 +1079,50 @@
       "name": "Sky Sports UHD",
       "group": "sports4k",
       "total": 4,
-      "live": 4,
+      "live": 0,
+      "unknown": 4,
       "dead": 0,
-      "status": "LIVE",
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 739,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 85,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "lefante01.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 156,
-          "error": null
+          "durationMs": 94,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "fx0101.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 158,
-          "error": null
+          "durationMs": 218,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 4,
           "host": "sny57.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 159,
-          "error": null
+          "durationMs": 97,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -1096,38 +1132,39 @@
       "group": "sports4k",
       "total": 3,
       "live": 2,
-      "dead": 1,
+      "unknown": 1,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 5562,
+          "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 581,
-          "error": null
+          "durationMs": 583,
+          "note": null
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
+          "state": "UNKNOWN",
           "httpStatus": 429,
           "bytes": 162,
           "contentType": "text/html",
-          "durationMs": 142,
-          "error": "HTTP 429 / no media bytes"
+          "durationMs": 86,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 11274,
+          "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 590,
-          "error": null
+          "durationMs": 538,
+          "note": null
         }
       ]
     },
@@ -1136,79 +1173,80 @@
       "name": "TNT Sports UHD",
       "group": "sports4k",
       "total": 7,
-      "live": 7,
+      "live": 6,
+      "unknown": 1,
       "dead": 0,
-      "status": "LIVE",
+      "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 2706,
-          "contentType": "video/mp2t",
-          "durationMs": 722,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": 429,
+          "bytes": 162,
+          "contentType": "text/html",
+          "durationMs": 86,
+          "note": "HTTP 429 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 982,
-          "error": null
+          "durationMs": 612,
+          "note": null
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 713,
-          "error": null
+          "durationMs": 635,
+          "note": null
         },
         {
           "index": 4,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 1570,
-          "error": null
+          "durationMs": 809,
+          "note": null
         },
         {
           "index": 5,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 6990,
+          "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 701,
-          "error": null
+          "durationMs": 632,
+          "note": null
         },
         {
           "index": 6,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 11274,
+          "bytes": 14130,
           "contentType": "video/mp2t",
-          "durationMs": 931,
-          "error": null
+          "durationMs": 650,
+          "note": null
         },
         {
           "index": 7,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 11274,
+          "bytes": 5562,
           "contentType": "video/mp2t",
-          "durationMs": 799,
-          "error": null
+          "durationMs": 617,
+          "note": null
         }
       ]
     },
@@ -1218,58 +1256,59 @@
       "group": "sports4k",
       "total": 5,
       "live": 5,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 7007,
+          "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 1991,
-          "error": null
+          "durationMs": 1906,
+          "note": null
         },
         {
           "index": 2,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 2172,
-          "error": null
+          "durationMs": 1828,
+          "note": null
         },
         {
           "index": 3,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 5579,
           "contentType": "video/mp2t",
-          "durationMs": 2194,
-          "error": null
+          "durationMs": 1865,
+          "note": null
         },
         {
           "index": 4,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 2171,
-          "error": null
+          "durationMs": 1814,
+          "note": null
         },
         {
           "index": 5,
           "host": "185.80.197.55",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 1965,
-          "error": null
+          "durationMs": 1732,
+          "note": null
         }
       ]
     },
@@ -1278,49 +1317,50 @@
       "name": "V Sport+ UHD",
       "group": "sports4k",
       "total": 4,
-      "live": 3,
-      "dead": 1,
+      "live": 1,
+      "unknown": 3,
+      "dead": 0,
       "status": "PARTIAL",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 549,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": null,
+          "bytes": 0,
+          "contentType": null,
+          "durationMs": 451,
+          "note": "network error - inconclusive: fetch failed"
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "alive": false,
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 142,
-          "error": "HTTP 429 / no media bytes"
+          "state": "LIVE",
+          "httpStatus": 200,
+          "bytes": 14130,
+          "contentType": "video/mp2t",
+          "durationMs": 456,
+          "note": null
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 11274,
-          "contentType": "video/mp2t",
-          "durationMs": 828,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": null,
+          "bytes": 0,
+          "contentType": null,
+          "durationMs": 288,
+          "note": "network error - inconclusive: fetch failed"
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "alive": true,
-          "httpStatus": 200,
-          "bytes": 8418,
-          "contentType": "video/mp2t",
-          "durationMs": 574,
-          "error": null
+          "state": "UNKNOWN",
+          "httpStatus": null,
+          "bytes": 0,
+          "contentType": null,
+          "durationMs": 586,
+          "note": "network error - inconclusive: fetch failed"
         }
       ]
     },
@@ -1329,39 +1369,40 @@
       "name": "DAZN 1 UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 3,
+      "live": 0,
+      "unknown": 3,
       "dead": 0,
-      "status": "LIVE",
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "lefante01.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 155,
-          "error": null
+          "durationMs": 99,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "fx0101.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 160,
-          "error": null
+          "durationMs": 99,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "sny57.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 156,
-          "error": null
+          "durationMs": 97,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -1370,39 +1411,40 @@
       "name": "DAZN 2 UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 3,
+      "live": 0,
+      "unknown": 3,
       "dead": 0,
-      "status": "LIVE",
+      "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "lefante01.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 356,
-          "error": null
+          "durationMs": 96,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 2,
           "host": "fx0101.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 360,
-          "error": null
+          "durationMs": 91,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         },
         {
           "index": 3,
           "host": "sny57.com:8080",
-          "alive": true,
+          "state": "UNKNOWN",
           "httpStatus": 200,
           "bytes": 90,
           "contentType": "application/json",
-          "durationMs": 322,
-          "error": null
+          "durationMs": 95,
+          "note": "HTTP 200 - inconclusive from GitHub runner"
         }
       ]
     },
@@ -1412,28 +1454,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 1133,
-          "error": null
+          "durationMs": 782,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 7007,
+          "bytes": 5579,
           "contentType": "video/mp2t",
-          "durationMs": 1183,
-          "error": null
+          "durationMs": 892,
+          "note": null
         }
       ]
     },
@@ -1443,28 +1486,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 4151,
           "contentType": "video/mp2t",
-          "durationMs": 1072,
-          "error": null
+          "durationMs": 1080,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 2723,
+          "bytes": 4151,
           "contentType": "video/mp2t",
-          "durationMs": 923,
-          "error": null
+          "durationMs": 806,
+          "note": null
         }
       ]
     },
@@ -1474,28 +1518,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 932,
-          "error": null
+          "durationMs": 940,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 9863,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 974,
-          "error": null
+          "durationMs": 944,
+          "note": null
         }
       ]
     },
@@ -1505,28 +1550,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 1295,
           "contentType": "video/mp2t",
-          "durationMs": 896,
-          "error": null
+          "durationMs": 710,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 2723,
+          "bytes": 4151,
           "contentType": "video/mp2t",
-          "durationMs": 938,
-          "error": null
+          "durationMs": 462,
+          "note": null
         }
       ]
     },
@@ -1536,28 +1582,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 5579,
           "contentType": "video/mp2t",
-          "durationMs": 523,
-          "error": null
+          "durationMs": 502,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 8435,
+          "bytes": 7007,
           "contentType": "video/mp2t",
-          "durationMs": 525,
-          "error": null
+          "durationMs": 462,
+          "note": null
         }
       ]
     },
@@ -1567,28 +1614,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 5579,
+          "bytes": 7007,
           "contentType": "video/mp2t",
-          "durationMs": 537,
-          "error": null
+          "durationMs": 470,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 5579,
+          "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 537,
-          "error": null
+          "durationMs": 507,
+          "note": null
         }
       ]
     },
@@ -1598,28 +1646,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 2723,
+          "bytes": 1295,
           "contentType": "video/mp2t",
-          "durationMs": 850,
-          "error": null
+          "durationMs": 628,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 1295,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 696,
-          "error": null
+          "durationMs": 467,
+          "note": null
         }
       ]
     },
@@ -1629,28 +1678,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 5579,
           "contentType": "video/mp2t",
-          "durationMs": 605,
-          "error": null
+          "durationMs": 468,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 1295,
+          "bytes": 4151,
           "contentType": "video/mp2t",
-          "durationMs": 592,
-          "error": null
+          "durationMs": 518,
+          "note": null
         }
       ]
     },
@@ -1660,28 +1710,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 615,
-          "error": null
+          "durationMs": 617,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 4151,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 575,
-          "error": null
+          "durationMs": 464,
+          "note": null
         }
       ]
     },
@@ -1691,28 +1742,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 8435,
+          "bytes": 5579,
           "contentType": "video/mp2t",
-          "durationMs": 1015,
-          "error": null
+          "durationMs": 533,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 1295,
           "contentType": "video/mp2t",
-          "durationMs": 919,
-          "error": null
+          "durationMs": 609,
+          "note": null
         }
       ]
     },
@@ -1722,28 +1774,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 7007,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 752,
-          "error": null
+          "durationMs": 499,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 11291,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 754,
-          "error": null
+          "durationMs": 659,
+          "note": null
         }
       ]
     },
@@ -1753,28 +1806,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 12719,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 658,
-          "error": null
+          "durationMs": 833,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 614,
-          "error": null
+          "durationMs": 491,
+          "note": null
         }
       ]
     },
@@ -1784,28 +1838,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 1295,
+          "bytes": 5579,
           "contentType": "video/mp2t",
-          "durationMs": 691,
-          "error": null
+          "durationMs": 639,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 5579,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 532,
-          "error": null
+          "durationMs": 485,
+          "note": null
         }
       ]
     },
@@ -1815,28 +1870,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 531,
-          "error": null
+          "durationMs": 469,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 11291,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 528,
-          "error": null
+          "durationMs": 998,
+          "note": null
         }
       ]
     },
@@ -1846,28 +1902,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 1295,
+          "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 699,
-          "error": null
+          "durationMs": 473,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 1295,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 607,
-          "error": null
+          "durationMs": 437,
+          "note": null
         }
       ]
     },
@@ -1877,28 +1934,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 575,
-          "error": null
+          "durationMs": 475,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
           "bytes": 1295,
           "contentType": "video/mp2t",
-          "durationMs": 566,
-          "error": null
+          "durationMs": 542,
+          "note": null
         }
       ]
     },
@@ -1908,28 +1966,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 8435,
+          "bytes": 5579,
           "contentType": "video/mp2t",
-          "durationMs": 846,
-          "error": null
+          "durationMs": 483,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 1295,
+          "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 520,
-          "error": null
+          "durationMs": 535,
+          "note": null
         }
       ]
     },
@@ -1939,28 +1998,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 1295,
           "contentType": "video/mp2t",
-          "durationMs": 535,
-          "error": null
+          "durationMs": 598,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 5579,
+          "bytes": 11291,
           "contentType": "video/mp2t",
-          "durationMs": 521,
-          "error": null
+          "durationMs": 505,
+          "note": null
         }
       ]
     },
@@ -1970,28 +2030,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 9863,
+          "bytes": 1295,
           "contentType": "video/mp2t",
-          "durationMs": 523,
-          "error": null
+          "durationMs": 490,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 1295,
+          "bytes": 4151,
           "contentType": "video/mp2t",
-          "durationMs": 519,
-          "error": null
+          "durationMs": 475,
+          "note": null
         }
       ]
     },
@@ -2001,28 +2062,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 5579,
+          "bytes": 8435,
           "contentType": "video/mp2t",
-          "durationMs": 576,
-          "error": null
+          "durationMs": 677,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 7007,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 713,
-          "error": null
+          "durationMs": 458,
+          "note": null
         }
       ]
     },
@@ -2032,28 +2094,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 8435,
+          "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 731,
-          "error": null
+          "durationMs": 490,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 2723,
           "contentType": "video/mp2t",
-          "durationMs": 708,
-          "error": null
+          "durationMs": 454,
+          "note": null
         }
       ]
     },
@@ -2063,28 +2126,29 @@
       "group": "peacock",
       "total": 2,
       "live": 2,
+      "unknown": 0,
       "dead": 0,
       "status": "LIVE",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 4151,
+          "bytes": 14147,
           "contentType": "video/mp2t",
-          "durationMs": 557,
-          "error": null
+          "durationMs": 450,
+          "note": null
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "alive": true,
+          "state": "LIVE",
           "httpStatus": 200,
-          "bytes": 14147,
+          "bytes": 1295,
           "contentType": "video/mp2t",
-          "durationMs": 579,
-          "error": null
+          "durationMs": 449,
+          "note": null
         }
       ]
     }
