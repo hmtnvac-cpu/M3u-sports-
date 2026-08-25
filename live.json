@@ -1,18 +1,1 @@
-[
-  {
-    "id": "nottingham-forest-leeds-20260826",
-    "time": "02:00",
-    "date": "26/08/2026",
-    "home": "Nottingham Forest",
-    "away": "Leeds United",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
-    "channels1080": [
-      "sky-sports-main-event-fhd"
-    ],
-    "channels4k": [
-      "sky-sports-main-event",
-      "sky-sports-uhd"
-    ]
-  }
-]
+[]
