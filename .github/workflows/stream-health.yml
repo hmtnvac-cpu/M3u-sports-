@@ -2,7 +2,7 @@ name: Stream Health Check
 
 on:
   schedule:
-    - cron: "30 23 * * *" # 06:30 Asia/Ho_Chi_Minh
+    - cron: "15 23 * * *" # 06:15 Asia/Ho_Chi_Minh
   workflow_dispatch:
   push:
     paths:
