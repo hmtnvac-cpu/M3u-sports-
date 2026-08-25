@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: "30 23 * * *" # 06:30 Asia/Ho_Chi_Minh
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/stream-health.yml"
+      - "scripts/check-streams.js"
 
 permissions:
   contents: write
