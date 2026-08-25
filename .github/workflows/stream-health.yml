@@ -8,6 +8,7 @@ on:
     paths:
       - ".github/workflows/stream-health.yml"
       - "scripts/check-streams.js"
+      - "scripts/rank-streams.js"
       - "package.json"
 
 permissions:
@@ -34,6 +35,9 @@ jobs:
         env:
           STREAM_CONCURRENCY: "4"
         run: npm run check-streams
+
+      - name: Rank fastest usable sources
+        run: node scripts/rank-streams.js
 
       - name: Commit latest health report
         run: |
