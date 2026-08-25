@@ -1,0 +1,41 @@
+name: Stream Health Check
+
+on:
+  schedule:
+    - cron: "30 23 * * *" # 06:30 Asia/Ho_Chi_Minh
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check-streams:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Probe existing streams
+        env:
+          STREAM_TIMEOUT_MS: "8000"
+          STREAM_CONCURRENCY: "8"
+        run: node scripts/check-streams.js
+
+      - name: Commit latest health report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- stream-health.json
+          if git diff --cached --quiet; then
+            echo "No stream-health changes"
+          else
+            git commit -m "Update daily stream health report"
+            git push
+          fi
