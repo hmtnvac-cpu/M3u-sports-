@@ -1,23 +1,23 @@
 {
-  "checkedAt": "2026-08-25T14:46:29.453Z",
-  "timeoutMs": 8000,
-  "concurrency": 8,
+  "checkedAt": "2026-08-25T14:53:23.548Z",
+  "method": "stalker-checker-style ffprobe verification",
+  "concurrency": 4,
   "meaning": {
-    "LIVE": "GitHub runner received media bytes",
-    "PARTIAL": "At least one source confirmed LIVE; other sources may be UNKNOWN/DEAD",
-    "UNKNOWN": "Runner could not verify; do not treat as dead",
-    "DEAD": "All sources returned explicit 404/410"
+    "VERIFIED": "ffprobe detected a real video stream and extracted video metadata",
+    "PARTIAL_VERIFIED": "at least one source is VERIFIED",
+    "ALIVE_UNVERIFIED": "media bytes were received but ffprobe did not verify video metadata",
+    "UNKNOWN": "not verified from the GitHub runner; do not treat as dead"
   },
   "totals": {
     "channels": 56,
     "streams": 146,
-    "liveStreams": 78,
-    "unknownStreams": 68,
-    "deadStreams": 0,
-    "liveChannels": 23,
-    "partialChannels": 16,
-    "unknownChannels": 17,
-    "deadChannels": 0
+    "verifiedStreams": 8,
+    "aliveUnverifiedStreams": 113,
+    "unknownStreams": 25,
+    "verifiedChannels": 0,
+    "partialVerifiedChannels": 2,
+    "aliveUnverifiedChannels": 44,
+    "unknownChannels": 10
   },
   "channels": [
     {
@@ -25,20 +25,28 @@
       "name": "VTV1",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 1196,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -47,20 +55,28 @@
       "name": "VTV2",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 1131,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -69,20 +85,28 @@
       "name": "VTV3",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 1733,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -91,20 +115,28 @@
       "name": "VTV4",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 1728,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -113,20 +145,28 @@
       "name": "VTV5",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 2000,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -135,20 +175,28 @@
       "name": "VTV6",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 1996,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -157,20 +205,28 @@
       "name": "VTV7",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 1991,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -179,20 +235,28 @@
       "name": "VTV8",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 2011,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -201,20 +265,28 @@
       "name": "VTV9",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 1128,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -223,20 +295,28 @@
       "name": "VTV10",
       "group": "vtv",
       "total": 1,
-      "live": 0,
+      "verified": 0,
+      "aliveUnverified": 0,
       "unknown": 1,
-      "dead": 0,
       "status": "UNKNOWN",
       "sources": [
         {
           "index": 1,
           "host": "vips-livecdn.fptplay.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 403,
-          "bytes": 150,
-          "contentType": "text/html",
-          "durationMs": 259,
-          "note": "HTTP 403 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -245,50 +325,82 @@
       "name": "CBS Sports 1080p 60 FPS",
       "group": "sports1080",
       "total": 4,
-      "live": 3,
+      "verified": 0,
+      "aliveUnverified": 3,
       "unknown": 1,
-      "dead": 0,
-      "status": "PARTIAL",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 647,
-          "note": null
+          "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
+          "httpStatus": 429,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 951,
+          "startupSeconds": 0.95,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14128,
-          "contentType": "video/mp2t",
-          "durationMs": 657,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 787,
+          "startupSeconds": 0.79,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14128,
-          "contentType": "video/mp2t",
-          "durationMs": 878,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 308,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 678,
+          "startupSeconds": 0.68,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -297,60 +409,100 @@
       "name": "NBC Sports 1080p 60 FPS",
       "group": "sports1080",
       "total": 5,
-      "live": 3,
+      "verified": 0,
+      "aliveUnverified": 3,
       "unknown": 2,
-      "dead": 0,
-      "status": "PARTIAL",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14128,
-          "contentType": "video/mp2t",
-          "durationMs": 1073,
-          "note": null
+          "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
+          "httpStatus": 429,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 197,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1096,
+          "startupSeconds": 1.1,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14128,
-          "contentType": "video/mp2t",
-          "durationMs": 1290,
-          "note": null
+          "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
+          "httpStatus": 429,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 671,
+          "startupSeconds": 0.67,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14095,
-          "contentType": "video/mp2t",
-          "durationMs": 881,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 5,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 232,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1018,
+          "startupSeconds": 1.02,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -359,60 +511,100 @@
       "name": "NOW Sports 1080p 60 FPS",
       "group": "sports1080",
       "total": 5,
-      "live": 1,
-      "unknown": 4,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 2,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 90,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 619,
+          "startupSeconds": 0.62,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 343,
+          "startupSeconds": 0.34,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 5562,
-          "contentType": "video/mp2t",
-          "durationMs": 731,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 5,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 212,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 498,
+          "startupSeconds": 0.5,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -421,50 +613,82 @@
       "name": "Sky Sports Main Event FHD",
       "group": "sports1080",
       "total": 4,
-      "live": 0,
-      "unknown": 4,
-      "dead": 0,
-      "status": "UNKNOWN",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 1,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 90,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 86,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 565,
+          "startupSeconds": 0.57,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 109,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 619,
+          "startupSeconds": 0.62,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 331,
+          "startupSeconds": 0.33,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -473,50 +697,82 @@
       "name": "Sky Sports Premier League FHD",
       "group": "sports1080",
       "total": 4,
-      "live": 1,
-      "unknown": 3,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 4,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 506,
+          "startupSeconds": 0.51,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 523,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 559,
+          "startupSeconds": 0.56,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 531,
+          "startupSeconds": 0.53,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 101,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 227,
+          "startupSeconds": 0.23,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -525,40 +781,64 @@
       "name": "Sportsnet One CA 1080p 60 FPS",
       "group": "sports1080",
       "total": 3,
-      "live": 2,
-      "unknown": 1,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 532,
+          "startupSeconds": 0.53,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 660,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 477,
+          "startupSeconds": 0.48,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8418,
-          "contentType": "video/mp2t",
-          "durationMs": 558,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 512,
+          "startupSeconds": 0.51,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -567,60 +847,100 @@
       "name": "USA Network 1080p 60 FPS",
       "group": "sports1080",
       "total": 5,
-      "live": 2,
-      "unknown": 3,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 4,
+      "unknown": 1,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 90,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 627,
+          "startupSeconds": 0.63,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8418,
-          "contentType": "video/mp2t",
-          "durationMs": 568,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 86,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 624,
+          "startupSeconds": 0.62,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 597,
+          "startupSeconds": 0.6,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2704,
-          "contentType": "video/mp2t",
-          "durationMs": 486,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 5,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 94,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 548,
+          "startupSeconds": 0.55,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -629,40 +949,64 @@
       "name": "Universo 1080p 60 FPS",
       "group": "sports1080",
       "total": 3,
-      "live": 1,
-      "unknown": 2,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 540,
+          "startupSeconds": 0.54,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 538,
+          "startupSeconds": 0.54,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14128,
-          "contentType": "video/mp2t",
-          "durationMs": 554,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 511,
+          "startupSeconds": 0.51,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -671,40 +1015,64 @@
       "name": "beIN Sports UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 1,
-      "unknown": 2,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 96,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 771,
+          "startupSeconds": 0.77,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
-          "httpStatus": 206,
-          "bytes": 1024,
-          "contentType": "video/mp2t",
-          "durationMs": 273,
-          "note": null
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 341,
+          "startupSeconds": 0.34,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 321,
+          "startupSeconds": 0.32,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -713,40 +1081,64 @@
       "name": "Digi Sport UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 0,
-      "unknown": 3,
-      "dead": 0,
-      "status": "UNKNOWN",
+      "verified": 0,
+      "aliveUnverified": 2,
+      "unknown": 1,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 584,
+          "startupSeconds": 0.58,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 97,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 328,
+          "startupSeconds": 0.33,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -755,50 +1147,82 @@
       "name": "Eleven Sports 1 UHD",
       "group": "sports4k",
       "total": 4,
-      "live": 1,
-      "unknown": 3,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 1,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 95,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 665,
+          "startupSeconds": 0.67,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 478,
+          "startupSeconds": 0.48,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 440,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 94,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 480,
+          "startupSeconds": 0.48,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -807,40 +1231,64 @@
       "name": "Sky Sports 1 UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 1,
-      "unknown": 2,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 2288,
+          "startupSeconds": 2.29,
+          "speed": "NORMAL",
           "httpStatus": 200,
-          "bytes": 11274,
-          "contentType": "video/mp2t",
-          "durationMs": 2308,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 2441,
+          "startupSeconds": 2.44,
+          "speed": "NORMAL",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 88,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 2720,
+          "startupSeconds": 2.72,
+          "speed": "NORMAL",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -849,40 +1297,64 @@
       "name": "Sky Sports 2 UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 0,
-      "unknown": 3,
-      "dead": 0,
-      "status": "UNKNOWN",
+      "verified": 0,
+      "aliveUnverified": 2,
+      "unknown": 1,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 94,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 474,
+          "startupSeconds": 0.47,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 558,
+          "startupSeconds": 0.56,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -891,50 +1363,82 @@
       "name": "Sky Sports Bundesliga UHD",
       "group": "sports4k",
       "total": 4,
-      "live": 0,
-      "unknown": 4,
-      "dead": 0,
-      "status": "UNKNOWN",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 1,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "mag.tivi-one-iptv.net",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": null,
-          "bytes": 0,
-          "contentType": null,
-          "durationMs": 8000,
-          "note": "timeout - inconclusive"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "lefante01.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 376,
+          "startupSeconds": 0.38,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 304,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "fx0101.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 328,
+          "startupSeconds": 0.33,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 348,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "sny57.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 334,
+          "startupSeconds": 0.33,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 277,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -943,40 +1447,64 @@
       "name": "Sky Sports Darts UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 2,
-      "unknown": 1,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1177,
+          "startupSeconds": 1.18,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 1077,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1255,
+          "startupSeconds": 1.26,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 930,
+          "startupSeconds": 0.93,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8418,
-          "contentType": "video/mp2t",
-          "durationMs": 1084,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -985,30 +1513,46 @@
       "name": "Sky Sports F1 UHD",
       "group": "sports4k",
       "total": 2,
-      "live": 1,
-      "unknown": 1,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 2,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 982,
+          "startupSeconds": 0.98,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1055,
+          "startupSeconds": 1.06,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 1108,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1017,60 +1561,100 @@
       "name": "Sky Sports Main Event",
       "group": "sports4k",
       "total": 5,
-      "live": 1,
-      "unknown": 4,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 2,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 86,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 84,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 593,
+          "startupSeconds": 0.59,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 89,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 3183,
+          "startupSeconds": 3.18,
+          "speed": "NORMAL",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 93,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 569,
+          "startupSeconds": 0.57,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 5,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 11274,
-          "contentType": "video/mp2t",
-          "durationMs": 513,
-          "note": null
+          "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
+          "httpStatus": 429,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1079,50 +1663,82 @@
       "name": "Sky Sports UHD",
       "group": "sports4k",
       "total": 4,
-      "live": 0,
-      "unknown": 4,
-      "dead": 0,
-      "status": "UNKNOWN",
+      "verified": 0,
+      "aliveUnverified": 4,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 85,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 495,
+          "startupSeconds": 0.5,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "lefante01.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 327,
+          "startupSeconds": 0.33,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 94,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "fx0101.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 231,
+          "startupSeconds": 0.23,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 218,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "sny57.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 323,
+          "startupSeconds": 0.32,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 97,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1131,40 +1747,64 @@
       "name": "TF1 HDR UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 2,
-      "unknown": 1,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 573,
+          "startupSeconds": 0.57,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 583,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 86,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 570,
+          "startupSeconds": 0.57,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 479,
+          "startupSeconds": 0.48,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 538,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1173,80 +1813,136 @@
       "name": "TNT Sports UHD",
       "group": "sports4k",
       "total": 7,
-      "live": 6,
-      "unknown": 1,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 4,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "PARTIAL_VERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "UNKNOWN",
-          "httpStatus": 429,
-          "bytes": 162,
-          "contentType": "text/html",
-          "durationMs": 86,
-          "note": "HTTP 429 - inconclusive from GitHub runner"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 609,
+          "startupSeconds": 0.61,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 346,
+          "startupSeconds": 0.35,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 612,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "chaotic-streams.cc",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 547,
+          "startupSeconds": 0.55,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 635,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 809,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 1963,
+          "startupSeconds": 1.96,
+          "speed": "FAST",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         },
         {
           "index": 5,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 632,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 2050,
+          "startupSeconds": 2.05,
+          "speed": "NORMAL",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         },
         {
           "index": 6,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 650,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 1953,
+          "startupSeconds": 1.95,
+          "speed": "FAST",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         },
         {
           "index": 7,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 5562,
-          "contentType": "video/mp2t",
-          "durationMs": 617,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 1933,
+          "startupSeconds": 1.93,
+          "speed": "FAST",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1255,60 +1951,100 @@
       "name": "TNT Sports Ultimate UHD",
       "group": "sports4k",
       "total": 5,
-      "live": 5,
+      "verified": 4,
+      "aliveUnverified": 1,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "PARTIAL_VERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1807,
+          "startupSeconds": 1.81,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 1906,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 1828,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 3251,
+          "startupSeconds": 3.25,
+          "speed": "NORMAL",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 5579,
-          "contentType": "video/mp2t",
-          "durationMs": 1865,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 3531,
+          "startupSeconds": 3.53,
+          "speed": "NORMAL",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 1814,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 3051,
+          "startupSeconds": 3.05,
+          "speed": "NORMAL",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         },
         {
           "index": 5,
           "host": "185.80.197.55",
-          "state": "LIVE",
-          "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 1732,
-          "note": null
+          "state": "VERIFIED",
+          "startupMs": 5018,
+          "startupSeconds": 5.02,
+          "speed": "SLOW",
+          "httpStatus": null,
+          "video": {
+            "detected": true,
+            "quality": "4K/UHD",
+            "width": 3840,
+            "height": 2160,
+            "fps": 50,
+            "codec": "HEVC",
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1317,50 +2053,82 @@
       "name": "V Sport+ UHD",
       "group": "sports4k",
       "total": 4,
-      "live": 1,
-      "unknown": 3,
-      "dead": 0,
-      "status": "PARTIAL",
+      "verified": 0,
+      "aliveUnverified": 2,
+      "unknown": 2,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": null,
-          "bytes": 0,
-          "contentType": null,
-          "durationMs": 451,
-          "note": "network error - inconclusive: fetch failed"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "line.moja-teve9.me",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 2130,
+          "startupSeconds": 2.13,
+          "speed": "NORMAL",
           "httpStatus": 200,
-          "bytes": 14130,
-          "contentType": "video/mp2t",
-          "durationMs": 456,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "line.moja-teve9.me",
           "state": "UNKNOWN",
+          "startupMs": null,
+          "startupSeconds": null,
+          "speed": null,
           "httpStatus": null,
-          "bytes": 0,
-          "contentType": null,
-          "durationMs": 288,
-          "note": "network error - inconclusive: fetch failed"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 4,
           "host": "chaotic-streams.cc",
-          "state": "UNKNOWN",
-          "httpStatus": null,
-          "bytes": 0,
-          "contentType": null,
-          "durationMs": 586,
-          "note": "network error - inconclusive: fetch failed"
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1028,
+          "startupSeconds": 1.03,
+          "speed": "FAST",
+          "httpStatus": 200,
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1369,40 +2137,64 @@
       "name": "DAZN 1 UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 0,
-      "unknown": 3,
-      "dead": 0,
-      "status": "UNKNOWN",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "lefante01.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 227,
+          "startupSeconds": 0.23,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 99,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "fx0101.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 326,
+          "startupSeconds": 0.33,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 99,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "sny57.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 326,
+          "startupSeconds": 0.33,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 97,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1411,40 +2203,64 @@
       "name": "DAZN 2 UHD",
       "group": "sports4k",
       "total": 3,
-      "live": 0,
-      "unknown": 3,
-      "dead": 0,
-      "status": "UNKNOWN",
+      "verified": 0,
+      "aliveUnverified": 3,
+      "unknown": 0,
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "lefante01.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 225,
+          "startupSeconds": 0.23,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 96,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "fx0101.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 247,
+          "startupSeconds": 0.25,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 91,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 3,
           "host": "sny57.com:8080",
-          "state": "UNKNOWN",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 228,
+          "startupSeconds": 0.23,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 90,
-          "contentType": "application/json",
-          "durationMs": 95,
-          "note": "HTTP 200 - inconclusive from GitHub runner"
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1453,30 +2269,46 @@
       "name": "USA PEACOCK EVENT 1",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 929,
+          "startupSeconds": 0.93,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 782,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 839,
+          "startupSeconds": 0.84,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 5579,
-          "contentType": "video/mp2t",
-          "durationMs": 892,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1485,30 +2317,46 @@
       "name": "USA PEACOCK EVENT 2",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 679,
+          "startupSeconds": 0.68,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 4151,
-          "contentType": "video/mp2t",
-          "durationMs": 1080,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 636,
+          "startupSeconds": 0.64,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 4151,
-          "contentType": "video/mp2t",
-          "durationMs": 806,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1517,30 +2365,46 @@
       "name": "USA PEACOCK EVENT 3",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 523,
+          "startupSeconds": 0.52,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 940,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 804,
+          "startupSeconds": 0.8,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 944,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1549,30 +2413,46 @@
       "name": "USA PEACOCK EVENT 4",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 668,
+          "startupSeconds": 0.67,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 1295,
-          "contentType": "video/mp2t",
-          "durationMs": 710,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 536,
+          "startupSeconds": 0.54,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 4151,
-          "contentType": "video/mp2t",
-          "durationMs": 462,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1581,30 +2461,46 @@
       "name": "USA PEACOCK EVENT 5",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 583,
+          "startupSeconds": 0.58,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 5579,
-          "contentType": "video/mp2t",
-          "durationMs": 502,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 604,
+          "startupSeconds": 0.6,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 7007,
-          "contentType": "video/mp2t",
-          "durationMs": 462,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1613,30 +2509,46 @@
       "name": "USA PEACOCK EVENT 6",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 7994,
+          "startupSeconds": 7.99,
+          "speed": "SLOW",
           "httpStatus": 200,
-          "bytes": 7007,
-          "contentType": "video/mp2t",
-          "durationMs": 470,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 7727,
+          "startupSeconds": 7.73,
+          "speed": "SLOW",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 507,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1645,30 +2557,46 @@
       "name": "USA PEACOCK EVENT 7",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 555,
+          "startupSeconds": 0.56,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 1295,
-          "contentType": "video/mp2t",
-          "durationMs": 628,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 708,
+          "startupSeconds": 0.71,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 467,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1677,30 +2605,46 @@
       "name": "USA PEACOCK EVENT 8",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 510,
+          "startupSeconds": 0.51,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 5579,
-          "contentType": "video/mp2t",
-          "durationMs": 468,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 787,
+          "startupSeconds": 0.79,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 4151,
-          "contentType": "video/mp2t",
-          "durationMs": 518,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1709,30 +2653,46 @@
       "name": "USA PEACOCK EVENT 9",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1629,
+          "startupSeconds": 1.63,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 617,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 636,
+          "startupSeconds": 0.64,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 464,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1741,30 +2701,46 @@
       "name": "USA PEACOCK EVENT 10",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 515,
+          "startupSeconds": 0.52,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 5579,
-          "contentType": "video/mp2t",
-          "durationMs": 533,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 481,
+          "startupSeconds": 0.48,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 1295,
-          "contentType": "video/mp2t",
-          "durationMs": 609,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1773,30 +2749,46 @@
       "name": "USA PEACOCK EVENT 11",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 556,
+          "startupSeconds": 0.56,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 499,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 491,
+          "startupSeconds": 0.49,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 659,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1805,30 +2797,46 @@
       "name": "USA PEACOCK EVENT 12",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 503,
+          "startupSeconds": 0.5,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 833,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 603,
+          "startupSeconds": 0.6,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 491,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1837,30 +2845,46 @@
       "name": "USA PEACOCK EVENT 13",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 504,
+          "startupSeconds": 0.5,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 5579,
-          "contentType": "video/mp2t",
-          "durationMs": 639,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 485,
+          "startupSeconds": 0.49,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 485,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1869,30 +2893,46 @@
       "name": "USA PEACOCK EVENT 14",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 484,
+          "startupSeconds": 0.48,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 469,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 519,
+          "startupSeconds": 0.52,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 998,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1901,30 +2941,46 @@
       "name": "USA PEACOCK EVENT 15",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 968,
+          "startupSeconds": 0.97,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 473,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 779,
+          "startupSeconds": 0.78,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 437,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1933,30 +2989,46 @@
       "name": "USA PEACOCK EVENT 16",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 511,
+          "startupSeconds": 0.51,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 475,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 799,
+          "startupSeconds": 0.8,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 1295,
-          "contentType": "video/mp2t",
-          "durationMs": 542,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1965,30 +3037,46 @@
       "name": "USA PEACOCK EVENT 17",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 525,
+          "startupSeconds": 0.53,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 5579,
-          "contentType": "video/mp2t",
-          "durationMs": 483,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 909,
+          "startupSeconds": 0.91,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 535,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -1997,30 +3085,46 @@
       "name": "USA PEACOCK EVENT 18",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 477,
+          "startupSeconds": 0.48,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 1295,
-          "contentType": "video/mp2t",
-          "durationMs": 598,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 545,
+          "startupSeconds": 0.55,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 11291,
-          "contentType": "video/mp2t",
-          "durationMs": 505,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -2029,30 +3133,46 @@
       "name": "USA PEACOCK EVENT 19",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1446,
+          "startupSeconds": 1.45,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 1295,
-          "contentType": "video/mp2t",
-          "durationMs": 490,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 1201,
+          "startupSeconds": 1.2,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 4151,
-          "contentType": "video/mp2t",
-          "durationMs": 475,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -2061,30 +3181,46 @@
       "name": "USA PEACOCK EVENT 20",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 590,
+          "startupSeconds": 0.59,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 8435,
-          "contentType": "video/mp2t",
-          "durationMs": 677,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 818,
+          "startupSeconds": 0.82,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 458,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -2093,30 +3229,46 @@
       "name": "USA PEACOCK EVENT 21",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 538,
+          "startupSeconds": 0.54,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 490,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 940,
+          "startupSeconds": 0.94,
+          "speed": "FAST",
           "httpStatus": 200,
-          "bytes": 2723,
-          "contentType": "video/mp2t",
-          "durationMs": 454,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     },
@@ -2125,30 +3277,46 @@
       "name": "USA PEACOCK EVENT 22",
       "group": "peacock",
       "total": 2,
-      "live": 2,
+      "verified": 0,
+      "aliveUnverified": 2,
       "unknown": 0,
-      "dead": 0,
-      "status": "LIVE",
+      "status": "ALIVE_UNVERIFIED",
       "sources": [
         {
           "index": 1,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 2438,
+          "startupSeconds": 2.44,
+          "speed": "NORMAL",
           "httpStatus": 200,
-          "bytes": 14147,
-          "contentType": "video/mp2t",
-          "durationMs": 450,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         },
         {
           "index": 2,
           "host": "nexusconnects.org",
-          "state": "LIVE",
+          "state": "ALIVE_UNVERIFIED",
+          "startupMs": 2364,
+          "startupSeconds": 2.36,
+          "speed": "NORMAL",
           "httpStatus": 200,
-          "bytes": 1295,
-          "contentType": "video/mp2t",
-          "durationMs": 449,
-          "note": null
+          "video": {
+            "detected": false,
+            "quality": null,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "codec": null,
+            "bitrate": null
+          }
         }
       ]
     }
