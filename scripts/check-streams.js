@@ -1,228 +1,249 @@
 const fs = require("fs");
+const { execFile } = require("child_process");
+const ffprobePath = require("ffprobe-static").path;
 const { channels } = require("../channels");
 
-const TIMEOUT_MS = Number(process.env.STREAM_TIMEOUT_MS || 8000);
-const CONCURRENCY = Number(process.env.STREAM_CONCURRENCY || 8);
+const CONCURRENCY = Number(process.env.STREAM_CONCURRENCY || 4);
 
 function hostOf(url) {
-  try {
-    return new URL(url).host;
-  } catch {
-    return "invalid-url";
-  }
+  try { return new URL(url).host; } catch { return "invalid-url"; }
 }
 
-function classifyHttp(status, bytes, contentType) {
-  const type = String(contentType || "").toLowerCase();
-  const looksLikeMedia =
-    type.includes("video/") ||
-    type.includes("audio/") ||
-    type.includes("mpegurl") ||
-    type.includes("mp2t") ||
-    type.includes("octet-stream");
-
-  if (status >= 200 && status < 400 && bytes > 0 && looksLikeMedia) {
-    return "LIVE";
+function fps(v) {
+  if (!v || v === "0/0") return null;
+  if (String(v).includes("/")) {
+    const [a,b] = String(v).split("/").map(Number);
+    return b ? Math.round((a / b) * 100) / 100 : null;
   }
-
-  // GitHub runners can be rate-limited or blocked by IPTV/CDN hosts.
-  // These responses must NOT be treated as proof that a stream is dead.
-  if ([401, 403, 408, 425, 429, 500, 502, 503, 504].includes(status)) {
-    return "UNKNOWN";
-  }
-
-  // Only explicit not-found/gone is considered definite DEAD.
-  if ([404, 410].includes(status)) {
-    return "DEAD";
-  }
-
-  return "UNKNOWN";
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
 }
 
-async function probe(url) {
-  const started = Date.now();
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+function quality(w,h) {
+  if (!w || !h) return null;
+  if (h >= 2160 || w >= 3840) return "4K/UHD";
+  if (h >= 1080 || w >= 1920) return "FHD";
+  if (h >= 720 || w >= 1280) return "HD";
+  return "SD";
+}
 
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      redirect: "follow",
-      signal: controller.signal,
-      headers: {
-        "User-Agent": "LiveTV-Stream-Check/1.1",
-        Range: "bytes=0-1023",
-        Accept: "*/*"
-      }
-    });
+function speed(ms) {
+  if (ms == null) return null;
+  if (ms < 2000) return "FAST";
+  if (ms <= 5000) return "NORMAL";
+  return "SLOW";
+}
 
-    let bytes = 0;
-    if (response.body) {
-      const reader = response.body.getReader();
-      try {
-        const { value } = await reader.read();
-        bytes = value ? value.byteLength : 0;
-      } finally {
-        try { await reader.cancel(); } catch {}
-      }
+function emptyVideo() {
+  return { detected:false, quality:null, width:null, height:null, fps:null, codec:null, bitrate:null };
+}
+
+function probeWithFfprobe(url, fallback=false) {
+  return new Promise(resolve => {
+    const started = Date.now();
+    const args = [
+      "-v","error",
+      "-user_agent","Mozilla/5.0 (QtEmbedded; U; Linux; C) MAG200 stbapp",
+      "-rw_timeout", fallback ? "12000000" : "6000000"
+    ];
+
+    if (fallback) {
+      args.push("-analyzeduration","10000000","-probesize","12000000");
+      if (/[?&]extension=ts(?:&|$)/i.test(url)) args.push("-f","mpegts");
     }
 
-    const contentType = response.headers.get("content-type") || null;
-    const state = classifyHttp(response.status, bytes, contentType);
+    args.push(
+      "-select_streams","v:0",
+      "-show_entries","stream=width,height,codec_name,r_frame_rate,avg_frame_rate,bit_rate",
+      "-of","json",
+      url
+    );
 
-    return {
-      state,
-      httpStatus: response.status,
-      bytes,
-      contentType,
-      durationMs: Date.now() - started,
-      note:
-        state === "LIVE"
-          ? null
-          : state === "DEAD"
-            ? `HTTP ${response.status}`
-            : `HTTP ${response.status} - inconclusive from GitHub runner`
-    };
-  } catch (error) {
-    return {
-      state: "UNKNOWN",
-      httpStatus: null,
-      bytes: 0,
-      contentType: null,
-      durationMs: Date.now() - started,
-      note:
-        error && error.name === "AbortError"
-          ? "timeout - inconclusive"
-          : `network error - inconclusive: ${String(error && error.message ? error.message : error)}`
-    };
+    execFile(ffprobePath, args, { timeout: fallback ? 16000 : 8000, maxBuffer: 2 * 1024 * 1024 }, (error, stdout) => {
+      const ms = Date.now() - started;
+      if (error) return resolve({ verified:false, startupMs:ms, video:emptyVideo() });
+      try {
+        const s = JSON.parse(stdout || "{}")?.streams?.[0];
+        if (!s) throw new Error("No video stream");
+        const width = Number(s.width) || null;
+        const height = Number(s.height) || null;
+        const detected = Boolean(width && height);
+        resolve({
+          verified: detected,
+          startupMs: ms,
+          video: {
+            detected,
+            quality: quality(width,height),
+            width,
+            height,
+            fps: fps(s.avg_frame_rate || s.r_frame_rate),
+            codec: s.codec_name ? String(s.codec_name).toUpperCase() : null,
+            bitrate: Number(s.bit_rate) || null
+          }
+        });
+      } catch {
+        resolve({ verified:false, startupMs:ms, video:emptyVideo() });
+      }
+    });
+  });
+}
+
+async function firstByte(url) {
+  const started = Date.now();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 9000);
+  try {
+    const r = await fetch(url, {
+      method:"GET",
+      redirect:"follow",
+      signal:controller.signal,
+      headers:{ "User-Agent":"Mozilla/5.0 (QtEmbedded; U; Linux; C) MAG200 stbapp", Accept:"*/*" }
+    });
+    if (!(r.status >= 200 && r.status < 400) || !r.body) {
+      return { ok:false, httpStatus:r.status, ms:Date.now()-started };
+    }
+    const reader = r.body.getReader();
+    const { value } = await reader.read();
+    try { await reader.cancel(); } catch {}
+    return { ok:Boolean(value && value.byteLength), httpStatus:r.status, ms:Date.now()-started };
+  } catch {
+    return { ok:false, httpStatus:null, ms:Date.now()-started };
   } finally {
     clearTimeout(timer);
   }
 }
 
-async function mapLimit(items, limit, worker) {
-  const results = new Array(items.length);
-  let cursor = 0;
-
-  async function runner() {
-    while (true) {
-      const index = cursor++;
-      if (index >= items.length) return;
-      results[index] = await worker(items[index], index);
-    }
+async function inspectStream(url) {
+  const p1 = await probeWithFfprobe(url, false);
+  if (p1.verified) {
+    return { state:"VERIFIED", startupMs:p1.startupMs, startupSeconds:Math.round(p1.startupMs/10)/100, speed:speed(p1.startupMs), video:p1.video };
   }
 
-  await Promise.all(Array.from({ length: Math.min(limit, items.length || 1) }, runner));
-  return results;
+  const p2 = await probeWithFfprobe(url, true);
+  if (p2.verified) {
+    return { state:"VERIFIED", startupMs:p2.startupMs, startupSeconds:Math.round(p2.startupMs/10)/100, speed:speed(p2.startupMs), video:p2.video };
+  }
+
+  const fb = await firstByte(url);
+  if (fb.ok) {
+    return { state:"ALIVE_UNVERIFIED", startupMs:fb.ms, startupSeconds:Math.round(fb.ms/10)/100, speed:speed(fb.ms), httpStatus:fb.httpStatus, video:emptyVideo() };
+  }
+
+  return { state:"UNKNOWN", startupMs:null, startupSeconds:null, speed:null, httpStatus:fb.httpStatus, video:emptyVideo() };
+}
+
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let i = 0;
+  async function worker() {
+    for (;;) {
+      const n = i++;
+      if (n >= items.length) return;
+      out[n] = await fn(items[n], n);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length || 1) }, worker));
+  return out;
 }
 
 (async () => {
   const tasks = [];
-
   channels.forEach(channel => {
-    (channel.streams || []).forEach((url, index) => {
-      tasks.push({
-        channelId: channel.id,
-        channelName: channel.name,
-        group: channel.group,
-        sourceIndex: index + 1,
-        url
-      });
-    });
+    (channel.streams || []).forEach((url,index) => tasks.push({
+      channelId:channel.id,
+      channelName:channel.name,
+      group:channel.group,
+      sourceIndex:index + 1,
+      url
+    }));
   });
 
-  const probed = await mapLimit(tasks, CONCURRENCY, async task => ({
+  const checked = await mapLimit(tasks, CONCURRENCY, async task => ({
     ...task,
-    host: hostOf(task.url),
-    result: await probe(task.url)
+    host:hostOf(task.url),
+    result:await inspectStream(task.url)
   }));
 
   const byChannel = new Map();
-
-  for (const item of probed) {
+  for (const item of checked) {
     if (!byChannel.has(item.channelId)) {
       byChannel.set(item.channelId, {
-        id: item.channelId,
-        name: item.channelName,
-        group: item.group,
-        total: 0,
-        live: 0,
-        unknown: 0,
-        dead: 0,
-        status: "UNKNOWN",
-        sources: []
+        id:item.channelId,
+        name:item.channelName,
+        group:item.group,
+        total:0,
+        verified:0,
+        aliveUnverified:0,
+        unknown:0,
+        status:"UNKNOWN",
+        sources:[]
       });
     }
+    const c = byChannel.get(item.channelId);
+    c.total += 1;
+    if (item.result.state === "VERIFIED") c.verified += 1;
+    else if (item.result.state === "ALIVE_UNVERIFIED") c.aliveUnverified += 1;
+    else c.unknown += 1;
 
-    const channel = byChannel.get(item.channelId);
-    channel.total += 1;
-    if (item.result.state === "LIVE") channel.live += 1;
-    else if (item.result.state === "DEAD") channel.dead += 1;
-    else channel.unknown += 1;
-
-    channel.sources.push({
-      index: item.sourceIndex,
-      host: item.host,
-      state: item.result.state,
-      httpStatus: item.result.httpStatus,
-      bytes: item.result.bytes,
-      contentType: item.result.contentType,
-      durationMs: item.result.durationMs,
-      note: item.result.note
+    c.sources.push({
+      index:item.sourceIndex,
+      host:item.host,
+      state:item.result.state,
+      startupMs:item.result.startupMs,
+      startupSeconds:item.result.startupSeconds,
+      speed:item.result.speed,
+      httpStatus:item.result.httpStatus ?? null,
+      video:item.result.video
     });
   }
 
-  const channelResults = Array.from(byChannel.values()).map(channel => {
-    if (channel.live === channel.total) channel.status = "LIVE";
-    else if (channel.live > 0) channel.status = "PARTIAL";
-    else if (channel.dead === channel.total) channel.status = "DEAD";
-    else channel.status = "UNKNOWN";
-    return channel;
+  const results = Array.from(byChannel.values()).map(c => {
+    if (c.verified === c.total) c.status = "VERIFIED";
+    else if (c.verified > 0) c.status = "PARTIAL_VERIFIED";
+    else if (c.aliveUnverified > 0) c.status = "ALIVE_UNVERIFIED";
+    else c.status = "UNKNOWN";
+    return c;
   });
 
   const summary = {
-    checkedAt: new Date().toISOString(),
-    timeoutMs: TIMEOUT_MS,
-    concurrency: CONCURRENCY,
-    meaning: {
-      LIVE: "GitHub runner received media bytes",
-      PARTIAL: "At least one source confirmed LIVE; other sources may be UNKNOWN/DEAD",
-      UNKNOWN: "Runner could not verify; do not treat as dead",
-      DEAD: "All sources returned explicit 404/410"
+    checkedAt:new Date().toISOString(),
+    method:"stalker-checker-style ffprobe verification",
+    concurrency:CONCURRENCY,
+    meaning:{
+      VERIFIED:"ffprobe detected a real video stream and extracted video metadata",
+      PARTIAL_VERIFIED:"at least one source is VERIFIED",
+      ALIVE_UNVERIFIED:"media bytes were received but ffprobe did not verify video metadata",
+      UNKNOWN:"not verified from the GitHub runner; do not treat as dead"
     },
-    totals: {
-      channels: channelResults.length,
-      streams: tasks.length,
-      liveStreams: channelResults.reduce((n, c) => n + c.live, 0),
-      unknownStreams: channelResults.reduce((n, c) => n + c.unknown, 0),
-      deadStreams: channelResults.reduce((n, c) => n + c.dead, 0),
-      liveChannels: channelResults.filter(c => c.status === "LIVE").length,
-      partialChannels: channelResults.filter(c => c.status === "PARTIAL").length,
-      unknownChannels: channelResults.filter(c => c.status === "UNKNOWN").length,
-      deadChannels: channelResults.filter(c => c.status === "DEAD").length
+    totals:{
+      channels:results.length,
+      streams:tasks.length,
+      verifiedStreams:results.reduce((n,c)=>n+c.verified,0),
+      aliveUnverifiedStreams:results.reduce((n,c)=>n+c.aliveUnverified,0),
+      unknownStreams:results.reduce((n,c)=>n+c.unknown,0),
+      verifiedChannels:results.filter(c=>c.status==="VERIFIED").length,
+      partialVerifiedChannels:results.filter(c=>c.status==="PARTIAL_VERIFIED").length,
+      aliveUnverifiedChannels:results.filter(c=>c.status==="ALIVE_UNVERIFIED").length,
+      unknownChannels:results.filter(c=>c.status==="UNKNOWN").length
     },
-    channels: channelResults
+    channels:results
   };
 
-  fs.writeFileSync("stream-health.json", JSON.stringify(summary, null, 2) + "\n");
+  fs.writeFileSync("stream-health.json", JSON.stringify(summary,null,2)+"\n");
 
   const lines = [
-    "# Stream health",
+    "# Stream health (ffprobe)",
     "",
     `Checked: ${summary.checkedAt}`,
-    `Channels: ${summary.totals.channels}`,
-    `Streams confirmed LIVE: ${summary.totals.liveStreams}/${summary.totals.streams}`,
+    `Streams VERIFIED: ${summary.totals.verifiedStreams}/${summary.totals.streams}`,
+    `Streams ALIVE_UNVERIFIED: ${summary.totals.aliveUnverifiedStreams}`,
     `Streams UNKNOWN: ${summary.totals.unknownStreams}`,
-    `Streams definite DEAD: ${summary.totals.deadStreams}`,
     "",
-    "| Channel | Status | LIVE | UNKNOWN | DEAD | Total |",
+    "| Channel | Status | VERIFIED | ALIVE_UNVERIFIED | UNKNOWN | Total |",
     "|---|---:|---:|---:|---:|---:|",
-    ...channelResults.map(c => `| ${c.name.replace(/\|/g, "\\|")} | ${c.status} | ${c.live} | ${c.unknown} | ${c.dead} | ${c.total} |`)
+    ...results.map(c=>`| ${c.name.replace(/\|/g,"\\|")} | ${c.status} | ${c.verified} | ${c.aliveUnverified} | ${c.unknown} | ${c.total} |`)
   ];
 
   console.log(lines.join("\n"));
-
-  if (process.env.GITHUB_STEP_SUMMARY) {
-    fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
-  }
+  if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n")+"\n");
 })();
