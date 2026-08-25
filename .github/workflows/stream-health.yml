@@ -8,6 +8,7 @@ on:
     paths:
       - ".github/workflows/stream-health.yml"
       - "scripts/check-streams.js"
+      - "package.json"
 
 permissions:
   contents: write
@@ -15,7 +16,7 @@ permissions:
 jobs:
   check-streams:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - name: Checkout
@@ -26,11 +27,13 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Probe existing streams
+      - name: Install checker dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Probe existing streams with ffprobe
         env:
-          STREAM_TIMEOUT_MS: "8000"
-          STREAM_CONCURRENCY: "8"
-        run: node scripts/check-streams.js
+          STREAM_CONCURRENCY: "4"
+        run: npm run check-streams
 
       - name: Commit latest health report
         run: |
