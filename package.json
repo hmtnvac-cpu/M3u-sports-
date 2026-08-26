@@ -3,7 +3,7 @@
   "version": "1.0.5",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node bootstrap.js",
     "check-streams": "node scripts/check-streams.js"
   },
   "dependencies": {
