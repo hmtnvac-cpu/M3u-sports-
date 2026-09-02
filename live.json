@@ -1,17 +1,14 @@
 [
   {
-    "id": "crystal-palace-man-city-20260829",
+    "id": "burnley-middlesbrough-20260903",
     "time": "02:00",
-    "date": "29/08/2026",
-    "home": "Crystal Palace",
-    "away": "Manchester City",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "date": "03/09/2026",
+    "home": "Burnley",
+    "away": "Middlesbrough",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/379.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/369.png",
     "channels1080": [
-      "sky-sports-main-event-fhd",
-      "sky-sports-premier-league-fhd",
-      "usa-network-1080",
-      "universo-1080"
+      "sky-sports-main-event-fhd"
     ],
     "channels4k": [
       "sky-sports-main-event",
