@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "id": "newcastle-bournemouth-20260905",
+    "time": "18:30",
+    "date": "05/09/2026",
+    "home": "Newcastle United",
+    "away": "AFC Bournemouth",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "channels1080": [
+      "usa-network-1080",
+      "universo-1080"
+    ],
+    "channels4k": [
+      "tnt-sports-uhd",
+      "tnt-sports-ultimate-uhd"
+    ]
+  },
+  {
+    "id": "brentford-sunderland-20260905",
+    "time": "21:00",
+    "date": "05/09/2026",
+    "home": "Brentford",
+    "away": "Sunderland",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "channels1080": [
+      "nbc-sports-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "brighton-leeds-20260905",
+    "time": "21:00",
+    "date": "05/09/2026",
+    "home": "Brighton & Hove Albion",
+    "away": "Leeds United",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
+    "channels1080": [
+      "nbc-sports-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "fulham-crystal-palace-20260905",
+    "time": "21:00",
+    "date": "05/09/2026",
+    "home": "Fulham",
+    "away": "Crystal Palace",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "channels1080": [
+      "nbc-sports-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "manchester-city-coventry-20260905",
+    "time": "21:00",
+    "date": "05/09/2026",
+    "home": "Manchester City",
+    "away": "Coventry City",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
+    "channels1080": [
+      "usa-network-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "nottingham-forest-tottenham-20260905",
+    "time": "21:00",
+    "date": "05/09/2026",
+    "home": "Nottingham Forest",
+    "away": "Tottenham Hotspur",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+    "channels1080": [
+      "nbc-sports-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "hull-aston-villa-20260905",
+    "time": "23:30",
+    "date": "05/09/2026",
+    "home": "Hull City",
+    "away": "Aston Villa",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/306.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "channels1080": [
+      "nbc-sports-1080",
+      "sky-sports-main-event-fhd",
+      "sky-sports-premier-league-fhd"
+    ],
+    "channels4k": [
+      "sky-sports-main-event",
+      "sky-sports-uhd"
+    ]
+  }
+]
