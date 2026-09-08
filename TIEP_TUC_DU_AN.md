@@ -1,66 +1,91 @@
 # TIẾP TỤC DỰ ÁN
 
-## Phạm vi lịch sử
-Dự án này là repo `hmtnvac-cpu/M3u-sports-`. Nội dung dưới đây được tổng hợp từ lịch sử làm việc đã có, trạng thái repo hiện tại và các commit đã ghi nhận trên GitHub. Nếu có điểm chưa thể xác minh từ repo, không được tự suy đoán; coi đó là mục cần kiểm tra.
+## 1. Phạm vi
+Repo: `hmtnvac-cpu/M3u-sports-`
 
-## Thời gian làm việc đã ghi nhận
-- Bắt đầu: 2026-08-24
-- Cập nhật cuối đã ghi nhận: 2026-09-07
+Đây là file ghi nhớ trạng thái làm việc để có thể mở repo và tiếp tục ngay, không phải README và không phải tài liệu bàn giao cho người khác.
 
-## Mục đích
-Repo phục vụ hệ thống danh sách/kênh thể thao M3U và dữ liệu LIVE, gồm dữ liệu kênh, lịch sự kiện, logo/badge và kiểm tra sức khỏe stream. Repo có liên hệ với hệ sinh thái Nuvio/Troll đã được xây dựng trong các phiên làm việc trước.
+## 2. Thời gian làm việc đã ghi nhận
+- Mốc GitHub liên quan đến LIVE bắt đầu: 2026-08-20.
+- Mốc làm việc đã xác định rõ trong các phiên: 2026-08-24 trở đi.
+- Cập nhật công việc gần nhất trước file này: 2026-09-07.
 
-## Những việc đã làm
-- Thiết lập/cập nhật dữ liệu kênh thể thao.
-- Duy trì `live.json` cho lịch LIVE.
-- Cập nhật lịch Premier League theo từng ngày.
-- Cập nhật sự kiện Peacock và logo dùng chung 2026.
-- Dọn lịch LIVE đã hoàn thành.
-- Duy trì dữ liệu health của stream.
-- Có cơ chế badge/logo cho Nuvio-Troll.
-- Có module TNT riêng.
+## 3. Mục tiêu dự án
+Danh sách/kênh thể thao M3U và catalog LIVE, kết hợp dữ liệu trận đấu, stream, logo/badge và kiểm tra chất lượng stream để phục vụ hệ sinh thái Nuvio/Troll.
 
-## Mốc GitHub đã xác minh
-- 2026-08-24 — cập nhật Peacock events dùng shared 2026 logo.
-- 2026-08-25 — clear lịch LIVE đã hoàn thành và cập nhật LIVE schedule.
-- 2026-09-02 — cập nhật LIVE schedule ngày 03/09.
-- 2026-09-05 — cập nhật Premier League LIVE ngày 05/09.
-- 2026-09-06 — cập nhật Premier League LIVE ngày 06/09.
-- 2026-09-07 — cập nhật Premier League LIVE ngày 07/09.
+## 4. Đã thực hiện
+### LIVE / lịch thi đấu
+- Tạo và duy trì `live.json`.
+- Cập nhật LIVE theo ngày.
+- Dọn các trận đã hoàn thành.
+- Loại các trận không thuộc phạm vi Premier League khi cần.
+- Cập nhật các cửa sổ LIVE Premier League ngày 25/08, 28/08, 03/09, 05/09, 06/09 và 07/09/2026.
+- Khi không có trận Premier League, đã có logic ẩn LIVE catalogs.
 
-## Cấu trúc chính
-- `index.js` — logic chính của addon/API.
+### Kênh / stream
+- Duy trì dữ liệu kênh thể thao.
+- Có module `tnt-channels.js` cho TNT.
+- Có kiểm tra stream và xếp hạng stream.
+- Có dữ liệu `stream-health.json`.
+
+### Badge / logo
+- Cập nhật sự kiện Peacock dùng shared 2026 logo.
+- Có mapping `nuvio-troll-badges.json` và thư mục `troll-badges/`.
+- Duy trì badge/logo phục vụ hiển thị Nuvio/Troll.
+
+### Automation
+- Đã thêm daily stream health check; workflow kiểm tra stream chạy trước cửa sổ cập nhật LIVE buổi sáng.
+- Có GitHub Actions trong `.github/workflows/`.
+
+## 5. Các mốc quan trọng đã xác minh
+- `7d4ffa4d...` — tạo `live.json` (20/08/2026).
+- `915cdaf8...` — cập nhật Peacock events dùng shared 2026 logo (24/08/2026).
+- `dc86eaaf...` — clear LIVE đã hoàn thành (25/08/2026).
+- `52c3e55c...` — cập nhật LIVE schedule 25/08.
+- `6f1fc0e3...` — thêm daily stream health check (25/08).
+- `9f1bca93...` — ẩn LIVE catalogs khi không có Premier League (26/08).
+- `50669a7b...` — thêm EPL match vào cửa sổ 28/08.
+- `0a6a4969...` — cập nhật LIVE 03/09.
+- `c0785ba6...` — cập nhật Premier League LIVE 05/09.
+- `a72c4eab...` — cập nhật Premier League LIVE 06/09.
+- `422a2faa...` — cập nhật Premier League LIVE 07/09.
+
+## 6. Luồng / file chính
+- `index.js` — logic chính của addon/API và cách dữ liệu được tiêu thụ.
 - `channels.js` — dữ liệu/cấu hình kênh.
-- `bootstrap.js` — khởi tạo/bootstrap.
-- `tnt-channels.js` — cấu hình kênh TNT.
-- `live.json` — dữ liệu lịch LIVE.
-- `stream-health.json` — dữ liệu kiểm tra health stream.
-- `nuvio-troll-badges.json` — mapping badge/logo cho Nuvio-Troll.
+- `bootstrap.js` — bootstrap.
+- `tnt-channels.js` — TNT channels.
+- `live.json` — nguồn lịch LIVE.
+- `stream-health.json` — kết quả health.
+- `scripts/check-streams.js` — kiểm tra stream.
+- `scripts/rank-streams.js` — xếp hạng stream.
+- `nuvio-troll-badges.json` — mapping badge.
 - `troll-badges/` — tài nguyên badge.
-- `scripts/` — script hỗ trợ.
-- `.github/` — cấu hình GitHub automation.
-- `package.json` — dependency/config Node.js.
+- `.github/workflows/stream-health.yml` — automation health.
+- `package.json` — Node.js config.
 
-## Quy tắc không được phá
-- Không tự ý thay đổi kiến trúc đang chạy.
-- Không tự ý đổi URL production hoặc cấu hình deploy.
-- Không tự động cập nhật `live.json` khi người dùng chưa yêu cầu.
-- Khi sửa dữ liệu LIVE phải giữ đúng format mà `index.js` đang đọc.
-- Không xóa dữ liệu kênh/logo/badge chỉ vì tưởng là không còn dùng; phải kiểm tra reference trước.
+## 7. Trạng thái hiện tại
+- Repo vẫn có logic kênh, LIVE, stream health và badge.
+- `live.json` hiện tại là file rỗng 3 bytes; không tự coi đây là lỗi.
+- Công việc cập nhật LIVE đang **tạm dừng theo lệnh người dùng**.
 
-## Công việc định kỳ
-- Cập nhật lịch LIVE khi được yêu cầu.
-- Xóa/clear sự kiện đã hoàn thành khi phù hợp.
-- Kiểm tra stream health khi cần.
-- Đồng bộ logo/badge khi có thay đổi nguồn.
+## 8. Quy tắc khóa
+- **Không tự động cập nhật `live.json`.**
+- Không tự động kiểm tra rồi sửa LIVE.
+- Chỉ cập nhật lịch khi người dùng ra lệnh mới.
+- Giữ nguyên format dữ liệu mà `index.js` đang đọc.
+- Không xóa kênh/logo/badge hoặc module chỉ vì nhìn có vẻ không dùng.
+- Không tự ý đổi production URL/deploy/config.
 
-## Trạng thái hiện tại
-- Repo có dữ liệu LIVE và hệ thống kênh đang tồn tại.
-- `live.json` hiện tại có kích thước 3 bytes, cần xem là trạng thái dữ liệu rỗng hiện thời chứ không phải lỗi cho đến khi kiểm tra yêu cầu mới.
-- Không được tự khởi động lại việc cập nhật định kỳ nếu người dùng đã tạm dừng.
+## 9. Công việc định kỳ khi được phép tiếp tục
+1. Đọc file này.
+2. Kiểm tra `index.js`, `channels.js`, `live.json` và workflow.
+3. Nếu người dùng yêu cầu cập nhật LIVE thì mới cập nhật.
+4. Nếu yêu cầu health thì chạy/kiểm tra health theo workflow hiện tại.
+5. Kiểm tra ảnh hưởng đến catalog và badge trước khi thay đổi cấu trúc.
 
-## Việc tiếp theo
-Chờ yêu cầu mới. Khi được yêu cầu tiếp tục, đọc file này + kiểm tra `index.js`, `channels.js`, `live.json`, `.github/` và trạng thái deployment trước khi sửa.
+## 10. Việc đang chờ
+Chờ lệnh mới của người dùng. Không có nhiệm vụ tự động nào được phép chạy tiếp chỉ vì lịch cũ từng được cập nhật hàng ngày.
 
-## Cập nhật gần nhất
-2026-09-08 — tạo tài liệu `TIEP_TUC_DU_AN.md` để lưu trạng thái và lịch sử làm việc.
+## 11. Cập nhật file
+2026-09-08 — hoàn thiện file `TIEP_TUC_DU_AN.md`, bổ sung lịch sử, cấu trúc, các mốc kỹ thuật và quy tắc khóa hiện hành.
