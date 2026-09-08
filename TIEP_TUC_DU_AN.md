@@ -89,3 +89,29 @@ Chờ lệnh mới của người dùng. Không có nhiệm vụ tự động n�
 
 ## 11. Cập nhật file
 2026-09-08 — hoàn thiện file `TIEP_TUC_DU_AN.md`, bổ sung lịch sử, cấu trúc, các mốc kỹ thuật và quy tắc khóa hiện hành.
+
+---
+
+# TIẾN TRÌNH SAU KHI NHẬN BÀN GIAO
+
+> Phần trên là nội dung bàn giao đã có và được giữ nguyên. Phần dưới chỉ ghi tiến trình của giai đoạn làm việc hiện tại; không diễn giải lại hay sửa lịch sử cũ.
+
+## 12. Mốc nhận tiếp quản
+- 08/09/2026: xác lập `TIEP_TUC_DU_AN.md` là file continuation/bàn giao sống của repo.
+- Từ mốc này, cập nhật file ngay sau thay đổi quan trọng; không chờ dự án kết thúc.
+
+## 13. Quy tắc vận hành được xác nhận trong giai đoạn hiện tại
+- `M3u-sports-` và `Iptv-sports-2` được duy trì song song cho cùng hệ Sports/Nuvio; thay đổi LIVE quan trọng cần đối chiếu cả hai để tránh lệch dữ liệu.
+- Phạm vi LIVE được người dùng xác nhận là Premier League.
+- Khi cập nhật LIVE: giữ nguyên URL stream; không cross-map channel; không tự xóa stream/channel ngoài yêu cầu; cập nhật đúng ngày/giờ, home/away, logo và mapping chất lượng.
+- LIVE phải có logo/badge phù hợp cho trận đấu và hiển thị đúng trong Nuvio.
+- Health check là công việc vận hành riêng với cập nhật LIVE; không được hiểu health check là quyền tự ý xóa/sửa stream.
+- Khi báo cáo công việc hằng ngày phải nói rõ đã kiểm tra/cập nhật gì, không chỉ báo chung chung.
+
+## 14. Trạng thái tại mốc tiếp quản
+- Repo có sẵn `live.json`, channel data, badge/logo và stream-health infrastructure từ giai đoạn trước.
+- Việc tiếp theo phải dựa trên code hiện tại + lệnh mới nhất của người dùng; phần lịch sử phía trên chỉ là bàn giao, không tự động quyết định tiến trình mới.
+
+## 15. Quy tắc continuation mới
+- Sau mỗi commit/thay đổi LIVE, channel mapping, logo/badge, health workflow hoặc deploy quan trọng: nối delta vào phần này ngay.
+- Không ghi lại nội dung đã có ở phần bàn giao; chỉ ghi thay đổi mới, quyết định mới, kết quả test/deploy và việc còn dở.
