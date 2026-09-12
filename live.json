@@ -1,1 +1,97 @@
-[]
+[
+  {
+    "id": "bournemouth-brentford-20260912",
+    "time": "21:00",
+    "date": "12/09/2026",
+    "home": "AFC Bournemouth",
+    "away": "Brentford",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "aston-villa-nottingham-forest-20260912",
+    "time": "21:00",
+    "date": "12/09/2026",
+    "home": "Aston Villa",
+    "away": "Nottingham Forest",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "chelsea-hull-city-20260912",
+    "time": "21:00",
+    "date": "12/09/2026",
+    "home": "Chelsea",
+    "away": "Hull City",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/306.png",
+    "channels1080": [
+      "usa-network-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "crystal-palace-ipswich-town-20260912",
+    "time": "21:00",
+    "date": "12/09/2026",
+    "home": "Crystal Palace",
+    "away": "Ipswich Town",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
+    "channels1080": [
+      "nbc-sports-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "liverpool-fulham-20260912",
+    "time": "21:00",
+    "date": "12/09/2026",
+    "home": "Liverpool",
+    "away": "Fulham",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
+    "channels1080": [
+      "nbc-sports-1080"
+    ],
+    "channels4k": []
+  },
+  {
+    "id": "tottenham-hotspur-everton-20260912",
+    "time": "23:30",
+    "date": "12/09/2026",
+    "home": "Tottenham Hotspur",
+    "away": "Everton",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
+    "channels1080": [
+      "nbc-sports-1080",
+      "sky-sports-main-event-fhd",
+      "sky-sports-premier-league-fhd"
+    ],
+    "channels4k": [
+      "sky-sports-main-event",
+      "sky-sports-uhd"
+    ]
+  },
+  {
+    "id": "sunderland-arsenal-20260913",
+    "time": "02:00",
+    "date": "13/09/2026",
+    "home": "Sunderland",
+    "away": "Arsenal",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+    "channels1080": [
+      "usa-network-1080"
+    ],
+    "channels4k": [
+      "tnt-sports-uhd",
+      "tnt-sports-ultimate-uhd"
+    ]
+  }
+]
