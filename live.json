@@ -1,97 +1,112 @@
 [
   {
-    "id": "bournemouth-brentford-20260912",
+    "id": "arsenal-leeds-united-20261010",
+    "time": "18:30",
+    "date": "10/10/2026",
+    "home": "Arsenal",
+    "away": "Leeds United",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/357.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "aston-villa-brentford-20261010",
     "time": "21:00",
-    "date": "12/09/2026",
-    "home": "AFC Bournemouth",
+    "date": "10/10/2026",
+    "home": "Aston Villa",
     "away": "Brentford",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
     "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/337.png",
     "channels1080": [],
     "channels4k": []
   },
   {
-    "id": "aston-villa-nottingham-forest-20260912",
+    "id": "chelsea-afc-bournemouth-20261010",
     "time": "21:00",
-    "date": "12/09/2026",
-    "home": "Aston Villa",
+    "date": "10/10/2026",
+    "home": "Chelsea",
+    "away": "AFC Bournemouth",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "ipswich-town-fulham-20261010",
+    "time": "21:00",
+    "date": "10/10/2026",
+    "home": "Ipswich Town",
+    "away": "Fulham",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "sunderland-brighton-and-hove-albion-20261010",
+    "time": "21:00",
+    "date": "10/10/2026",
+    "home": "Sunderland",
+    "away": "Brighton & Hove Albion",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "manchester-united-tottenham-hotspur-20261010",
+    "time": "23:30",
+    "date": "10/10/2026",
+    "home": "Manchester United",
+    "away": "Tottenham Hotspur",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "crystal-palace-nottingham-forest-20261011",
+    "time": "20:00",
+    "date": "11/10/2026",
+    "home": "Crystal Palace",
     "away": "Nottingham Forest",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
     "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/393.png",
     "channels1080": [],
     "channels4k": []
   },
   {
-    "id": "chelsea-hull-city-20260912",
-    "time": "21:00",
-    "date": "12/09/2026",
-    "home": "Chelsea",
-    "away": "Hull City",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/363.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/306.png",
-    "channels1080": [
-      "usa-network-1080"
-    ],
-    "channels4k": []
-  },
-  {
-    "id": "crystal-palace-ipswich-town-20260912",
-    "time": "21:00",
-    "date": "12/09/2026",
-    "home": "Crystal Palace",
-    "away": "Ipswich Town",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/373.png",
-    "channels1080": [
-      "nbc-sports-1080"
-    ],
-    "channels4k": []
-  },
-  {
-    "id": "liverpool-fulham-20260912",
-    "time": "21:00",
-    "date": "12/09/2026",
-    "home": "Liverpool",
-    "away": "Fulham",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/370.png",
-    "channels1080": [
-      "nbc-sports-1080"
-    ],
-    "channels4k": []
-  },
-  {
-    "id": "tottenham-hotspur-everton-20260912",
-    "time": "23:30",
-    "date": "12/09/2026",
-    "home": "Tottenham Hotspur",
+    "id": "hull-city-everton-20261011",
+    "time": "20:00",
+    "date": "11/10/2026",
+    "home": "Hull City",
     "away": "Everton",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/306.png",
     "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/368.png",
-    "channels1080": [
-      "nbc-sports-1080",
-      "sky-sports-main-event-fhd",
-      "sky-sports-premier-league-fhd"
-    ],
-    "channels4k": [
-      "sky-sports-main-event",
-      "sky-sports-uhd"
-    ]
+    "channels1080": [],
+    "channels4k": []
   },
   {
-    "id": "sunderland-arsenal-20260913",
+    "id": "liverpool-manchester-city-20261011",
+    "time": "22:30",
+    "date": "11/10/2026",
+    "home": "Liverpool",
+    "away": "Manchester City",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "channels1080": [],
+    "channels4k": []
+  },
+  {
+    "id": "coventry-city-newcastle-united-20261013",
     "time": "02:00",
-    "date": "13/09/2026",
-    "home": "Sunderland",
-    "away": "Arsenal",
-    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
-    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
-    "channels1080": [
-      "usa-network-1080"
-    ],
-    "channels4k": [
-      "tnt-sports-uhd",
-      "tnt-sports-ultimate-uhd"
-    ]
+    "date": "13/10/2026",
+    "home": "Coventry City",
+    "away": "Newcastle United",
+    "homeLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/388.png",
+    "awayLogo": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+    "channels1080": [],
+    "channels4k": []
   }
 ]
